@@ -29,10 +29,10 @@ export function Header() {
         <Link to="/" className={logoCss}>
           <Logo />
         </Link>
-        <Navigation className={nav} />
-        <Link to="/search" className={searchButton}>
+        {/* <Navigation className={nav} /> */}
+        {/* <Link to="/search" className={searchButton}>
           <SearchIcon />
-        </Link>
+        </Link> */}
         <CartButton quantity={quantity} />
       </header>
       <Toast show={loading || didJustAddToCart}>

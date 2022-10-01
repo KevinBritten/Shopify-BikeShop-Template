@@ -31,7 +31,7 @@ function Hero(props) {
 export default function IndexPage({ data }) {
   return (
     <Layout>
-      <Hero />
+      {/* <Hero /> */}
       <ProductListing products={data?.shopifyCollection?.products} />
     </Layout>
   )

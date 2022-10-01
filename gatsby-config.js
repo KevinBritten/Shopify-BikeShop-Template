@@ -3,11 +3,10 @@ require("dotenv").config({
 })
 module.exports = {
   siteMetadata: {
-    siteTitle: "gatsby-starter-shopify",
-    siteTitleDefault: "gatsby-starter-shopify by @GatsbyJS",
+    siteTitle: "Courrier Caverne",
+    siteTitleDefault: "Courrier Caverne",
     siteUrl: "https://shopify-demo.gatsbyjs.com",
-    siteDescription:
-      "A Gatsby starter using the latest Shopify plugin showcasing a store with product overview, individual product pages, and a cart.",
+    siteDescription: "7400 rue Saint-André, Montréal",
     siteImage: "/default-og-image.jpg",
     twitter: "@gatsbyjs",
   },
@@ -23,6 +22,7 @@ module.exports = {
         shopifyConnections: ["collections"],
       },
     },
+    "gatsby-plugin-postcss",
     "gatsby-plugin-image",
     "gatsby-plugin-sharp",
     "gatsby-transformer-sharp",

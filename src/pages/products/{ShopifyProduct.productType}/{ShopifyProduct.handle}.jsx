@@ -144,10 +144,10 @@ export default function Product({ data: { product, suggestions } }) {
             <span className={noImagePreview}>No Preview image</span>
           )}
           <div>
-            <div className={breadcrumb}>
+            {/* <div className={breadcrumb}>
               <Link to={product.productTypeSlug}>{product.productType}</Link>
               <ChevronIcon size={12} />
-            </div>
+            </div> */}
             <h1 className={header}>{title}</h1>
             <p className={productDescription}>{description}</p>
             <h2 className={priceValue}>
@@ -187,7 +187,7 @@ export default function Product({ data: { product, suggestions } }) {
                 available={available}
               />
             </div>
-            <div className={metaSection}>
+            {/* <div className={metaSection}>
               <span className={labelFont}>Type</span>
               <span className={tagList}>
                 <Link to={product.productTypeSlug}>{product.productType}</Link>
@@ -198,7 +198,7 @@ export default function Product({ data: { product, suggestions } }) {
                   <Link to={`/search?t=${tag}`}>{tag}</Link>
                 ))}
               </span>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>
@@ -227,7 +227,7 @@ export const Head = ({ data: { product } }) => {
 }
 
 export const query = graphql`
-  query($id: String!, $productType: String!) {
+  query ($id: String!, $productType: String!) {
     product: shopifyProduct(id: { eq: $id }) {
       title
       description
