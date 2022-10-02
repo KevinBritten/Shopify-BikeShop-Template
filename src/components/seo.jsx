@@ -59,7 +59,7 @@ export function Seo({
       <meta name="twitter:description" content={seo.description} />
       <meta name="twitter:image" content={seo.image} />
       <meta name="twitter:creator" content={twitter} />
-      <link
+      {/* <link
         rel="icon"
         type="image/png"
         sizes="32x32"
@@ -75,7 +75,7 @@ export function Seo({
         rel="apple-touch-icon"
         sizes="180x180"
         href="/apple-touch-icon.png"
-      />
+      /> */}
       {/* The following meta tag is for demonstration only and can be removed */}
       {!!process.env.GATSBY_DEMO_STORE && (
         <meta name="robots" content="noindex, nofollow" />

@@ -46,7 +46,6 @@ export default function CartPage() {
           </div>
         ) : (
           <>
-            <h1 className={title}>Your cart</h1>
             <table className={table}>
               <thead>
                 <tr>

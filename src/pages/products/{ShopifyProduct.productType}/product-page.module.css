@@ -10,7 +10,6 @@
 
 .header {
   font-size: var(--text-display);
-  font-weight: var(--bold);
   margin-bottom: var(--space-xl);
   line-height: var(--dense);
 }
@@ -55,7 +54,6 @@
 
 .priceValue > span {
   font-size: var(--text-display);
-  font-weight: var(--bold);
   line-height: var(--dense);
   color: var(--primary);
 }

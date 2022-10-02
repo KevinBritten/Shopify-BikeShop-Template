@@ -1,6 +1,5 @@
 .title {
   font-size: var(--text-display);
-  font-weight: var(--bold);
   margin: 0;
   padding: var(--space-2xl) 0 var(--space-2xl);
 }
@@ -41,13 +40,11 @@
 }
 
 .summary {
-  font-weight: var(--semibold);
   font-size: var(--text-lg);
 }
 
 .grandTotal {
   font-size: var(--text-2xl);
-  font-weight: var(--semibold);
 }
 
 .checkoutButton {
@@ -57,7 +54,6 @@
   color: var(--text-color-inverted);
   display: flex;
   font-size: var(--text-md);
-  font-weight: var(--semibold);
   height: var(--size-input);
   justify-content: center;
   line-height: var(--solid);
@@ -125,14 +121,12 @@
 .emptyStateHeading {
   color: var(--text-color);
   font-size: var(--text-display);
-  font-weight: var(--bold);
   margin-bottom: var(--space-lg);
 }
 
 .emptyStateLink {
   display: inline-block;
   color: var(--primary);
-  font-weight: var(--bold);
   margin-top: var(--space-xl);
   font-size: var(--text-xl);
 }
