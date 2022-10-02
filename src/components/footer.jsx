@@ -90,7 +90,7 @@ export function Footer() {
           H2R 2P7
         </div>
         <a
-          className="underline hover:no-underline my-8"
+          className="underline hover:no-underline my-8 block"
           href="mailto:courriercaverne@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
