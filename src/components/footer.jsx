@@ -80,8 +80,6 @@ export function Footer() {
         </a>
       </div>
       <div className={copyright}>
-        {/* Copyright &copy; Courrier Caverne {new Date().getFullYear()} · All
-        rights reserved */}
         <div className="mb-4">
           7400 rue Saint-André
           <br />
