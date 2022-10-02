@@ -5,10 +5,10 @@ module.exports = {
   siteMetadata: {
     siteTitle: "Courrier Caverne",
     siteTitleDefault: "Courrier Caverne",
-    siteUrl: "https://shopify-demo.gatsbyjs.com",
+    siteUrl: "https://www.courriercaverne.ca",
     siteDescription: "7400 rue Saint-André, Montréal",
-    siteImage: "/default-og-image.jpg",
-    twitter: "@gatsbyjs",
+    siteImage: "/cc-ogimage.png",
+    twitter: "@joperron",
   },
   flags: {
     FAST_DEV: true,

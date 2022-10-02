@@ -45,7 +45,7 @@ export function Seo({
 
   return (
     <>
-      <title> {title ? `${title} | ${siteTitle}`: siteTitleDefault}</title>
+      <title> {title ? `${title} | ${siteTitle}` : siteTitleDefault}</title>
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />
       <meta property="og:title" content={seo.title} />
@@ -78,10 +78,7 @@ export function Seo({
       />
       {/* The following meta tag is for demonstration only and can be removed */}
       {!!process.env.GATSBY_DEMO_STORE && (
-        <meta
-          name="robots"
-          content="noindex, nofollow"
-        />
+        <meta name="robots" content="noindex, nofollow" />
       )}
       {children}
     </>
