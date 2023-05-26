@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import { Layout } from "../components/layout"
 import { ProductListing } from "../components/product-listing"
 import { Seo } from "../components/seo"
+import Hero from "../components/Hero"
 import {
   container,
   intro,
@@ -20,19 +21,12 @@ export const query = graphql`
     }
   }
 `
-function Hero(props) {
-  return (
-    <div className={container}>
-      <h1 className={intro}>Courrier Caverne</h1>
-    </div>
-  )
-}
 
 export default function IndexPage({ data }) {
   return (
     <Layout>
-      {/* <Hero /> */}
-      <ProductListing products={data?.shopifyCollection?.products} />
+      <Hero />
+      {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
     </Layout>
   )
 }
