@@ -30,7 +30,7 @@
     "gatsby-plugin-image": "^2.25.0",
     "gatsby-plugin-sharp": "^4.0.0",
     "gatsby-plugin-sitemap": "^5.0.0",
-    "gatsby-source-filesystem": "^4.0.0",
+    "gatsby-source-filesystem": "^4.25.0",
     "gatsby-source-shopify": "^6.0.0",
     "gatsby-transformer-sharp": "^4.0.0",
     "i18next": "^22.5.0",

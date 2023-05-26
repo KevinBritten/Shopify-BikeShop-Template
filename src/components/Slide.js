@@ -1,13 +1,16 @@
 // Slide.js
 import React from "react"
 import { Link } from "gatsby"
-import { StaticImage } from "gatsby-plugin-image"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 const Slide = ({ imageSrc, title, subtitle, targetSection }) => {
+  const image = getImage(imageSrc)
+  console.log(image, imageSrc)
+
   return (
     <div className="relative h-full w-full flex items-center justify-center text-center">
-      <StaticImage
-        src={imageSrc}
+      <GatsbyImage
+        image={image}
         alt={title}
         className="w-full h-full object-cover absolute"
       />
@@ -15,7 +18,6 @@ const Slide = ({ imageSrc, title, subtitle, targetSection }) => {
         <div className="p-8 bg-white bg-opacity-50 rounded-lg">
           <h1 className="text-4xl md:text-5xl lg:text-6xl text-black font-bold mb-4">
             {title}
-            {imageSrc}
           </h1>
           <h2 className="text-2xl md:text-3xl lg:text-4xl text-black mb-8">
             {subtitle}
