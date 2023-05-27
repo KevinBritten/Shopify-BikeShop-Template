@@ -7,12 +7,14 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
 import { graphql, useStaticQuery } from "gatsby"
 
+import "../styles/splide.css"
+
 const slides = [
   // Your slide data here
   {
     image: "../images/placeholder-img-1.png",
-    title: "Slide 1 Title",
-    subtitle: "Slide 1 Subtitle",
+    title: "Bike builds you can trust",
+    subtitle: "Contact us now for a custom bike build.",
     target: "/target1",
   },
   {
@@ -58,23 +60,21 @@ const Hero = () => {
     return { ...slide, image }
   })
 
-  console.log(slidesWithImages)
-
   return (
-    <Splide>
+    <Splide className="h-[80vh]">
       {slidesWithImages.map((slide, index) => (
-        <SplideSlide key={index}>
+        <SplideSlide key={index} className="realtive w-full h-full">
           <div className="relative h-full">
             {slide.image && (
               <GatsbyImage
                 image={slide.image}
                 alt={`Slide ${index + 1}`}
-                className="w-full h-full"
+                className="realtive w-full h-full"
               />
             )}
-            <div className="absolute inset-0 bg-white bg-opacity-30 flex flex-col items-center justify-center">
-              <h1 className="text-4xl text-white">{slide.title}</h1>
-              <h2 className="text-2xl text-white">{slide.subtitle}</h2>
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-center">
+              <h1 className="text-4xl ">{slide.title}</h1>
+              <h2 className="text-2xl text-black">{slide.subtitle}</h2>
               <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
                 Click Me
               </button>
