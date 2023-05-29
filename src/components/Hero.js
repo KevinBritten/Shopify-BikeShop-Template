@@ -29,8 +29,18 @@ const slides = [
     subtitle: "Slide 1 Subtitle",
     target: "/target1",
   },
-  // More slides...
 ]
+
+const splideOptions = {
+  lazyLoad: "nearby",
+  preloadPages: 1,
+  type: "loop", // enables wraparound
+  autoplay: false, // enables autoplay
+  interval: 4000, // interval of autoplay in milliseconds
+  pauseOnHover: false, // whether to pause on hover
+  pauseOnFocus: true, // whether to pause on focus
+  keyboard: true,
+}
 
 const Hero = () => {
   const data = useStaticQuery(graphql`
@@ -61,7 +71,7 @@ const Hero = () => {
   })
 
   return (
-    <Splide className="h-[80vh]">
+    <Splide options={splideOptions} className="h-[80vh]">
       {slidesWithImages.map((slide, index) => (
         <SplideSlide key={index} className="realtive w-full h-full">
           <div className="relative h-full">
@@ -72,11 +82,27 @@ const Hero = () => {
                 className="realtive w-full h-full"
               />
             )}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-center">
+            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
               <h1 className="text-4xl ">{slide.title}</h1>
-              <h2 className="text-2xl text-black">{slide.subtitle}</h2>
-              <button className="mt-4 px-4 py-2 bg-blue-500 text-white rounded-lg">
-                Click Me
+              <h2 className="text-2xl text-black mt-4">{slide.subtitle}</h2>
+              <button
+                className="mt-4 px-6 py-2 bg-blue-500 rounded-lg flex items-center justify-center"
+                aria-label="Click to navigate"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                  className="h-8 w-8 stroke-white"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={4}
+                    d="M14 5l7 7m0 0l-7 7m7-7H3"
+                  />
+                </svg>
               </button>
             </div>
           </div>

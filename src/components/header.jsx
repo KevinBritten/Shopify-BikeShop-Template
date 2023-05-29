@@ -29,6 +29,17 @@ export function Header() {
         <Link to="/" className={logoCss}>
           <Logo />
         </Link>
+        <nav className="hidden items-center md:flex space-x-4">
+          <Link to="/#services">Services</Link>
+          <Link to="/#builds">Builds</Link>
+          <Link to="/#contacts">Contacts</Link>
+          <Link to="/shop">Store</Link>
+        </nav>
+
+        <nav className="md:hidden">
+          <button>Menu</button>{" "}
+          {/* This could toggle display of a dropdown or slide-out menu */}
+        </nav>
         {/* <Navigation className={nav} /> */}
         {/* <Link to="/search" className={searchButton}>
           <SearchIcon />

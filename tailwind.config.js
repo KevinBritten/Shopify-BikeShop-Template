@@ -21,21 +21,26 @@ module.exports = {
       textTransform: {
         uppercase: "uppercase",
       },
+      fontWeight: {
+        bold: "800",
+      },
     },
   },
   variants: {},
   plugins: [
-    function ({ addBase, config }) {
+    function ({ addBase }) {
       addBase({
         h1: {
           fontFamily: "Work Sans, sans-serif",
           fontSize: "2.125rem", // equivalent to 34px
           color: "var(--orange)",
+          fontWeight: "800",
         },
         h2: {
           fontFamily: "Work Sans, sans-serif",
           fontSize: "1.25rem", // equivalent to 20px
           color: "var(--compliment)",
+          fontWeight: "800",
         },
         h3: {
           fontFamily: "Work Sans, sans-serif",
