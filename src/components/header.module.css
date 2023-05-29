@@ -16,7 +16,12 @@
   background-color: var(--background);
 }
 
-.header::after {
+.active-link {
+  text-decoration: underline;
+}
+
+/* TODO: remove if no purpose for this pseudo element */
+/* .header::after {
   grid-area: navHeader;
   content: "";
   display: block;
@@ -29,7 +34,7 @@
     rgba(255, 255, 255, 1)
   );
   justify-self: flex-end;
-}
+} */
 
 @media (min-width: 640px) {
   .header {
@@ -56,9 +61,15 @@
   color: var(--primary);
 }
 
-.nav {
+nav {
   grid-area: navHeader;
   align-self: stretch;
+  justify-content: center;
+  width: 100%;
+}
+
+nav > a {
+  margin: 0 32px;
 }
 
 .searchButton {

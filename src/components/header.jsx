@@ -12,6 +12,7 @@ import {
   logo as logoCss,
   searchButton,
   nav,
+  activeLink,
 } from "./header.module.css"
 
 export function Header() {
@@ -29,11 +30,19 @@ export function Header() {
         <Link to="/" className={logoCss}>
           <Logo />
         </Link>
-        <nav className="hidden items-center md:flex space-x-4">
-          <Link to="/#services">Services</Link>
-          <Link to="/#builds">Builds</Link>
-          <Link to="/#contacts">Contacts</Link>
-          <Link to="/shop">Store</Link>
+        <nav className="nav hidden items-center md:flex uppercase">
+          <Link to="/Services" activeClassName={activeLink}>
+            Services
+          </Link>
+          <Link to="/#builds" activeClassName={activeLink}>
+            Builds
+          </Link>
+          <Link to="/#contacts" activeClassName={activeLink}>
+            Contacts
+          </Link>
+          <Link to="/shop" activeClassName={activeLink}>
+            Store
+          </Link>
         </nav>
 
         <nav className="md:hidden">
@@ -41,9 +50,10 @@ export function Header() {
           {/* This could toggle display of a dropdown or slide-out menu */}
         </nav>
         {/* <Navigation className={nav} /> */}
-        {/* <Link to="/search" className={searchButton}>
+
+        <Link to="/search" className={searchButton}>
           <SearchIcon />
-        </Link> */}
+        </Link>
         <CartButton quantity={quantity} />
       </header>
       <Toast show={loading || didJustAddToCart}>
