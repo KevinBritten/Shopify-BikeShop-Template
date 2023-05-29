@@ -4,6 +4,7 @@ import { Layout } from "../components/layout"
 import { ProductListing } from "../components/product-listing"
 import { Seo } from "../components/seo"
 import Hero from "../components/Hero"
+import Intro from "../components/Intro"
 import {
   container,
   intro,
@@ -26,6 +27,7 @@ export default function IndexPage({ data }) {
   return (
     <Layout>
       <Hero />
+      <Intro />
       {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
     </Layout>
   )
