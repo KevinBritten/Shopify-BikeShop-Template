@@ -9,6 +9,7 @@ module.exports = {
       colors: {
         orange: "var(--orange)",
         compliment: "var(--compliment)",
+        "light-bg": "var(--light-bg)",
       },
       fontSize: {
         h1: "2.125rem", // 34px
@@ -39,12 +40,13 @@ module.exports = {
         h2: {
           fontFamily: "Work Sans, sans-serif",
           fontSize: "1.25rem", // equivalent to 20px
-          color: "var(--compliment)",
           fontWeight: "800",
         },
         h3: {
           fontFamily: "Work Sans, sans-serif",
           fontSize: "0.75rem", // equivalent to 12px
+          color: "var(--compliment)",
+
           textTransform: "uppercase",
         },
       })
