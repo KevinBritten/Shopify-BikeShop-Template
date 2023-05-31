@@ -4,7 +4,7 @@ function Intro() {
   return (
     <section className="text-center py-20">
       <h1>Our Store</h1>
-      <p className="m-auto max-w-2xl text-base">
+      <p className="m-auto max-w-2xl">
         Welcome to Courrier Caverne, where our love for bikes and coffee
         collide. As avid cyclists and coffee enthusiasts, we wanted to create a
         space where people like us can enjoy both passions. At Courrier Caverne,
