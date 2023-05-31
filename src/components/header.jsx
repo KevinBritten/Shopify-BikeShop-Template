@@ -12,6 +12,7 @@ import {
   container,
   logo as logoCss,
   searchButton,
+  languageButton,
   nav,
   activeLink,
 } from "./header.module.css"
@@ -56,7 +57,7 @@ export function Header() {
           {/* This could toggle display of a dropdown or slide-out menu */}
         </nav>
         {/* <Navigation className={nav} /> */}
-        <div>
+        <div className={languageButton}>
           <button onClick={() => changeLanguage("en")}>en</button>
           <button onClick={() => changeLanguage("fr")}>fr</button>
         </div>

@@ -11,7 +11,7 @@
   width: 100%;
   padding: var(--size-gap) var(--size-gutter);
   grid-template-columns: 150px 1fr min-content min-content;
-  grid-template-areas: "logo nada searchButton cartButton" "navHeader navHeader navHeader navHeader";
+  grid-template-areas: "logo nada language button searchButton cartButton" "navHeader navHeader navHeader navHeader";
   align-items: center;
   background-color: var(--background);
 }
@@ -38,7 +38,7 @@
 
 @media (min-width: 640px) {
   .header {
-    grid-template-areas: "logo navHeader searchButton cartButton";
+    grid-template-areas: "logo navHeader languageButton searchButton cartButton";
   }
 }
 
@@ -87,4 +87,8 @@ nav > a {
 
 .searchButton[aria-current="page"] {
   color: var(--primary);
+}
+
+.languageButton {
+  grid-area: languageButton
 }
