@@ -61,17 +61,15 @@ function Services() {
           ))}
         </div>
       </div>
-      <div className="relative text-center">
+      <div className="relative text-center h-80">
         <GatsbyImage
           image={image}
           alt={"A picture of our workbench"}
           className="relative w-full h-full"
         />
-        <div className="px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
-          <h2 className="text-4xl text-compliment">
-            Visit us for a free estimate
-          </h2>
-          <p className=" mt-4">
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-4 bg-white bg-opacity-90 flex flex-col items-center justify-between">
+          <h2 className=" text-compliment">Visit us for a free estimate</h2>
+          <p className=" max-w-2xl mt-4">
             Get a free estimate at Courrier Caverne today! Our skilled mechanics
             have the knowledge and expertise to fix any bike issue. Trust us
             with your bike's maintenance and repairs, from minor adjustments to
