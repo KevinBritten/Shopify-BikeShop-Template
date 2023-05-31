@@ -31,7 +31,7 @@ export function Header() {
           <Logo />
         </Link>
         <nav className="nav hidden items-center md:flex uppercase">
-          <Link to="/Services" activeClassName={activeLink}>
+          <Link to="/#services" activeClassName={activeLink}>
             Services
           </Link>
           <Link to="/#builds" activeClassName={activeLink}>

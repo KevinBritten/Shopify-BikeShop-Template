@@ -45,7 +45,7 @@ function Services() {
   const image = getImage(data.placeholderImage)
 
   return (
-    <section>
+    <section id="services">
       <div className="p-16 bg-light-bg">
         <h1 className="text-center">Services</h1>
         <h2 className="text-center">Tune-Ups</h2>

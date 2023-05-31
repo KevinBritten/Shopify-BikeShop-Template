@@ -2,7 +2,7 @@ import React from "react"
 
 function Contact() {
   return (
-    <section className="bg-light-bg p-16">
+    <section id="contact" className="bg-light-bg p-16">
       <h1 className="text-center">Come Visit Us</h1>
       <div
         className="grid grid-cols-2 auto-rows-auto mt-8"
