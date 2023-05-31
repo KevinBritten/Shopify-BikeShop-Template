@@ -7,6 +7,7 @@ import Hero from "../components/Hero"
 import Intro from "../components/Intro"
 import Services from "../components/Services"
 import Builds from "../components/Builds"
+import Contact from "../components/Contact"
 import {
   container,
   intro,
@@ -32,6 +33,7 @@ export default function IndexPage({ data }) {
       <Intro />
       <Services />
       <Builds />
+      <Contact />
       {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
     </Layout>
   )
