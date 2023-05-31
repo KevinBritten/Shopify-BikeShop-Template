@@ -5,6 +5,7 @@ import { ProductListing } from "../components/product-listing"
 import { Seo } from "../components/seo"
 import Hero from "../components/Hero"
 import Intro from "../components/Intro"
+import Services from "../components/Services"
 import {
   container,
   intro,
@@ -28,6 +29,7 @@ export default function IndexPage({ data }) {
     <Layout>
       <Hero />
       <Intro />
+      <Services />
       {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
     </Layout>
   )
