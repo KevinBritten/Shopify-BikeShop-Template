@@ -1,4 +1,5 @@
 import * as React from "react"
+import { useTranslation } from "react-i18next"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
 import Logo from "../icons/logo"
@@ -16,6 +17,11 @@ import {
 } from "./header.module.css"
 
 export function Header() {
+  const { t, i18n } = useTranslation()
+  const changeLanguage = (lng) => {
+    i18n.changeLanguage(lng)
+  }
+
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
 
   const items = checkout ? checkout.lineItems : []
@@ -50,7 +56,10 @@ export function Header() {
           {/* This could toggle display of a dropdown or slide-out menu */}
         </nav>
         {/* <Navigation className={nav} /> */}
-
+        <div>
+          <button onClick={() => changeLanguage("en")}>en</button>
+          <button onClick={() => changeLanguage("fr")}>fr</button>
+        </div>
         <Link to="/search" className={searchButton}>
           <SearchIcon />
         </Link>
