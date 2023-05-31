@@ -41,8 +41,16 @@ function Contact() {
         <div>
           <h2 className="text-compliment">Contact</h2>
           <ul>
-            <li>info@courriercaverne.ca</li>
-            <li>555-555-5555</li>
+            <li>
+              <a href="mailto:info@courriercaverne.ca" className="underline">
+                info@courriercaverne.ca
+              </a>
+            </li>
+            <li>
+              <a href="tel:1234567890" className="underline">
+                123-456-7890
+              </a>
+            </li>
           </ul>
         </div>
       </div>
