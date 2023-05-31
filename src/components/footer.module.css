@@ -6,6 +6,7 @@
   text-align: center;
   color: var(--text-color-secondary);
   margin-top: var(--space-3xl);
+  background-color: black;
 }
 
 .logos {
