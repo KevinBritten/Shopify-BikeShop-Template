@@ -1,4 +1,5 @@
 import * as React from "react"
+import "./src/i18n"
 import { StoreProvider } from "./src/context/store-context"
 import "./src/styles/reset.css"
 import "./src/styles/variables.css"
