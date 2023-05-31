@@ -37,8 +37,8 @@ export function Header() {
           <Link to="/#builds" activeClassName={activeLink}>
             Builds
           </Link>
-          <Link to="/#contacts" activeClassName={activeLink}>
-            Contacts
+          <Link to="/#contact" activeClassName={activeLink}>
+            Contact
           </Link>
           <Link to="/shop" activeClassName={activeLink}>
             Store
