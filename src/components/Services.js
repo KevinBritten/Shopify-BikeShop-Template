@@ -1,4 +1,7 @@
 import React from "react"
+import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { graphql, useStaticQuery } from "gatsby"
+import placeholderImg from "../images/placeholder-img-2.png" // Import the image
 
 import ServicesCard from "./ServicesCard"
 
@@ -26,6 +29,21 @@ function Services() {
       ],
     },
   ]
+  const data = useStaticQuery(graphql`
+    query {
+      placeholderImage: file(relativePath: { eq: "placeholder-img-2.png" }) {
+        childImageSharp {
+          gatsbyImageData(
+            width: 400
+            placeholder: BLURRED
+            formats: [AUTO, WEBP, AVIF]
+          )
+        }
+      }
+    }
+  `)
+
+  const image = getImage(data.placeholderImage)
 
   return (
     <section className="bg-light-bg p-16">
@@ -41,6 +59,24 @@ function Services() {
             isLast={index === serviceLevels.length - 1}
           />
         ))}
+      </div>
+      <div className="relative text-center">
+        <GatsbyImage
+          image={image}
+          alt={"A picture of our workbench"}
+          className="realtive w-full h-full"
+        />
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
+          <h2 className="text-4xl text-compliment">
+            Visit us for a free estimate
+          </h2>
+          <p className="text-2xl mt-4">
+            Get a free estimate at Courrier Caverne today! Our skilled mechanics
+            have the knowledge and expertise to fix any bike issue. Trust us
+            with your bike's maintenance and repairs, from minor adjustments to
+            complex fixes.
+          </p>
+        </div>
       </div>
     </section>
   )
