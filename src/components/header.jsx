@@ -23,6 +23,9 @@ export function Header({ language }) {
     i18n.changeLanguage(language)
   }, [i18n, language])
 
+  //for home link
+  const langPrefix = language === "en" ? "/en" : ""
+
   function changeLanguage(lang) {
     const currentPath = window.location.pathname
 
@@ -46,7 +49,7 @@ export function Header({ language }) {
   return (
     <div className={container}>
       <header className={header}>
-        <Link to="/" className={logoCss}>
+        <Link to={`${langPrefix}/`} className={logoCss}>
           <Logo />
         </Link>
         <nav className="nav hidden items-center md:flex uppercase">
