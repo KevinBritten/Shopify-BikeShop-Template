@@ -8,6 +8,7 @@ import Intro from "../components/Intro"
 import Services from "../components/Services"
 import Builds from "../components/Builds"
 import Contact from "../components/Contact"
+import Home from "../components/Home"
 import {
   container,
   intro,
@@ -16,27 +17,33 @@ import {
   deployButton,
 } from "./index.module.css"
 
-export const query = graphql`
-  query {
-    shopifyCollection(handle: { eq: "frontpage" }) {
-      products {
-        ...ProductCard
-      }
-    }
-  }
-`
+// export const query = graphql`
+//   query {
+//     shopifyCollection(handle: { eq: "frontpage" }) {
+//       products {
+//         ...ProductCard
+//       }
+//     }
+//   }
+// `
 
-export default function IndexPage({ data }) {
-  return (
-    <Layout>
-      <Hero />
-      <Intro />
-      <Services />
-      <Builds />
-      <Contact />
-      {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
-    </Layout>
-  )
-}
+// export default function IndexPage({ data }) {
+//   return (
+//     <Layout>
+//       <Hero />
+//       <Intro />
+//       <Services />
+//       <Builds />
+//       <Contact />
+//       {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
+//     </Layout>
+//   )
+// }
 
 export const Head = () => <Seo />
+
+function IndexPage() {
+  return <Home language="fr" />
+}
+
+export default IndexPage

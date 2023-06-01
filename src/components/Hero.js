@@ -1,5 +1,6 @@
 // Hero.js
-import React from "react"
+import React, { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 import Slide from "./Slide"
 
@@ -8,28 +9,6 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 import "../styles/splide.css"
-
-const slides = [
-  // Your slide data here
-  {
-    image: "../images/placeholder-img-1.png",
-    title: "Bike builds you can trust",
-    subtitle: "Contact us now for a custom bike build.",
-    target: "/target1",
-  },
-  {
-    image: "../images/placeholder-img-2.png",
-    title: "Slide 1 Title",
-    subtitle: "Slide 1 Subtitle",
-    target: "/target1",
-  },
-  {
-    image: "../images/placeholder-img-3.png",
-    title: "Slide 1 Title",
-    subtitle: "Slide 1 Subtitle",
-    target: "/target1",
-  },
-]
 
 const splideOptions = {
   lazyLoad: "nearby",
@@ -42,7 +21,33 @@ const splideOptions = {
   keyboard: true,
 }
 
-const Hero = () => {
+const Hero = ({ language }) => {
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n, language])
+  const slides = [
+    // Your slide data here
+    {
+      image: "../images/placeholder-img-1.png",
+      title: t("hero.slides.slide1.title"),
+      subtitle: t("hero.slides.slide1.subtitle"),
+      target: "/target1",
+    },
+    {
+      image: "../images/placeholder-img-2.png",
+      title: t("hero.slides.slide2.title"),
+      subtitle: t("hero.slides.slide2.subtitle"),
+      target: "/target1",
+    },
+    {
+      image: "../images/placeholder-img-3.png",
+      title: t("hero.slides.slide3.title"),
+      subtitle: t("hero.slides.slide3.subtitle"),
+      target: "/target1",
+    },
+  ]
   const data = useStaticQuery(graphql`
     query {
       allFile {
