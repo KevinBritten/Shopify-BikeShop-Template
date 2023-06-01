@@ -31,13 +31,19 @@ export function Header({ language }) {
     const currentPath = window.location.pathname
     const pageFragment = window.location.hash
 
-    // Remove hash from fragment
+    // Redirect to home page if the current page is root
+    if (!pageFragment) {
+      if (lang === "fr") {
+        window.location.href = "/"
+      } else if (lang === "en") {
+        window.location.href = "/en"
+      }
+      return
+    }
+
+    // If not root, proceed with the usual process
     const pageFragmentWithoutHash = pageFragment.replace("#", "")
-
-    // Identify the language currently being used
     const currentLang = currentPath.includes("/en/") ? "en" : "fr"
-
-    // Get all keys in the links object of the current language where the value matches pageFragmentWithoutHash
     const matchedKeys = Object.keys(
       i18n.getResourceBundle(currentLang, "translation").links
     ).filter(
@@ -45,19 +51,13 @@ export function Header({ language }) {
         i18n.getResourceBundle(currentLang, "translation").links[key] ===
         pageFragmentWithoutHash
     )
-
-    // Assume the first match is the correct key
     const correctKey = matchedKeys[0]
-
-    // Translate the correct key into the target language
     const translatedFragment = i18n.t(`links.${correctKey}`, { lng: lang })
 
     if (lang === "fr") {
-      // Switching to French, replace "/en/" with "/" and append the translated fragment
       window.location.href =
         currentPath.replace("/en/", "/") + "#" + translatedFragment
     } else if (lang === "en") {
-      // Switching to English, prepend "/en/" to the path and append the translated fragment
       window.location.href = "/en" + currentPath + "#" + translatedFragment
     }
   }
@@ -76,23 +76,6 @@ export function Header({ language }) {
         <Link to={`${langPrefix}/`} className={logoCss}>
           <Logo />
         </Link>
-        {/* {language === "fr" && (
-          <nav className="nav hidden items-center md:flex uppercase">
-            <Link to="/#services" activeClassName={activeLink}>
-              {t("links.services")}
-            </Link>
-            <Link to="/#builds" activeClassName={activeLink}>
-              {t("links.builds")}
-            </Link>
-            <Link to="/#contact" activeClassName={activeLink}>
-              {t("links.contact")}
-            </Link>
-            <Link to="/shop" activeClassName={activeLink}>
-              {t("links.store")}
-            </Link>
-          </nav>
-        )}
-        {language === "en" && ( */}
         <nav className="nav hidden items-center md:flex uppercase">
           <Link
             to={`${langPrefix}/#${t("links.services")}`}
@@ -112,12 +95,12 @@ export function Header({ language }) {
           >
             {t("links.contact")}
           </Link>
-          <Link
+          {/* <Link
             to={`${langPrefix}/${t("links.store")}`}
             activeClassName={activeLink}
           >
             {t("links.store")}
-          </Link>
+          </Link> */}
         </nav>
         {/* )} */}
         <nav className="md:hidden">
