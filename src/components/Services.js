@@ -48,8 +48,8 @@ function Services({ language }) {
   return (
     <section id="services">
       <div className="p-16 bg-light-bg">
-        <h1 className="text-center">Services</h1>
-        <h2 className="text-center">Tune-Ups</h2>
+        <h1 className="text-center">{t("services.title")}</h1>
+        <h2 className="text-center">{t("services.subtitle")}</h2>
         <div className="grid grid-cols-3 gap-4 border-compliment">
           {serviceLevels.map((level, index) => (
             <ServicesCard
