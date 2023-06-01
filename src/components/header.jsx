@@ -1,4 +1,4 @@
-import * as React from "react"
+import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
@@ -17,10 +17,22 @@ import {
   activeLink,
 } from "./header.module.css"
 
-export function Header() {
+export function Header({ language }) {
   const { t, i18n } = useTranslation()
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng)
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n, language])
+
+  function changeLanguage(lang) {
+    const currentPath = window.location.pathname
+
+    if (lang === "fr") {
+      // Switching to French, replace "/en/" with "/"
+      window.location.pathname = currentPath.replace("/en/", "/")
+    } else if (lang === "en") {
+      // Switching to English, prepend "/en/" to the path
+      window.location.pathname = "/en" + currentPath
+    }
   }
 
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
@@ -39,16 +51,16 @@ export function Header() {
         </Link>
         <nav className="nav hidden items-center md:flex uppercase">
           <Link to="/#services" activeClassName={activeLink}>
-            Services
+            {t("links.services")}
           </Link>
           <Link to="/#builds" activeClassName={activeLink}>
-            Builds
+            {t("links.builds")}
           </Link>
           <Link to="/#contact" activeClassName={activeLink}>
-            Contact
+            {t("links.contact")}
           </Link>
           <Link to="/shop" activeClassName={activeLink}>
-            Store
+            {t("links.store")}
           </Link>
         </nav>
 
@@ -58,8 +70,12 @@ export function Header() {
         </nav>
         {/* <Navigation className={nav} /> */}
         <div className={languageButton}>
-          <button onClick={() => changeLanguage("en")}>en</button>
-          <button onClick={() => changeLanguage("fr")}>fr</button>
+          {language === "fr" && (
+            <button onClick={() => changeLanguage("en")}>EN</button>
+          )}
+          {language === "en" && (
+            <button onClick={() => changeLanguage("fr")}>FR</button>
+          )}
         </div>
         <Link to="/search" className={searchButton}>
           <SearchIcon />

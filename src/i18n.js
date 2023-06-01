@@ -5,6 +5,12 @@ i18n.use(initReactI18next).init({
   resources: {
     en: {
       translation: {
+        links: {
+          services: "Services",
+          builds: "Builds",
+          contact: "Contact",
+          store: "Store",
+        },
         hero: {
           slides: [
             {
@@ -110,6 +116,13 @@ i18n.use(initReactI18next).init({
     },
     fr: {
       translation: {
+        links: {
+          services: "Services",
+          builds: "Constructions",
+          contact: "Contact",
+          store: "Magasin",
+        },
+
         hero: {
           slides: [
             {
@@ -216,7 +229,7 @@ i18n.use(initReactI18next).init({
       },
     },
   },
-  lng: "en", // language to use, more information below
+  lng: "fr", // language to use, more information below
   interpolation: {
     escapeValue: false, // react is already safe from xss
   },

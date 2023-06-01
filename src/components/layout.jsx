@@ -3,12 +3,11 @@ import { SkipNavContent, SkipNavLink } from "./skip-nav"
 import { Header } from "./header"
 import Footer from "./Footer"
 
-export function Layout({ children }) {
+export function Layout({ children, language }) {
   return (
     <div>
-      <SkipNavLink />
-      <Header />
-      <SkipNavContent>{children}</SkipNavContent>
+      <Header language={language} />
+      {children}
       <Footer />
     </div>
   )

@@ -1,5 +1,6 @@
 import React from "react"
 
+import { Layout } from "./layout"
 import Hero from "./Hero"
 import Intro from "./Intro"
 import Services from "./Services"
@@ -8,13 +9,13 @@ import Contact from "./Contact"
 
 function Home({ language }) {
   return (
-    <div>
+    <Layout language={language}>
       <Hero language={language} />
       <Intro language={language} />
       <Services language={language} />
       <Builds language={language} />
       <Contact language={language} />
-    </div>
+    </Layout>
   )
 }
 
