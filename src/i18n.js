@@ -6,28 +6,55 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         hero: {
-          slides: {
-            slide1: {
+          slides: [
+            {
               title: "Bike builds you can trust",
               subtitle: "Contact us now for a custom bike build.",
             },
-            slide2: {
+            {
               title: "Quality Components, Expert Assemblage",
               subtitle:
                 "Our experienced staff will help you choose the perfect components for your build.",
             },
-            slide3: {
+            {
               title: "Ready for Any Terrain",
               subtitle:
                 "From city commuting to mountain biking, we'll set you up with a bike that's fit for purpose.",
             },
-          },
+          ],
         },
         intro: {
           title: "Our Store",
           body: "Welcome to Courrier Caverne, where our love for bikes and coffee collide. As avid cyclists and coffee enthusiasts, we wanted to create a space where people like us can enjoy both passions. At Courrier Caverne, we offer a wide selection of bikes and accessories for all levels of riders. And, when you're ready to refuel, our café serves up tasty sandwiches and quality coffee to keep you going.",
         },
-        services: {},
+        services: {
+          title: "Services",
+          subtitle: "Tune-Ups",
+          serviceLevels: [
+            {
+              title: "Basic",
+              services: ["Service 1", "Service 2", "Service 3"],
+            },
+            {
+              title: "Comprehensive",
+              services: ["Service 1", "Service 2", "Service 3", "Service 4"],
+            },
+            {
+              title: "Deluxe",
+              services: [
+                "Service 1",
+                "Service 2",
+                "Service 3",
+                "Service 4",
+                "Service 5",
+              ],
+            },
+          ],
+          estimate: {
+            title: "Visit us for a free estimate",
+            body: "Get a free estimate at Courrier Caverne today! Our skilled mechanics have the knowledge and expertise to fix any bike issue. Trust us with your bike's maintenance and repairs, from minor adjustments to complex fixes.",
+          },
+        },
         builds: {},
         contact: {},
       },

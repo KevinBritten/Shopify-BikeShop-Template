@@ -31,20 +31,20 @@ const Hero = ({ language }) => {
     // Your slide data here
     {
       image: "../images/placeholder-img-1.png",
-      title: t("hero.slides.slide1.title"),
-      subtitle: t("hero.slides.slide1.subtitle"),
+      title: t("hero.slides.0.title"),
+      subtitle: t("hero.slides.0.subtitle"),
       target: "/target1",
     },
     {
       image: "../images/placeholder-img-2.png",
-      title: t("hero.slides.slide2.title"),
-      subtitle: t("hero.slides.slide2.subtitle"),
+      title: t("hero.slides.1.title"),
+      subtitle: t("hero.slides.1.subtitle"),
       target: "/target1",
     },
     {
       image: "../images/placeholder-img-3.png",
-      title: t("hero.slides.slide3.title"),
-      subtitle: t("hero.slides.slide3.subtitle"),
+      title: t("hero.slides.2.title"),
+      subtitle: t("hero.slides.2.subtitle"),
       target: "/target1",
     },
   ]

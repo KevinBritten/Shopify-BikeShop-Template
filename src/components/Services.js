@@ -1,31 +1,32 @@
-import React from "react"
+import React, { useEffect } from "react"
+import { useTranslation } from "react-i18next"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 import ServicesCard from "./ServicesCard"
 
-function Services() {
+function Services({ language }) {
+  const { t, i18n } = useTranslation()
+
+  useEffect(() => {
+    i18n.changeLanguage(language)
+  }, [i18n, language])
+
   const serviceLevels = [
     {
       image: "services-icon-1.svg",
-      title: "Basic",
-      services: ["Service 1", "Service 2", "Service 3"],
+      title: t("services.serviceLevels.0.title"),
+      services: t("services.serviceLevels.0.services", { returnObjects: true }),
     },
     {
       image: "services-icon-2.svg",
-      title: "Comprehensive",
-      services: ["Service 1", "Service 2", "Service 3", "Service 4"],
+      title: t("services.serviceLevels.1.title"),
+      services: t("services.serviceLevels.1.services", { returnObjects: true }),
     },
     {
       image: "services-icon-3.svg",
-      title: "Deluxe",
-      services: [
-        "Service 1",
-        "Service 2",
-        "Service 3",
-        "Service 4",
-        "Service 5",
-      ],
+      title: t("services.serviceLevels.2.title"),
+      services: t("services.serviceLevels.2.services", { returnObjects: true }),
     },
   ]
   const data = useStaticQuery(graphql`
@@ -68,13 +69,8 @@ function Services() {
           className="relative w-full h-full"
         />
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-4 bg-white bg-opacity-90 flex flex-col items-center justify-between">
-          <h2 className=" text-compliment">Visit us for a free estimate</h2>
-          <p className=" max-w-2xl mt-4">
-            Get a free estimate at Courrier Caverne today! Our skilled mechanics
-            have the knowledge and expertise to fix any bike issue. Trust us
-            with your bike's maintenance and repairs, from minor adjustments to
-            complex fixes.
-          </p>
+          <h2 className=" text-compliment">{t("services.estimate.title")}</h2>
+          <p className=" max-w-2xl mt-4">{t("services.estimate.body")}</p>
         </div>
       </div>
     </section>
