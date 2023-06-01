@@ -55,7 +55,17 @@ i18n.use(initReactI18next).init({
             body: "Get a free estimate at Courrier Caverne today! Our skilled mechanics have the knowledge and expertise to fix any bike issue. Trust us with your bike's maintenance and repairs, from minor adjustments to complex fixes.",
           },
         },
-        builds: {},
+        builds: {
+          title: "Builds",
+          custom: {
+            title: "Custom Builds",
+            body: "Customize Your Ride at Courrier Caverne! Our Custom Builds are designed to bring your dream bike to life. With a wide range of frame options, components, and accessories to choose from, you have the freedom to create a one-of-a-kind masterpiece that reflects your unique style and preferences. Our knowledgeable staff will assist you every step of the way, providing expert advice and guidance to ensure your custom build exceeds your expectations. Whether you're a seasoned cyclist or a first-time rider, Courrier Caverne is here to help you create the perfect bike that matches your vision.",
+          },
+          complete: {
+            title: "Complete Builds",
+            body: "Discover Convenience and Quality with Complete Builds at Courrier Caverne! If you're looking for a ready-to-ride option without the hassle, our Complete Builds are the ideal choice. Our curated selection of prebuilt bikes ensures high-quality craftsmanship and performance, carefully assembled and tuned by our skilled team. Whether you're seeking a road bike, mountain bike, or urban commuter, our Complete Builds offer a seamless riding experience right out of the box. Experience the joy of cycling with confidence, knowing that your bike is built to the highest standards at Courrier Caverne.",
+          },
+        },
         contact: {},
       },
     },
