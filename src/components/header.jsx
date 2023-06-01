@@ -1,5 +1,6 @@
 import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
+import i18n from "i18next"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
 import Logo from "../icons/logo"
@@ -28,13 +29,36 @@ export function Header({ language }) {
 
   function changeLanguage(lang) {
     const currentPath = window.location.pathname
+    const pageFragment = window.location.hash
+
+    // Remove hash from fragment
+    const pageFragmentWithoutHash = pageFragment.replace("#", "")
+
+    // Identify the language currently being used
+    const currentLang = currentPath.includes("/en/") ? "en" : "fr"
+
+    // Get all keys in the links object of the current language where the value matches pageFragmentWithoutHash
+    const matchedKeys = Object.keys(
+      i18n.getResourceBundle(currentLang, "translation").links
+    ).filter(
+      (key) =>
+        i18n.getResourceBundle(currentLang, "translation").links[key] ===
+        pageFragmentWithoutHash
+    )
+
+    // Assume the first match is the correct key
+    const correctKey = matchedKeys[0]
+
+    // Translate the correct key into the target language
+    const translatedFragment = i18n.t(`links.${correctKey}`, { lng: lang })
 
     if (lang === "fr") {
-      // Switching to French, replace "/en/" with "/"
-      window.location.pathname = currentPath.replace("/en/", "/")
+      // Switching to French, replace "/en/" with "/" and append the translated fragment
+      window.location.href =
+        currentPath.replace("/en/", "/") + "#" + translatedFragment
     } else if (lang === "en") {
-      // Switching to English, prepend "/en/" to the path
-      window.location.pathname = "/en" + currentPath
+      // Switching to English, prepend "/en/" to the path and append the translated fragment
+      window.location.href = "/en" + currentPath + "#" + translatedFragment
     }
   }
 
@@ -52,21 +76,50 @@ export function Header({ language }) {
         <Link to={`${langPrefix}/`} className={logoCss}>
           <Logo />
         </Link>
+        {/* {language === "fr" && (
+          <nav className="nav hidden items-center md:flex uppercase">
+            <Link to="/#services" activeClassName={activeLink}>
+              {t("links.services")}
+            </Link>
+            <Link to="/#builds" activeClassName={activeLink}>
+              {t("links.builds")}
+            </Link>
+            <Link to="/#contact" activeClassName={activeLink}>
+              {t("links.contact")}
+            </Link>
+            <Link to="/shop" activeClassName={activeLink}>
+              {t("links.store")}
+            </Link>
+          </nav>
+        )}
+        {language === "en" && ( */}
         <nav className="nav hidden items-center md:flex uppercase">
-          <Link to="/#services" activeClassName={activeLink}>
+          <Link
+            to={`${langPrefix}/#${t("links.services")}`}
+            activeClassName={activeLink}
+          >
             {t("links.services")}
           </Link>
-          <Link to="/#builds" activeClassName={activeLink}>
+          <Link
+            to={`${langPrefix}/#${t("links.builds")}`}
+            activeClassName={activeLink}
+          >
             {t("links.builds")}
           </Link>
-          <Link to="/#contact" activeClassName={activeLink}>
+          <Link
+            to={`${langPrefix}/#${t("links.contact")}`}
+            activeClassName={activeLink}
+          >
             {t("links.contact")}
           </Link>
-          <Link to="/shop" activeClassName={activeLink}>
+          <Link
+            to={`${langPrefix}/${t("links.store")}`}
+            activeClassName={activeLink}
+          >
             {t("links.store")}
           </Link>
         </nav>
-
+        {/* )} */}
         <nav className="md:hidden">
           <button>Menu</button>{" "}
           {/* This could toggle display of a dropdown or slide-out menu */}

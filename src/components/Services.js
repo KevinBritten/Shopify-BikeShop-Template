@@ -46,7 +46,7 @@ function Services({ language }) {
   const image = getImage(data.placeholderImage)
 
   return (
-    <section id="services">
+    <section id={t("links.services")}>
       <div className="p-16 bg-light-bg">
         <h1 className="text-center">{t("services.title")}</h1>
         <h2 className="text-center">{t("services.subtitle")}</h2>

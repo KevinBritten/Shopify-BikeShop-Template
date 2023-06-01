@@ -9,7 +9,7 @@ function Contact({ language }) {
   }, [i18n, language])
 
   return (
-    <section id="contact" className="bg-light-bg p-16">
+    <section id={t("links.contact")} className="bg-light-bg p-16">
       <h1 className="text-center">{t("contact.title")}</h1>
       <div
         className="grid grid-cols-2 auto-rows-auto mt-8"

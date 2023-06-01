@@ -36,7 +36,7 @@ function Builds({ language }) {
   const image2 = getImage(data.placeholderImage4)
 
   return (
-    <section id="builds" className="p-16">
+    <section id={t("links.builds")} className="p-16">
       <h1 className="text-center">{t("builds.title")}</h1>
       <div className="flex items-center mt-16">
         <div className="w-1/2 flex">

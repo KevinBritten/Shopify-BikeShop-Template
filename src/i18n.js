@@ -6,10 +6,10 @@ i18n.use(initReactI18next).init({
     en: {
       translation: {
         links: {
-          services: "Services",
-          builds: "Builds",
-          contact: "Contact",
-          store: "Store",
+          services: "services",
+          builds: "builds",
+          contact: "contact",
+          store: "store",
         },
         hero: {
           slides: [
@@ -117,10 +117,10 @@ i18n.use(initReactI18next).init({
     fr: {
       translation: {
         links: {
-          services: "Services",
-          builds: "Constructions",
-          contact: "Contact",
-          store: "Magasin",
+          services: "services",
+          builds: "constructions",
+          contact: "contact",
+          store: "magasin",
         },
 
         hero: {
