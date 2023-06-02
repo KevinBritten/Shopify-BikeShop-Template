@@ -1,21 +1,16 @@
 import * as React from "react"
-import { graphql } from "gatsby"
-import { Layout } from "../components/layout"
-import { ProductListing } from "../components/product-listing"
-import { Seo } from "../components/seo"
-import Hero from "../components/Hero"
-import Intro from "../components/Intro"
-import Services from "../components/Services"
-import Builds from "../components/Builds"
-import Contact from "../components/Contact"
+// import { graphql } from "gatsby"
+// import { Layout } from "../components/layout"
+// import { ProductListing } from "../components/product-listing"
+// import { Seo } from "../components/seo"
 import Home from "../components/Home"
-import {
-  container,
-  intro,
-  callOut,
-  callToAction,
-  deployButton,
-} from "./index.module.css"
+// import {
+//   container,
+//   intro,
+//   callOut,
+//   callToAction,
+//   deployButton,
+// } from "./index.module.css"
 
 // export const query = graphql`
 //   query {
@@ -40,7 +35,7 @@ import {
 //   )
 // }
 
-export const Head = () => <Seo />
+// export const Head = () => <Seo />
 
 function IndexPage() {
   return <Home language="fr" />
