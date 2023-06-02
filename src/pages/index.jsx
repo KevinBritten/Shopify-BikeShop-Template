@@ -1,5 +1,5 @@
 import * as React from "react"
-// import { graphql } from "gatsby"
+import { graphql } from "gatsby"
 // import { Layout } from "../components/layout"
 // import { ProductListing } from "../components/product-listing"
 // import { Seo } from "../components/seo"
@@ -12,15 +12,15 @@ import Home from "../components/Home"
 //   deployButton,
 // } from "./index.module.css"
 
-// export const query = graphql`
-//   query {
-//     shopifyCollection(handle: { eq: "frontpage" }) {
-//       products {
-//         ...ProductCard
-//       }
-//     }
-//   }
-// `
+export const query = graphql`
+  query {
+    shopifyCollection(handle: { eq: "frontpage" }) {
+      products {
+        ...ProductCard
+      }
+    }
+  }
+`
 
 // export default function IndexPage({ data }) {
 //   return (
