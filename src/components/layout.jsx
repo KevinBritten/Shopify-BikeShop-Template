@@ -6,8 +6,9 @@ import Footer from "./Footer"
 export function Layout({ children, language }) {
   return (
     <div>
+      <SkipNavLink />
       <Header language={language} />
-      {children}
+      <SkipNavContent>{children}</SkipNavContent>
       <Footer />
     </div>
   )
