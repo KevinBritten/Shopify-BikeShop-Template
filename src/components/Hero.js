@@ -14,8 +14,8 @@ const splideOptions = {
   lazyLoad: "nearby",
   preloadPages: 1,
   type: "loop", // enables wraparound
-  autoplay: false, // enables autoplay
-  interval: 4000, // interval of autoplay in milliseconds
+  autoplay: true, // enables autoplay
+  interval: 5000, // interval of autoplay in milliseconds
   pauseOnHover: false, // whether to pause on hover
   pauseOnFocus: true, // whether to pause on focus
   keyboard: true,
@@ -33,19 +33,19 @@ const Hero = ({ language }) => {
       image: "../images/placeholder-img-1.png",
       title: t("hero.slides.0.title"),
       subtitle: t("hero.slides.0.subtitle"),
-      target: "/target1",
+      target: "/#contact",
     },
     {
       image: "../images/placeholder-img-2.png",
       title: t("hero.slides.1.title"),
       subtitle: t("hero.slides.1.subtitle"),
-      target: "/target1",
+      target: "/#builds",
     },
     {
       image: "../images/placeholder-img-3.png",
       title: t("hero.slides.2.title"),
       subtitle: t("hero.slides.2.subtitle"),
-      target: "/target1",
+      target: "/#service",
     },
   ]
   const data = useStaticQuery(graphql`
@@ -88,8 +88,10 @@ const Hero = ({ language }) => {
               />
             )}
             <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
-              <h1 className="text-4xl ">{slide.title}</h1>
-              <h2 className="text-2xl text-black mt-4">{slide.subtitle}</h2>
+              <h1 className="text-4xl text-center">{slide.title}</h1>
+              <h2 className="text-2xl text-black mt-4 text-center">
+                {slide.subtitle}
+              </h2>
               <button
                 className="mt-4 px-6 py-2 bg-blue-500 rounded-lg flex items-center justify-center"
                 aria-label="Click to navigate"
