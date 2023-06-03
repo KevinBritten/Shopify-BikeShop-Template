@@ -90,5 +90,7 @@ nav > a {
 }
 
 .languageButton {
-  grid-area: languageButton
+  grid-area: languageButton;
+  /* TODO: change when shop icons added */
+  padding-left: 150px;
 }
