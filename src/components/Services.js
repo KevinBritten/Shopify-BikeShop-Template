@@ -14,17 +14,17 @@ function Services({ language }) {
 
   const serviceLevels = [
     {
-      image: "services-icon-1.svg",
+      image: "/services-icon-1.svg",
       title: t("services.serviceLevels.0.title"),
       services: t("services.serviceLevels.0.services", { returnObjects: true }),
     },
     {
-      image: "services-icon-2.svg",
+      image: "/services-icon-2.svg",
       title: t("services.serviceLevels.1.title"),
       services: t("services.serviceLevels.1.services", { returnObjects: true }),
     },
     {
-      image: "services-icon-3.svg",
+      image: "/services-icon-3.svg",
       title: t("services.serviceLevels.2.title"),
       services: t("services.serviceLevels.2.services", { returnObjects: true }),
     },
