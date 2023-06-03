@@ -117,10 +117,10 @@ export function Header({ language }) {
             <button onClick={() => changeLanguage("fr")}>FR</button>
           )}
         </div>
-        <Link to="/search" className={searchButton}>
+        {/* <Link to="/search" className={searchButton}>
           <SearchIcon />
-        </Link>
-        <CartButton quantity={quantity} />
+        </Link> */}
+        {/* <CartButton quantity={quantity} /> */}
       </header>
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
