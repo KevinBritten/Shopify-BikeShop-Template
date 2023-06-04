@@ -31,7 +31,7 @@ function Services({ language }) {
   ]
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "placeholder-img-2.png" }) {
+      placeholderImage: file(relativePath: { eq: "placeholder-img-2a.png" }) {
         childImageSharp {
           gatsbyImageData(
             width: 400

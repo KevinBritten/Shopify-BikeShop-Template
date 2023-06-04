@@ -10,7 +10,7 @@
   display: grid;
   width: 100%;
   padding: var(--size-gap) var(--size-gutter);
-  grid-template-columns: 150px 1fr min-content min-content;
+  grid-template-columns: 100px 1fr min-content min-content;
   grid-template-areas: "logo nada language button searchButton cartButton" "navHeader navHeader navHeader navHeader";
   align-items: center;
   background-color: var(--background);
@@ -39,6 +39,7 @@
 @media (min-width: 640px) {
   .header {
     grid-template-areas: "logo navHeader languageButton searchButton cartButton";
+    grid-template-columns: 150px 1fr min-content min-content;
   }
 }
 

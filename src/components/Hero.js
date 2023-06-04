@@ -36,7 +36,7 @@ const Hero = ({ language }) => {
       target: `#${t("links.contact")}`,
     },
     {
-      image: "../images/placeholder-img-2.png",
+      image: "../images/placeholder-img-2a.png",
       title: t("hero.slides.1.title"),
       subtitle: t("hero.slides.1.subtitle"),
       target: `#${t("links.builds")}`,
