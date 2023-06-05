@@ -68,7 +68,7 @@ function Services({ language }) {
           alt={"A picture of our workbench"}
           className="relative w-full h-full"
         />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-4 bg-white bg-opacity-90 flex flex-col items-center justify-between">
+        <div className="lg:w-full lg:max-w-3xl absolute top-1/2 lg:left-1/2 transform lg:-translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
           <h2 className=" text-compliment">{t("services.estimate.title")}</h2>
           <p className=" max-w-2xl mt-4">{t("services.estimate.body")}</p>
         </div>
