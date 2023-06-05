@@ -19,6 +19,7 @@ import {
   nav,
   activeLink,
   menuButton,
+  open,
 } from "./header.module.css"
 
 export function Header({ language }) {
@@ -85,57 +86,78 @@ export function Header({ language }) {
       <button className={menuButton} onClick={handleMenuButtonClick}>
         <Hamburger isOpen={isMenuOpen} toogle={setIsMenuOpen} />
       </button>
-      {isMenuOpen && (
-        <header className={header}>
-          <Link to={`${langPrefix}/`} className={logoCss}>
-            <Logo />
+
+      <header className={`${header} ${isMenuOpen ? open : ""}`}>
+        <Link
+          onClick={handleMenuButtonClick}
+          to={`${langPrefix}/`}
+          className={logoCss}
+        >
+          <Logo />
+        </Link>
+        <nav className="nav items-center flex-col md:flex-row justify-center md:justify-end lg:justify-center flex uppercase">
+          <Link
+            onClick={handleMenuButtonClick}
+            to={`${langPrefix}/#${t("links.services")}`}
+            activeClassName={activeLink}
+          >
+            {t("links.services")}
           </Link>
-          <nav className="nav items-center flex-col justify-center md:justify-end lg:justify-center flex uppercase">
-            <Link
-              to={`${langPrefix}/#${t("links.services")}`}
-              activeClassName={activeLink}
-            >
-              {t("links.services")}
-            </Link>
-            <Link
-              to={`${langPrefix}/#${t("links.builds")}`}
-              activeClassName={activeLink}
-            >
-              {t("links.builds")}
-            </Link>
-            <Link
-              to={`${langPrefix}/#${t("links.contact")}`}
-              activeClassName={activeLink}
-            >
-              {t("links.contact")}
-            </Link>
-            {/* <Link
+          <Link
+            onClick={handleMenuButtonClick}
+            to={`${langPrefix}/#${t("links.builds")}`}
+            activeClassName={activeLink}
+          >
+            {t("links.builds")}
+          </Link>
+          <Link
+            onClick={handleMenuButtonClick}
+            to={`${langPrefix}/#${t("links.contact")}`}
+            activeClassName={activeLink}
+          >
+            {t("links.contact")}
+          </Link>
+          {/* <Link
             to={`${langPrefix}/${t("links.store")}`}
             activeClassName={activeLink}
           >
             {t("links.store")}
           </Link> */}
-          </nav>
-          {/* )} */}
-          <nav className="hidden">
-            <button>Menu</button>{" "}
-            {/* This could toggle display of a dropdown or slide-out menu */}
-          </nav>
-          {/* <Navigation className={nav} /> */}
-          <div className={languageButton}>
-            {language === "fr" && (
-              <button onClick={() => changeLanguage("en")}>EN</button>
-            )}
-            {language === "en" && (
-              <button onClick={() => changeLanguage("fr")}>FR</button>
-            )}
-          </div>
-          {/* <Link to="/search" className={searchButton}>
+        </nav>
+        {/* )} */}
+        <nav className="hidden">
+          <button>Menu</button>{" "}
+          {/* This could toggle display of a dropdown or slide-out menu */}
+        </nav>
+        {/* <Navigation className={nav} /> */}
+        <div className={languageButton}>
+          {language === "fr" && (
+            <button
+              onClick={() => {
+                handleMenuButtonClick()
+                changeLanguage("en")
+              }}
+            >
+              EN
+            </button>
+          )}
+          {language === "en" && (
+            <button
+              onClick={() => {
+                handleMenuButtonClick()
+                changeLanguage("fr")
+              }}
+            >
+              FR
+            </button>
+          )}
+        </div>
+        {/* <Link to="/search" className={searchButton}>
           <SearchIcon />
         </Link> */}
-          {/* <CartButton quantity={quantity} /> */}
-        </header>
-      )}
+        {/* <CartButton quantity={quantity} /> */}
+      </header>
+
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
           "Updating…"
