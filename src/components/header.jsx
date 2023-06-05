@@ -69,17 +69,19 @@ export function Header({ language }) {
       window.location.href = "/en" + currentPath + "#" + translatedFragment
     }
   }
-
+  const preventBodyScroll = (state) => {
+    if (!state) {
+      // Disable scrolling on the body.
+      document.body.style.overflow = "hidden"
+    } else {
+      // Enable scrolling on the body.
+      document.body.style.overflow = "auto"
+    }
+  }
   const handleMenuButtonClick = () => {
     setIsMenuOpen((prevState) => {
       // If the menu was previously closed and is now opening...
-      if (!prevState) {
-        // Disable scrolling on the body.
-        document.body.style.overflow = "hidden"
-      } else {
-        // Enable scrolling on the body.
-        document.body.style.overflow = "auto"
-      }
+      preventBodyScroll(prevState)
 
       // Toggle the visibility state.
       return !prevState
@@ -96,8 +98,11 @@ export function Header({ language }) {
 
   return (
     <div className={container}>
-      <button className={menuButton} onClick={handleMenuButtonClick}>
-        <Hamburger isOpen={isMenuOpen} toogle={setIsMenuOpen} />
+      <button
+        className={menuButton}
+        onClick={() => preventBodyScroll(isMenuOpen)}
+      >
+        <Hamburger toggled={isMenuOpen} onToggle={handleMenuButtonClick} />
       </button>
 
       <header className={`${header} ${isMenuOpen ? open : ""}`}>

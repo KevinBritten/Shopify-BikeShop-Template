@@ -85,7 +85,7 @@ nav > a {
   height: var(--size-input);
   display: grid;
   place-items: center;
-  margin:auto;
+  margin: auto;
 }
 
 .searchButton:hover {
@@ -96,10 +96,9 @@ nav > a {
   color: var(--primary);
 }
 
-
 .languageButton {
   grid-area: languageButton;
-margin: 8px auto 40px;
+  margin: 8px auto 40px;
 }
 
 .menu-button {
@@ -110,7 +109,7 @@ margin: 8px auto 40px;
 }
 
 .socials {
-grid-area: socials
+  grid-area: socials;
 }
 
 @media (min-width: 768px) {
@@ -133,19 +132,19 @@ grid-area: socials
     height: auto;
   }
   .languageButton {
-    width:48px;
-    height:48px;
+    width: 48px;
+    height: 48px;
     display: flex;
     justify-content: center;
     /* TODO: change when shop icons added */
     padding-left: 0px;
-    margin:auto;
+    margin: auto;
   }
   .menu-button {
     display: none;
   }
   .socials {
-    display:none;
+    display: none;
   }
 }
 
@@ -155,7 +154,7 @@ grid-area: socials
   }
   .languageButton {
     /* TODO: change when shop icons added */
-    padding-left: 150px;
+    padding-left: 0px;
   }
   nav > a {
     margin: 0 32px;
