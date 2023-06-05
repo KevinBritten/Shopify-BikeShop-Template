@@ -17,9 +17,9 @@
   height: 100vh;
   padding: var(--size-gap) var(--size-gutter);
 
-  grid-template-columns: 50px 1fr min-content min-content;
+  grid-template-columns: 120px 1fr min-content min-content;
   grid-template-rows: auto 1fr;
-  grid-template-areas: "logo nada languageButton searchButton cartButton" "navHeader navHeader navHeader navHeader navHeader";
+  grid-template-areas: "logo nada nada " "navHeader navHeader navHeader" "searchButton searchButton searchButton" "cartButton cartButton cartButton" "languageButton languageButton languageButton" "socials socials socials";
   align-items: center;
   background-color: white;
   border-bottom: 1px solid hsla(0, 0%, 93.3%, 0.5);
@@ -85,6 +85,7 @@ nav > a {
   height: var(--size-input);
   display: grid;
   place-items: center;
+  margin:auto;
 }
 
 .searchButton:hover {
@@ -95,8 +96,10 @@ nav > a {
   color: var(--primary);
 }
 
+
 .languageButton {
   grid-area: languageButton;
+margin: 8px auto 40px;
 }
 
 .menu-button {
@@ -104,6 +107,10 @@ nav > a {
   right: 10px;
   top: 10px;
   z-index: 20;
+}
+
+.socials {
+grid-area: socials
 }
 
 @media (min-width: 768px) {
@@ -126,11 +133,19 @@ nav > a {
     height: auto;
   }
   .languageButton {
+    width:48px;
+    height:48px;
+    display: flex;
+    justify-content: center;
     /* TODO: change when shop icons added */
     padding-left: 0px;
+    margin:auto;
   }
   .menu-button {
     display: none;
+  }
+  .socials {
+    display:none;
   }
 }
 

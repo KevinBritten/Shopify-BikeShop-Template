@@ -5,6 +5,7 @@ import i18n from "i18next"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
 import Logo from "../icons/logo"
+import Socials from "./Socials"
 import { Navigation } from "./navigation"
 import { CartButton } from "./cart-button"
 import SearchIcon from "../icons/search"
@@ -20,6 +21,7 @@ import {
   activeLink,
   menuButton,
   open,
+  socials,
 } from "./header.module.css"
 
 export function Header({ language }) {
@@ -163,10 +165,13 @@ export function Header({ language }) {
             </button>
           )}
         </div>
-        {/* <Link to="/search" className={searchButton}>
+        <Link to="/search" className={searchButton}>
           <SearchIcon />
-        </Link> */}
-        {/* <CartButton quantity={quantity} /> */}
+        </Link>
+        <CartButton quantity={quantity} />
+        <div className={socials}>
+          <Socials />
+        </div>
       </header>
 
       <Toast show={loading || didJustAddToCart}>

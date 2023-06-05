@@ -1,4 +1,5 @@
 .cartButton {
+  margin:auto;
   color: var(--text-color-secondary);
   grid-area: cartButton;
   width: var(--size-input);
