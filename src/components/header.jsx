@@ -77,7 +77,7 @@ export function Header({ language }) {
         <Link to={`${langPrefix}/`} className={logoCss}>
           <Logo />
         </Link>
-        <nav className="nav hidden items-center md:flex uppercase">
+        <nav className="nav hidden items-center justify-end lg:justify-center md:flex uppercase">
           <Link
             to={`${langPrefix}/#${t("links.services")}`}
             activeClassName={activeLink}
