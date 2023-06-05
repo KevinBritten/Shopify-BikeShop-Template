@@ -89,9 +89,7 @@ const Hero = ({ language }) => {
             )}
             <div className="lg:w-full lg:max-w-3xl absolute top-1/2 lg:left-1/2 transform lg:-translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
               <h1 className="text-center block">{slide.title}</h1>
-              <h2 className="text-black mt-4 text-center block">
-                {slide.subtitle}
-              </h2>
+              <h2 className="text-black mt-4 text-center">{slide.subtitle}</h2>
               <a href={slide.target}>
                 <button
                   className="mt-4 px-6 py-2 bg-blue-500 rounded-lg flex items-center justify-center"
