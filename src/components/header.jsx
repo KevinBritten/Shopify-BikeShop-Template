@@ -1,5 +1,5 @@
 import * as React from "react"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useTranslation } from "react-i18next"
 import i18n from "i18next"
 import { Link } from "gatsby"
@@ -8,6 +8,7 @@ import Logo from "../icons/logo"
 import { Navigation } from "./navigation"
 import { CartButton } from "./cart-button"
 import SearchIcon from "../icons/search"
+import { Squash as Hamburger } from "hamburger-react"
 import { Toast } from "./toast"
 import {
   header,
@@ -17,6 +18,7 @@ import {
   languageButton,
   nav,
   activeLink,
+  menuButton,
 } from "./header.module.css"
 
 export function Header({ language }) {
@@ -24,6 +26,8 @@ export function Header({ language }) {
   useEffect(() => {
     i18n.changeLanguage(language)
   }, [i18n, language])
+
+  const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
   //for home link
   const langPrefix = language === "en" ? "/en" : ""
@@ -63,6 +67,11 @@ export function Header({ language }) {
     }
   }
 
+  const handleMenuButtonClick = () => {
+    // Toggle the visibility state on button click
+    setIsMenuOpen((prevState) => !prevState)
+  }
+
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
 
   const items = checkout ? checkout.lineItems : []
@@ -73,55 +82,60 @@ export function Header({ language }) {
 
   return (
     <div className={container}>
-      <header className={header}>
-        <Link to={`${langPrefix}/`} className={logoCss}>
-          <Logo />
-        </Link>
-        <nav className="nav hidden items-center justify-end lg:justify-center md:flex uppercase">
-          <Link
-            to={`${langPrefix}/#${t("links.services")}`}
-            activeClassName={activeLink}
-          >
-            {t("links.services")}
+      <button className={menuButton} onClick={handleMenuButtonClick}>
+        <Hamburger isOpen={isMenuOpen} toogle={setIsMenuOpen} />
+      </button>
+      {isMenuOpen && (
+        <header className={header}>
+          <Link to={`${langPrefix}/`} className={logoCss}>
+            <Logo />
           </Link>
-          <Link
-            to={`${langPrefix}/#${t("links.builds")}`}
-            activeClassName={activeLink}
-          >
-            {t("links.builds")}
-          </Link>
-          <Link
-            to={`${langPrefix}/#${t("links.contact")}`}
-            activeClassName={activeLink}
-          >
-            {t("links.contact")}
-          </Link>
-          {/* <Link
+          <nav className="nav items-center flex-col justify-center md:justify-end lg:justify-center flex uppercase">
+            <Link
+              to={`${langPrefix}/#${t("links.services")}`}
+              activeClassName={activeLink}
+            >
+              {t("links.services")}
+            </Link>
+            <Link
+              to={`${langPrefix}/#${t("links.builds")}`}
+              activeClassName={activeLink}
+            >
+              {t("links.builds")}
+            </Link>
+            <Link
+              to={`${langPrefix}/#${t("links.contact")}`}
+              activeClassName={activeLink}
+            >
+              {t("links.contact")}
+            </Link>
+            {/* <Link
             to={`${langPrefix}/${t("links.store")}`}
             activeClassName={activeLink}
           >
             {t("links.store")}
           </Link> */}
-        </nav>
-        {/* )} */}
-        <nav className="md:hidden">
-          <button>Menu</button>{" "}
-          {/* This could toggle display of a dropdown or slide-out menu */}
-        </nav>
-        {/* <Navigation className={nav} /> */}
-        <div className={languageButton}>
-          {language === "fr" && (
-            <button onClick={() => changeLanguage("en")}>EN</button>
-          )}
-          {language === "en" && (
-            <button onClick={() => changeLanguage("fr")}>FR</button>
-          )}
-        </div>
-        {/* <Link to="/search" className={searchButton}>
+          </nav>
+          {/* )} */}
+          <nav className="hidden">
+            <button>Menu</button>{" "}
+            {/* This could toggle display of a dropdown or slide-out menu */}
+          </nav>
+          {/* <Navigation className={nav} /> */}
+          <div className={languageButton}>
+            {language === "fr" && (
+              <button onClick={() => changeLanguage("en")}>EN</button>
+            )}
+            {language === "en" && (
+              <button onClick={() => changeLanguage("fr")}>FR</button>
+            )}
+          </div>
+          {/* <Link to="/search" className={searchButton}>
           <SearchIcon />
         </Link> */}
-        {/* <CartButton quantity={quantity} /> */}
-      </header>
+          {/* <CartButton quantity={quantity} /> */}
+        </header>
+      )}
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
           "Updating…"

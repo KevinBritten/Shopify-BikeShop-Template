@@ -1,23 +1,25 @@
 .container {
-  display: flex;
   align-items: center;
   position: fixed;
+  display: flex;
   z-index: 10;
   top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .header {
   display: grid;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  padding: var(--size-gap) var(--size-gutter);
-  grid-template-columns: 100px 1fr min-content min-content;
-  grid-template-areas: "logo nada language button searchButton cartButton" "navHeader navHeader navHeader navHeader";
+  grid-template-columns: 50px 1fr min-content min-content;
+  grid-template-rows: auto 1fr;
+  grid-template-areas: "logo nada languageButton searchButton cartButton" "navHeader navHeader navHeader navHeader navHeader";
   align-items: center;
-  background-color: var(--background);
+  background-color: white;
   border-bottom: 1px solid hsla(0, 0%, 93.3%, 0.5);
 }
 
@@ -92,22 +94,37 @@ nav > a {
   grid-area: languageButton;
 }
 
+.menu-button {
+  position: fixed;
+  right: 10px;
+  top: 10px;
+  z-index: 20;
+}
+
 @media (min-width: 768px) {
   .container {
     align-items: center;
     position: sticky;
+  }
+  .header {
+    position: relative;
+    top: auto;
     right: auto;
     bottom: auto;
     left: auto;
-  }
-  .header {
-    grid-template-areas: "logo navHeader languageButton searchButton cartButton";
+    padding: var(--size-gap) var(--size-gutter);
     grid-template-columns: 120px 1fr min-content min-content;
+    grid-template-areas: "logo navHeader languageButton searchButton cartButton";
+    background-color: var(--background);
+    border-bottom: 1px solid hsla(0, 0%, 93.3%, 0.5);
     height: auto;
   }
   .languageButton {
     /* TODO: change when shop icons added */
     padding-left: 0px;
+  }
+  .menu-button {
+    display: none;
   }
 }
 
