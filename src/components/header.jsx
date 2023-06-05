@@ -69,8 +69,19 @@ export function Header({ language }) {
   }
 
   const handleMenuButtonClick = () => {
-    // Toggle the visibility state on button click
-    setIsMenuOpen((prevState) => !prevState)
+    setIsMenuOpen((prevState) => {
+      // If the menu was previously closed and is now opening...
+      if (!prevState) {
+        // Disable scrolling on the body.
+        document.body.style.overflow = "hidden"
+      } else {
+        // Enable scrolling on the body.
+        document.body.style.overflow = "auto"
+      }
+
+      // Toggle the visibility state.
+      return !prevState
+    })
   }
 
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
