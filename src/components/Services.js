@@ -34,7 +34,7 @@ function Services({ language }) {
       placeholderImage: file(relativePath: { eq: "placeholder-img-2a.png" }) {
         childImageSharp {
           gatsbyImageData(
-            width: 400
+            width: 1024
             placeholder: BLURRED
             formats: [AUTO, WEBP, AVIF]
           )
@@ -62,7 +62,7 @@ function Services({ language }) {
           ))}
         </div>
       </div>
-      <div className="relative text-center h-80">
+      <div className="relative text-center h-96">
         <GatsbyImage
           image={image}
           alt={"A picture of our workbench"}
