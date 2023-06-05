@@ -40,7 +40,7 @@ function Builds({ language }) {
       <h1 className="text-center">{t("builds.title")}</h1>
       <div className="flex items-center mt-8 lg:mt-16">
         <div className="w-1/2 flex">
-          <div className="flex flex-col w-full p-4">
+          <div className="flex flex-col w-full px-4">
             <h2 className="text-compliment text-center">
               {t("builds.custom.title")}
             </h2>{" "}
@@ -55,7 +55,7 @@ function Builds({ language }) {
           />
         </div>
       </div>
-      <div className="flex items-center ;g:mt-16">
+      <div className="flex items-center mt-4 lg:mt-16">
         <div className="p-4 relative w-1/2 h-72 ">
           <GatsbyImage
             image={image2}
@@ -64,7 +64,7 @@ function Builds({ language }) {
           />
         </div>
         <div className="w-1/2 flex">
-          <div className="flex flex-col w-full p-4">
+          <div className="flex flex-col w-full px-4">
             <h2 className="text-compliment text-center">
               {t("builds.complete.title")}
             </h2>{" "}
