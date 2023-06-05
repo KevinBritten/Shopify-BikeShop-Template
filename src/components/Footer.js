@@ -2,7 +2,7 @@ import React from "react"
 
 function Footer() {
   return (
-    <footer className="bg-black px-16 py-8 flex justify-between items-center text-white">
+    <footer className="bg-black px-4 lg:px-16 py-8 flex justify-between items-center text-white">
       <ul>
         <li>7400 rue Saint-André</li>
         <li>Montréal, Québec</li>

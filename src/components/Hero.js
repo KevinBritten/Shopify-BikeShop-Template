@@ -14,7 +14,7 @@ const splideOptions = {
   lazyLoad: "nearby",
   preloadPages: 1,
   type: "loop", // enables wraparound
-  autoplay: true, // enables autoplay
+  autoplay: false, // enables autoplay
   interval: 5000, // interval of autoplay in milliseconds
   pauseOnHover: false, // whether to pause on hover
   pauseOnFocus: true, // whether to pause on focus
@@ -36,7 +36,7 @@ const Hero = ({ language }) => {
       target: `#${t("links.contact")}`,
     },
     {
-      image: "../images/placeholder-img-2.png",
+      image: "../images/placeholder-img-2a.png",
       title: t("hero.slides.1.title"),
       subtitle: t("hero.slides.1.subtitle"),
       target: `#${t("links.builds")}`,
@@ -87,11 +87,9 @@ const Hero = ({ language }) => {
                 className="realtive w-full h-full"
               />
             )}
-            <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
-              <h1 className="text-4xl text-center">{slide.title}</h1>
-              <h2 className="text-2xl text-black mt-4 text-center">
-                {slide.subtitle}
-              </h2>
+            <div className="lg:w-full lg:max-w-3xl absolute top-1/2 lg:left-1/2 transform lg:-translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
+              <h1 className="text-center block">{slide.title}</h1>
+              <h2 className="text-black mt-4 text-center">{slide.subtitle}</h2>
               <a href={slide.target}>
                 <button
                   className="mt-4 px-6 py-2 bg-blue-500 rounded-lg flex items-center justify-center"

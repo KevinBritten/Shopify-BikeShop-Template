@@ -10,10 +10,11 @@
   display: grid;
   width: 100%;
   padding: var(--size-gap) var(--size-gutter);
-  grid-template-columns: 150px 1fr min-content min-content;
+  grid-template-columns: 100px 1fr min-content min-content;
   grid-template-areas: "logo nada language button searchButton cartButton" "navHeader navHeader navHeader navHeader";
   align-items: center;
   background-color: var(--background);
+  border-bottom: 1px solid hsla(0, 0%, 93.3%, 0.5);
 }
 
 .active-link {
@@ -36,9 +37,27 @@
   justify-self: flex-end;
 } */
 
-@media (min-width: 640px) {
+@media (min-width: 768px) {
   .header {
     grid-template-areas: "logo navHeader languageButton searchButton cartButton";
+    grid-template-columns: 120px 1fr min-content min-content;
+  }
+  .languageButton {
+    /* TODO: change when shop icons added */
+    padding-left: 0px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .header {
+    grid-template-columns: 150px 1fr min-content min-content;
+  }
+  .languageButton {
+    /* TODO: change when shop icons added */
+    padding-left: 150px;
+  }
+  nav > a {
+    margin: 0 32px;
   }
 }
 
@@ -69,7 +88,7 @@ nav {
 }
 
 nav > a {
-  margin: 0 32px;
+  margin: 12px;
 }
 
 .searchButton {
@@ -91,6 +110,4 @@ nav > a {
 
 .languageButton {
   grid-area: languageButton;
-  /* TODO: change when shop icons added */
-  padding-left: 150px;
 }
