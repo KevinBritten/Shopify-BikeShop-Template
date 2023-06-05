@@ -47,10 +47,10 @@ function Services({ language }) {
 
   return (
     <section id={t("links.services")}>
-      <div className="p-16 bg-light-bg">
+      <div className="px-4 py-8 lg:p-16 bg-light-bg">
         <h1 className="text-center">{t("services.title")}</h1>
-        <h2 className="text-center">{t("services.subtitle")}</h2>
-        <div className="grid grid-cols-3 gap-4 border-compliment">
+        <h2 className="text-center mt-8">{t("services.subtitle")}</h2>
+        <div className="grid grid-cols-3 gap-4 border-compliment mt-4">
           {serviceLevels.map((level, index) => (
             <ServicesCard
               key={index}
