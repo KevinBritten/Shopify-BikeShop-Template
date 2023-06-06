@@ -43,7 +43,7 @@ module.exports = {
     "gatsby-plugin-sitemap",
     "gatsby-plugin-gatsby-cloud",
     "gatsby-plugin-netlify",
-    // Add your Google Analytics ID to the .env file to enable
+    //  Add your Google Analytics ID to the .env file to enable
     // Otherwise, this plugin can be removed
     process.env.GOOGLE_ANALYTICS_ID && {
       resolve: "gatsby-plugin-google-analytics",
