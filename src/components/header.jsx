@@ -30,6 +30,13 @@ export function Header({ language }) {
     i18n.changeLanguage(language)
   }, [i18n, language])
 
+  //ensure body scroll isn't hidden from mobile menu being open before navigating from another page
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [])
+
   const [isMenuOpen, setIsMenuOpen] = React.useState(false)
 
   //for home link
@@ -88,6 +95,14 @@ export function Header({ language }) {
     })
   }
 
+  //close menu when nav button is clicked
+  const handleNavButtonClick = () => {
+    setIsMenuOpen(() => {
+      document.body.style.overflow = "auto"
+      return false
+    })
+  }
+
   const { checkout, loading, didJustAddToCart } = React.useContext(StoreContext)
 
   const items = checkout ? checkout.lineItems : []
@@ -107,7 +122,7 @@ export function Header({ language }) {
 
       <header className={`${header} ${isMenuOpen ? open : ""}`}>
         <Link
-          onClick={handleMenuButtonClick}
+          onClick={handleNavButtonClick}
           to={`${langPrefix}/`}
           className={logoCss}
         >
@@ -115,21 +130,21 @@ export function Header({ language }) {
         </Link>
         <nav className="nav items-center flex-col md:flex-row justify-center md:justify-end lg:justify-center flex uppercase">
           <Link
-            onClick={handleMenuButtonClick}
+            onClick={handleNavButtonClick}
             to={`${langPrefix}/#${t("links.services")}`}
             activeClassName={activeLink}
           >
             {t("links.services")}
           </Link>
           <Link
-            onClick={handleMenuButtonClick}
+            onClick={handleNavButtonClick}
             to={`${langPrefix}/#${t("links.builds")}`}
             activeClassName={activeLink}
           >
             {t("links.builds")}
           </Link>
           <Link
-            onClick={handleMenuButtonClick}
+            onClick={handleNavButtonClick}
             to={`${langPrefix}/#${t("links.contact")}`}
             activeClassName={activeLink}
           >
@@ -152,7 +167,7 @@ export function Header({ language }) {
           {language === "fr" && (
             <button
               onClick={() => {
-                handleMenuButtonClick()
+                handleNavButtonClick()
                 changeLanguage("en")
               }}
             >
@@ -162,7 +177,7 @@ export function Header({ language }) {
           {language === "en" && (
             <button
               onClick={() => {
-                handleMenuButtonClick()
+                handleNavButtonClick()
                 changeLanguage("fr")
               }}
             >
