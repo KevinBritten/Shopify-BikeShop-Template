@@ -7,6 +7,7 @@ const Socials = () => {
         href="https://www.instagram.com/courriercaverne/"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Instagram"
       >
         <svg
           viewBox="0 0 24 24"
@@ -27,6 +28,7 @@ const Socials = () => {
         href="https://www.facebook.com/Courrier-caverne-112116368140522/"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Facebook"
       >
         <svg
           viewBox="0 0 24 24"
@@ -45,6 +47,7 @@ const Socials = () => {
         href="https://goo.gl/maps/xLLDG5gpzZ5vyirs6"
         target="_blank"
         rel="noopener noreferrer"
+        aria-label="Google Maps"
       >
         <svg
           viewBox="0 0 24 24"
