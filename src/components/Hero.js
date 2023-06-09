@@ -30,19 +30,19 @@ const Hero = ({ language }) => {
   const slides = [
     // Your slide data here
     {
-      image: "../images/iStock-1143317984.webp",
+      image: "../images/iStock-1143317984.jpeg",
       title: t("hero.slides.0.title"),
       subtitle: t("hero.slides.0.subtitle"),
       target: `#${t("links.contact")}`,
     },
     {
-      image: "../images/iStock-1142568317.webp",
+      image: "../images/iStock-1142568317.jpeg",
       title: t("hero.slides.1.title"),
       subtitle: t("hero.slides.1.subtitle"),
       target: `#${t("links.builds")}`,
     },
     {
-      image: "../images/iStock-628540996.webp",
+      image: "../images/iStock-908850278.jpeg",
       title: t("hero.slides.2.title"),
       subtitle: t("hero.slides.2.subtitle"),
       target: `#${t("links.services")}`,
