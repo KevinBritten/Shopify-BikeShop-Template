@@ -153,7 +153,8 @@ nav > a {
   }
   .languageButton {
     /* TODO: change when shop icons added */
-    padding-left: 0px;
+    padding-left: 96px;
+    padding-right:20px;
   }
   nav > a {
     margin: 0 32px;

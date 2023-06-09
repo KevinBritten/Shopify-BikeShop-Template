@@ -185,10 +185,10 @@ export function Header({ language }) {
             </button>
           )}
         </div>
-        <Link to="/search" className={searchButton}>
+        {/* <Link to="/search" className={searchButton}>
           <SearchIcon />
-        </Link>
-        <CartButton quantity={quantity} />
+        </Link> */}
+        {/* <CartButton quantity={quantity} /> */}
         <div className={socials}>
           <Socials />
         </div>
