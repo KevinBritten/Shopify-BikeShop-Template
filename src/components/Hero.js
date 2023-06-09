@@ -14,7 +14,7 @@ const splideOptions = {
   lazyLoad: "nearby",
   preloadPages: 1,
   type: "loop", // enables wraparound
-  autoplay: false, // enables autoplay
+  autoplay: true, // enables autoplay
   interval: 5000, // interval of autoplay in milliseconds
   pauseOnHover: false, // whether to pause on hover
   pauseOnFocus: true, // whether to pause on focus
