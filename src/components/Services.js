@@ -31,7 +31,7 @@ function Services({ language }) {
   ]
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "iStock-155436930.jpeg" }) {
+      placeholderImage: file(relativePath: { eq: "iStock-155436930.webp" }) {
         childImageSharp {
           gatsbyImageData(
             width: 1024
