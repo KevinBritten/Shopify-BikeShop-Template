@@ -1,16 +1,7 @@
 import * as React from "react"
 import { graphql } from "gatsby"
-// import { Layout } from "../components/layout"
-// import { ProductListing } from "../components/product-listing"
-// import { Seo } from "../components/seo"
+import { Seo } from "../components/seo"
 import Home from "../components/Home"
-// import {
-//   container,
-//   intro,
-//   callOut,
-//   callToAction,
-//   deployButton,
-// } from "./index.module.css"
 
 export const query = graphql`
   query {
@@ -22,20 +13,7 @@ export const query = graphql`
   }
 `
 
-// export default function IndexPage({ data }) {
-//   return (
-//     <Layout>
-//       <Hero />
-//       <Intro />
-//       <Services />
-//       <Builds />
-//       <Contact />
-//       {/* <ProductListing products={data?.shopifyCollection?.products} /> */}
-//     </Layout>
-//   )
-// }
-
-// export const Head = () => <Seo />
+export const Head = () => <Seo />
 
 function IndexPage() {
   return <Home language="fr" />
