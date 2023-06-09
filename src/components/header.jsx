@@ -116,6 +116,7 @@ export function Header({ language }) {
       <button
         className={menuButton}
         onClick={() => preventBodyScroll(isMenuOpen)}
+        id="menu-button"
       >
         <Hamburger toggled={isMenuOpen} onToggle={handleMenuButtonClick} />
       </button>
