@@ -117,7 +117,7 @@ export function Header({ language }) {
         <Hamburger
           toggled={isMenuOpen}
           onToggle={handleMenuButtonClick}
-          ariaLabel="Menu"
+          label="Menu"
         />
       </div>
 
