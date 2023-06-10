@@ -8,7 +8,6 @@ export function Seo({
   pathname = "",
   image = "",
   children = null,
-  lang = "fr",
 }) {
   const location = useLocation()
   const {
@@ -46,7 +45,6 @@ export function Seo({
 
   return (
     <>
-      <html lang={lang} />
       <title> {title ? `${title} | ${siteTitle}` : siteTitleDefault}</title>
       <meta name="description" content={seo.description} />
       <meta name="image" content={seo.image} />

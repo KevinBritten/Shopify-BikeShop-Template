@@ -12,6 +12,9 @@ export const Head = () => (
 )
 
 function IndexPage() {
+  React.useEffect(() => {
+    document.documentElement.lang = "en"
+  }, [])
   return <Home language="en" />
 }
 
