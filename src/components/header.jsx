@@ -113,13 +113,13 @@ export function Header({ language }) {
 
   return (
     <div className={container}>
-      <button
-        className={menuButton}
-        onClick={() => preventBodyScroll(isMenuOpen)}
-        aria-label="Menu"
-      >
-        <Hamburger toggled={isMenuOpen} onToggle={handleMenuButtonClick} />
-      </button>
+      <div className={menuButton}>
+        <Hamburger
+          toggled={isMenuOpen}
+          onToggle={handleMenuButtonClick}
+          ariaLabel="Menu"
+        />
+      </div>
 
       <header className={`${header} ${isMenuOpen ? open : ""}`}>
         <Link
