@@ -85,6 +85,7 @@ const Hero = ({ language }) => {
                 image={slide.image}
                 alt={`Slide ${index + 1}`}
                 className="realtive w-full h-full"
+                loading={index === 0 ? "eager" : "lazy"}
               />
             )}
             <div className="w-full lg:max-w-3xl absolute top-1/2 lg:left-1/2 transform lg:-translate-x-1/2 -translate-y-1/2 px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">

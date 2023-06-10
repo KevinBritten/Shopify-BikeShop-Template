@@ -3,7 +3,7 @@ import React from "react"
 import { Link } from "gatsby"
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
 
-const Slide = ({ imageSrc, title, subtitle, targetSection }) => {
+const Slide = ({ imageSrc, title, subtitle, targetSection, loading }) => {
   const image = getImage(imageSrc)
   console.log(image, imageSrc)
 
@@ -13,6 +13,7 @@ const Slide = ({ imageSrc, title, subtitle, targetSection }) => {
         image={image}
         alt={title}
         className="w-full h-full object-cover absolute"
+        loading={loading}
       />
       <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center text-center">
         <div className="p-8 bg-white bg-opacity-50 rounded-lg">
