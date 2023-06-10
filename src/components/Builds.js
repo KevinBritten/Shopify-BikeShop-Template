@@ -13,20 +13,12 @@ function Builds({ language }) {
     query {
       placeholderImage3: file(relativePath: { eq: "iStock-876453532.jpeg" }) {
         childImageSharp {
-          gatsbyImageData(
-            width: 400
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
+          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
         }
       }
       placeholderImage4: file(relativePath: { eq: "iStock-155437509.jpeg" }) {
         childImageSharp {
-          gatsbyImageData(
-            width: 400
-            placeholder: BLURRED
-            formats: [AUTO, WEBP, AVIF]
-          )
+          gatsbyImageData(placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
         }
       }
     }

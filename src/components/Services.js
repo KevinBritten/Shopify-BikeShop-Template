@@ -34,7 +34,7 @@ function Services({ language }) {
       placeholderImage: file(relativePath: { eq: "iStock-155436930.jpeg" }) {
         childImageSharp {
           gatsbyImageData(
-            width: 1024
+            width: 2048
             placeholder: BLURRED
             formats: [AUTO, WEBP]
           )
