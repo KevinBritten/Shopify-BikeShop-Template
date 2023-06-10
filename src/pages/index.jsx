@@ -15,7 +15,6 @@ export const query = graphql`
 
 export const Head = () => (
   <>
-    <html lang="fr" />
     <Seo
       title="Courrier Caverne - Magasin de vélos & Café à Montréal"
       description="Courrier Caverne est votre guichet unique pour des vélos de qualité et du café délicieux. Explorez notre gamme de vélos et rejoignez-nous au café."
