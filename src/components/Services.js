@@ -4,6 +4,7 @@ import { GatsbyImage, getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 import ServicesCard from "./ServicesCard"
+import LocalizedGatsbyImage from "./localizedGatsbyImage"
 
 function Services({ language }) {
   const { t, i18n } = useTranslation()
@@ -31,7 +32,7 @@ function Services({ language }) {
   ]
   const data = useStaticQuery(graphql`
     query {
-      placeholderImage: file(relativePath: { eq: "iStock-155436930.jpeg" }) {
+      servicesImage: file(relativePath: { eq: "iStock-155436930.jpeg" }) {
         childImageSharp {
           gatsbyImageData(
             width: 2048
@@ -43,7 +44,7 @@ function Services({ language }) {
     }
   `)
 
-  const image = getImage(data.placeholderImage)
+  const image = getImage(data.servicesImage)
 
   return (
     <section id={t("links.services")}>
@@ -63,9 +64,13 @@ function Services({ language }) {
         </div>
       </div>
       <div className="relative text-center h-96">
-        <GatsbyImage
+        <LocalizedGatsbyImage
           image={image}
-          alt={"A picture of our workbench"}
+          alten={"An image of a stripped-down bike being repaired on a stand."}
+          altfr={
+            "Une image d'un vélo démonté qui est en cours de réparation sur un support."
+          }
+          language={language}
           className="relative w-full h-full"
         />
         <div className="lg:w-full lg:max-w-3xl absolute top-1/2 lg:left-1/2 transform lg:-translate-x-1/2 -translate-y-1/2 px-4 md:px-16 py-8 bg-white bg-opacity-90 flex flex-col items-center justify-between">
