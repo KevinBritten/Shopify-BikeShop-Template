@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 
 import { GatsbyImage, getImage } from "gatsby-plugin-image"
-
 import { graphql, useStaticQuery } from "gatsby"
+
+import LocalizedGatsbyImage from "./localizedGatsbyImage"
 
 import "../styles/splide.css"
 
@@ -28,23 +29,34 @@ const Hero = ({ language }) => {
   }, [i18n, language])
   const slides = [
     // Your slide data here
+
     {
       image: "../images/iStock-1143317984.jpeg",
       title: t("hero.slides.0.title"),
       subtitle: t("hero.slides.0.subtitle"),
       target: `#${t("links.contact")}`,
+      altEn:
+        "An image of a mechanic working on a bicycle's fork in a clean, organized workshop.",
+      altFr:
+        "Une image d'un mécanicien travaillant sur la fourche d'un vélo dans un atelier propre et organisé.",
     },
     {
       image: "../images/iStock-1142568317.jpeg",
       title: t("hero.slides.1.title"),
       subtitle: t("hero.slides.1.subtitle"),
       target: `#${t("links.builds")}`,
+      altEn: "An image of coffee being poured from a stainless steel machine.",
+      altFr:
+        "Une image du café qui est versé d'une machine en acier inoxydable.",
     },
     {
       image: "../images/iStock-908850278.jpeg",
       title: t("hero.slides.2.title"),
       subtitle: t("hero.slides.2.subtitle"),
       target: `#${t("links.services")}`,
+      altEn: "An image of an orderly rack displaying vintage bike parts.",
+      altFr:
+        "Une image d'un présentoir ordonné affichant des pièces de vélo vintage.",
     },
   ]
   const data = useStaticQuery(graphql`
@@ -80,9 +92,11 @@ const Hero = ({ language }) => {
         <SplideSlide key={index} className="realtive w-full h-full">
           <div className="relative h-full">
             {slide.image && (
-              <GatsbyImage
+              <LocalizedGatsbyImage
                 image={slide.image}
-                alt={`Slide ${index + 1}`}
+                alten={slide.altEn}
+                altfr={slide.altFr}
+                language={language}
                 className="realtive w-full h-full"
                 loading={index === 0 ? "eager" : "lazy"}
               />
