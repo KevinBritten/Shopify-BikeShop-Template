@@ -3,7 +3,7 @@ import React, { useEffect } from "react"
 import { useTranslation } from "react-i18next"
 import { Splide, SplideSlide } from "@splidejs/react-splide"
 
-import { GatsbyImage, getImage } from "gatsby-plugin-image"
+import { getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 import LocalizedGatsbyImage from "./localizedGatsbyImage"
