@@ -4,7 +4,7 @@ import { getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 import ServicesCard from "./ServicesCard"
-import LocalizedGatsbyImage from "./localizedGatsbyImage"
+import LocalizedGatsbyImage from "./LocalizedGatsbyImage"
 
 function Services({ language }) {
   const { t, i18n } = useTranslation()
