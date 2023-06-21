@@ -4,7 +4,7 @@ import { getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
 import ServicesCard from "./ServicesCard"
-import LocalizedGatsbyImage from "./LocalizedGatsbyImage"
+import GatsbyImageWithLocalization from "./GatsbyImageWithLocalization"
 
 function Services({ language }) {
   const { t, i18n } = useTranslation()
@@ -64,7 +64,7 @@ function Services({ language }) {
         </div>
       </div>
       <div className="relative text-center h-96">
-        <LocalizedGatsbyImage
+        <GatsbyImageWithLocalization
           image={image}
           alten={"An image of a stripped-down bike being repaired on a stand."}
           altfr={

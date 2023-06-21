@@ -6,7 +6,7 @@ import { Splide, SplideSlide } from "@splidejs/react-splide"
 import { getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
-import LocalizedGatsbyImage from "./localizedGatsbyImage"
+import GatsbyImageWithLocalization from "./GatsbyImageWithLocalization"
 
 import "../styles/splide.css"
 
@@ -92,7 +92,7 @@ const Hero = ({ language }) => {
         <SplideSlide key={index} className="realtive w-full h-full">
           <div className="relative h-full">
             {slide.image && (
-              <LocalizedGatsbyImage
+              <GatsbyImageWithLocalization
                 image={slide.image}
                 alten={slide.altEn}
                 altfr={slide.altFr}

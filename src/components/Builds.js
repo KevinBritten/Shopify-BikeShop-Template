@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next"
 import { getImage } from "gatsby-plugin-image"
 import { graphql, useStaticQuery } from "gatsby"
 
-import LocalizedGatsbyImage from "./LocalizedGatsbyImage"
+import GatsbyImageWithLocalization from "./GatsbyImageWithLocalization"
 
 function Builds({ language }) {
   const { t, i18n } = useTranslation()
@@ -42,7 +42,7 @@ function Builds({ language }) {
           </div>
         </div>
         <div className="p-4 relative md:w-1/2 h-72 ">
-          <LocalizedGatsbyImage
+          <GatsbyImageWithLocalization
             image={customBuildsImage}
             alten="An image showing disassembled bicycle components meticulously arranged."
             altfr="Une image montrant des composants de vélo méticuleusement disposés en pièces détachées."
@@ -52,7 +52,7 @@ function Builds({ language }) {
       </div>
       <div className="flex flex-col-reverse md:flex-row items-center mt-4 lg:mt-16">
         <div className="p-4 relative md:w-1/2 h-72 ">
-          <LocalizedGatsbyImage
+          <GatsbyImageWithLocalization
             image={completeBuildsImage}
             alten="An image showing a rack full of vintage road bikes."
             altfr="Une image montrant un rack rempli de vélos de route vintage."
