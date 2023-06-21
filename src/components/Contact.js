@@ -49,9 +49,9 @@ function Contact({ language }) {
         <div className="col-span-2 md:col-span-1 text-center md:text-left">
           <h2 className="text-compliment">{t("contact.location.title")}</h2>
           <ul>
-            <li>7400 rue Saint-André</li>
+            <li>7411 rue Saint-Hubert</li>
             <li>Montréal, Québec</li>
-            <li>H2R 2P7</li>
+            <li>H2R 2N4</li>
           </ul>
         </div>
         <div className="col-span-2 md:col-span-1 text-center md:text-left">
@@ -63,8 +63,8 @@ function Contact({ language }) {
               </a>
             </li>
             <li>
-              <a href="tel:1234567890" className="underline">
-                123-456-7890
+              <a href="tel:5142796660" className="underline">
+                514-279-6660
               </a>
             </li>
           </ul>

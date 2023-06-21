@@ -5,9 +5,9 @@ function Footer() {
   return (
     <footer className="bg-black px-4 lg:px-16 py-8 flex justify-center md:justify-between items-center text-white">
       <ul className="hidden md:block">
-        <li>7400 rue Saint-André</li>
+        <li>7411 rue Saint-Hubert</li>
         <li>Montréal, Québec</li>
-        <li>H2R 2P7</li>
+        <li>H2R 2N4</li>
       </ul>
       <Socials />
       <a
