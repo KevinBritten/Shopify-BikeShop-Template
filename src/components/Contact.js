@@ -19,9 +19,9 @@ function Contact({ language }) {
           <iframe
             title="map"
             src={
-              `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2794.387256282514!2d-73.6189176226199!3d45.542534771075466!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc9193dfb48aaf1%3A0x12cea4ffb76f509b!2s7400%20St%20Andre%20St%2C%20Montreal%2C%20QC%20H2R%202P7!5e0!3m2!1s` +
+              `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2794.387256282525!2d-73.61891762402757!3d45.54253477107524!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4cc919e88ad6a11f%3A0xb667f50873badb43!2sCourrier%20Caverne!5e0!3m2!1s` +
               language +
-              `!2sca!4v1685557812085!5m2!1s` +
+              `!2sca!4v1687372251787!5m2!1s` +
               language +
               `!2sca`
             }
