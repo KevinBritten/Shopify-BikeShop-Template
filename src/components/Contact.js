@@ -35,12 +35,12 @@ function Contact({ language }) {
         <div className="col-span-2 md:col-span-1 text-center md:text-left">
           <h2 className="text-compliment">{t("contact.hours.title")}</h2>
           <ul>
-            <li>{t("contact.hours.days.0")}: 9am - 6pm</li>
-            <li>{t("contact.hours.days.1")}: 9am - 6pm</li>
-            <li>{t("contact.hours.days.2")}: 9am - 6pm</li>
-            <li>{t("contact.hours.days.3")}: 9am - 7pm</li>
-            <li>{t("contact.hours.days.4")}: 9am - 7pm</li>
-            <li>{t("contact.hours.days.5")}: 10am - 5pm</li>
+            <li>{t("contact.hours.days.0")}: 10am - 6pm</li>
+            <li>{t("contact.hours.days.1")}: 10am - 6pm</li>
+            <li>{t("contact.hours.days.2")}: 10am - 6pm</li>
+            <li>{t("contact.hours.days.3")}: 10am - 6pm</li>
+            <li>{t("contact.hours.days.4")}: 10am - 6pm</li>
+            <li>{t("contact.hours.days.5")}: 10am - 6pm</li>
             <li>
               {t("contact.hours.days.6")}: {t("contact.hours.closed")}
             </li>
