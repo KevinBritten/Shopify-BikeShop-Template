@@ -175,16 +175,16 @@ i18n.use(initReactI18next).init({
         builds: {
           title: "Montages",
           custom: {
-            title: "Montages sur mesure",
+            title: "Montages Sur Mesure",
             body: "Personnalisez votre vélo à Courrier Caverne! Nos Montages Sur Mesure sont conçus pour réaliser le vélo de vos rêves. Avec une large gamme de options de cadre, de composants et d'accessoires au choix, vous avez la liberté de créer un chef-d'œuvre unique qui reflète votre style et vos préférences uniques. Notre personnel compétent vous assistera à chaque étape, fournissant des conseils et des orientations experts pour garantir que votre montage sur mesure dépasse vos attentes. Que vous soyez un cycliste expérimenté ou un novice, Courrier Caverne est là pour vous aider à créer le vélo parfait qui correspond à votre vision.",
           },
           complete: {
-            title: "Montages complets",
+            title: "Montages Complets",
             body: "Découvrez la commodité et la qualité des Montages Complets à Courrier Caverne! Si vous recherchez une option prête à rouler sans tracas, nos Montages Complets sont le choix idéal. Notre sélection soigneusement choisie de vélos préassemblés assure un savoir-faire et des performances de haute qualité, soigneusement assemblés et réglés par notre équipe compétente. Que vous cherchiez un vélo de route, un VTT ou un vélo urbain, nos Montages Complets offrent une expérience de conduite fluide dès la sortie de la boîte. Vivez la joie du cyclisme en toute confiance, sachant que votre vélo est construit aux normes les plus élevées à Courrier Caverne.",
           },
         },
         contact: {
-          title: "Venez nous visiter",
+          title: "Venez Nous Visiter",
           hours: {
             title: "Heures d'ouverture",
             days: [
