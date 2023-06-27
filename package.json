@@ -35,6 +35,7 @@
     "gatsby-plugin-sitemap": "^5.0.0",
     "gatsby-source-filesystem": "^4.25.0",
     "gatsby-source-shopify": "^6.0.0",
+    "gatsby-source-shopify-translations": "file:../packages/my-packages/gatsby-source-shopify-translations",
     "gatsby-transformer-sharp": "^4.0.0",
     "hamburger-react": "^2.5.0",
     "i18next": "^22.5.0",
@@ -48,8 +49,7 @@
     "react-icons": "^4.1.0",
     "sharp": "^0.32.1",
     "shopify-buy": "^2.11.0",
-    "urql": "^2.0.2",
-    "gatsby-source-shopify-translations": "file:../packages/my-packages/gatsby-source-shopify-translations"
+    "urql": "^2.0.2"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",

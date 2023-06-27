@@ -30,10 +30,7 @@ exports.createPages = async ({ graphql, actions }) => {
           }
         }
       }
-      products: allShopifyProduct(
-        sort: { fields: publishedAt, order: ASC }
-        limit: 24
-      ) {
+      products: allShopifyProduct(sort: { fields: publishedAt, order: ASC }) {
         nodes {
           ...ProductCard
           storefrontId
@@ -45,6 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
       translatedProducts: allShopifyTranslatedProduct {
         nodes {
           ...TranslatedProductCard
+          handle
           storefrontId
           metafields {
             edges {
@@ -92,10 +90,9 @@ exports.createPages = async ({ graphql, actions }) => {
     const translatedProductType = node.metafields.edges.filter(
       (edge) => (edge.node.key = "frenchtype")
     )[0].node.value
-    const { title } = node
+    const { handle } = node
     const slugifiedProductType = slugify(translatedProductType, { lower: true })
-    const slugifiedTitle = slugify(title, { lower: true })
-    return `./${slugifiedProductType}/${slugifiedTitle}`
+    return `./${slugifiedProductType}/${handle}`
   }
   //define translated products
   const products = result.data.products
@@ -137,6 +134,9 @@ exports.createPages = async ({ graphql, actions }) => {
       language: "en",
     },
   })
+
+  //create individual french pages
+  translatedProducts.nodes.forEach((node) => {})
 
   // products.forEach((category) => {
   //   const translatedProduct = translatedProducts.filter(
