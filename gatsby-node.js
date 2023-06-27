@@ -141,7 +141,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   // create individual french pages
   translatedProducts.nodes.forEach((node) => {
-    console.log(node)
     createPage({
       path: `/magasin/${slugify(getProductTypeMetafieldFromNode(node))}/${
         node.handle

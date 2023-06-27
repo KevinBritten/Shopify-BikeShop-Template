@@ -28,7 +28,6 @@ import {
   metaSection,
   productDescription,
 } from "./product-page.module.css"
-import { traceSVG } from "gatsby-plugin-sharp"
 
 export default function Product({ data: { product, translatedProduct } }) {
   const { options, priceRangeV2, images, variants } = product
