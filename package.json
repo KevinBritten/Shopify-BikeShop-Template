@@ -49,7 +49,7 @@
     "sharp": "^0.32.1",
     "shopify-buy": "^2.11.0",
     "urql": "^2.0.2",
-    "gatsby-source-shopify-translations": "file:../packages/gatsby-source-shopify-translations"
+    "gatsby-source-shopify-translations": "file:../packages/my-packages/gatsby-source-shopify-translations"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.12",
