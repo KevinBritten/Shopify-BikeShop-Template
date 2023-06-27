@@ -29,16 +29,19 @@ import {
   productDescription,
 } from "./product-page.module.css"
 
-export default function Product({ data: { product, suggestions } }) {
+export default function Product({
+  data: { product, translatedProduct, suggestions },
+}) {
   const {
     options,
     variants,
     variants: [initialVariant],
     priceRangeV2,
-    title,
-    description,
     images,
   } = product
+
+  const { title, description } = translatedProduct
+
   const { client } = React.useContext(StoreContext)
 
   const [variant, setVariant] = React.useState({ ...initialVariant })
@@ -206,12 +209,11 @@ export default function Product({ data: { product, suggestions } }) {
   )
 }
 
-export const Head = ({ data: { product } }) => {
+export const Head = ({ data: { product, translatedProduct } }) => {
   const {
-    title,
-    description,
     images: [firstImage],
   } = product
+  const { title, description } = translatedProduct
 
   return (
     <>
@@ -227,8 +229,8 @@ export const Head = ({ data: { product } }) => {
 }
 
 export const query = graphql`
-  query ($id: String!, $productType: String!) {
-    product: shopifyProduct(id: { eq: $id }) {
+  query ($storefrontId: String!) {
+    product: shopifyProduct(storefrontId: { eq: $storefrontId }) {
       title
       description
       productType
@@ -268,12 +270,31 @@ export const query = graphql`
         id
       }
     }
-    suggestions: allShopifyProduct(
-      limit: 3
-      filter: { productType: { eq: $productType }, id: { ne: $id } }
+    translatedProduct: shopifyTranslatedProduct(
+      storefrontId: { eq: $storefrontId }
     ) {
-      nodes {
-        ...ProductCard
+      title
+      description
+      id
+      metafields {
+        edges {
+          node {
+            key
+            value
+          }
+        }
+      }
+      handle
+      variants {
+        edges {
+          node {
+            selectedOptions {
+              name
+              value
+            }
+            title
+          }
+        }
       }
     }
   }

@@ -85,11 +85,13 @@ exports.createPages = async ({ graphql, actions }) => {
   if (result.errors) {
     throw new Error(result.errors)
   }
-
-  function createTranslatedSlug(node) {
-    const translatedProductType = node.metafields.edges.filter(
+  function getProductTypeMetafieldFromNode(node) {
+    return node.metafields.edges.filter(
       (edge) => (edge.node.key = "frenchtype")
     )[0].node.value
+  }
+  function createTranslatedSlug(node) {
+    const translatedProductType = getProductTypeMetafieldFromNode(node)
     const { handle } = node
     const slugifiedProductType = slugify(translatedProductType, { lower: true })
     return `./${slugifiedProductType}/${handle}`
@@ -104,9 +106,11 @@ exports.createPages = async ({ graphql, actions }) => {
     )[0]
     const productMerged = {
       ...product,
+      metafields: translatedProduct.metafields,
       title: translatedProduct.title,
       id: translatedProduct.id,
       slug: createTranslatedSlug(translatedProduct),
+      handle: translatedProduct.handle,
     }
     return productMerged
   })
@@ -136,7 +140,19 @@ exports.createPages = async ({ graphql, actions }) => {
   })
 
   // create individual french pages
-  // translatedProducts.nodes.forEach((node) => {})
+  translatedProducts.nodes.forEach((node) => {
+    console.log(node)
+    createPage({
+      path: `/magasin/${slugify(getProductTypeMetafieldFromNode(node))}/${
+        node.handle
+      }`,
+      component: path.resolve(`src/components/ProductPageTranslated.jsx`), // Update path to the translated products component
+      context: {
+        storefrontId: node.storefrontId,
+        language: "fr",
+      },
+    })
+  })
 
   // products.forEach((category) => {
   //   const translatedProduct = translatedProducts.filter(
