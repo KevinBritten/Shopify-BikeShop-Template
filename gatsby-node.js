@@ -135,7 +135,7 @@ exports.createPages = async ({ graphql, actions }) => {
     },
   })
 
-  //create individual french pages
+  // create individual french pages
   // translatedProducts.nodes.forEach((node) => {})
 
   // products.forEach((category) => {
