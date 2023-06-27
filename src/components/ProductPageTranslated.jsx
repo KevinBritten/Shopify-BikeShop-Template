@@ -28,19 +28,30 @@ import {
   metaSection,
   productDescription,
 } from "./product-page.module.css"
+import { traceSVG } from "gatsby-plugin-sharp"
 
-export default function Product({
-  data: { product, translatedProduct, suggestions },
-}) {
-  const {
-    options,
-    variants,
-    variants: [initialVariant],
-    priceRangeV2,
-    images,
-  } = product
+export default function Product({ data: { product, translatedProduct } }) {
+  const { options, priceRangeV2, images, variants } = product
 
   const { title, description } = translatedProduct
+
+  // let variants = product.variants
+  //
+  // console.log("1: ", variants)
+  // console.log("1: ")
+  // Since we don't have a way to match product.variants to translatedProduct.variants as there is no storefrontId on translatedProduct.variants, we will only set the variants to be translated if the array is the same size in product.variants and translatedProduct.variant.
+  // if (variants.length === translatedProduct.variants.edges.length) {
+  //   //create variants with data from both product objects
+  //   variants = product.variants.map((productVariant, i) => {
+  //     return { ...productVariant, ...translatedProduct.variants.edges[i].node }
+  //   })
+  // }
+  // console.log("2: ", variants)
+
+  // Define initialVariant based on the updated variants
+  const [initialVariant] = variants
+
+  // Merge product and translatedProduct, using fields from translatedProduct
 
   const { client } = React.useContext(StoreContext)
 
