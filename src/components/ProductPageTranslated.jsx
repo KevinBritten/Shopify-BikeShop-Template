@@ -30,27 +30,23 @@ import {
 } from "./product-page.module.css"
 
 export default function Product({ data: { product, translatedProduct } }) {
-  const { options, priceRangeV2, images, variants } = product
+  const {
+    // options,
+    variants,
+    variants: [initialVariant],
+    priceRangeV2,
+    images,
+  } = product
+  const { title, description, options: translatedOptions } = translatedProduct
 
-  const { title, description } = translatedProduct
-
-  // let variants = product.variants
-  //
-  // console.log("1: ", variants)
-  // console.log("1: ")
-  // Since we don't have a way to match product.variants to translatedProduct.variants as there is no storefrontId on translatedProduct.variants, we will only set the variants to be translated if the array is the same size in product.variants and translatedProduct.variant.
-  // if (variants.length === translatedProduct.variants.edges.length) {
-  //   //create variants with data from both product objects
-  //   variants = product.variants.map((productVariant, i) => {
-  //     return { ...productVariant, ...translatedProduct.variants.edges[i].node }
-  //   })
-  // }
-  // console.log("2: ", variants)
-
-  // Define initialVariant based on the updated variants
-  const [initialVariant] = variants
-
-  // Merge product and translatedProduct, using fields from translatedProduct
+  //add translated data to options object
+  const options = product.options.map((option, i) => {
+    return {
+      ...option,
+      translatedValues: translatedProduct.options[i].values,
+      translatedName: translatedProduct.options[i].name,
+    }
+  })
 
   const { client } = React.useContext(StoreContext)
 
@@ -168,21 +164,26 @@ export default function Product({ data: { product, translatedProduct } }) {
             </h2>
             <fieldset className={optionsWrapper}>
               {hasVariants &&
-                options.map(({ id, name, values }, index) => (
-                  <div className={selectVariant} key={id}>
-                    <select
-                      aria-label="Variants"
-                      onChange={(event) => handleOptionChange(index, event)}
-                    >
-                      <option value="">{`Select ${name}`}</option>
-                      {values.map((value) => (
-                        <option value={value} key={`${name}-${value}`}>
-                          {value}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                ))}
+                options.map(
+                  (
+                    { id, name, values, translatedName, translatedValues },
+                    index
+                  ) => (
+                    <div className={selectVariant} key={id}>
+                      <select
+                        aria-label="Variants"
+                        onChange={(event) => handleOptionChange(index, event)}
+                      >
+                        <option value="">{`Select ${translatedName}`}</option>
+                        {values.map((value, i) => (
+                          <option value={value} key={`${name}-${value}`}>
+                            {translatedValues[i]}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  )
+                )}
             </fieldset>
             <div className={addToCartStyle}>
               <NumericInput
@@ -305,6 +306,10 @@ export const query = graphql`
             title
           }
         }
+      }
+      options {
+        name
+        values
       }
     }
   }
