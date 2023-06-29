@@ -22,10 +22,12 @@ export function ProductCard({ product, eager }) {
     storefrontImages,
   } = product
 
-  const price = formatPrice(
-    priceRangeV2.minVariantPrice.currencyCode,
-    priceRangeV2.minVariantPrice.amount
-  )
+  const price = priceRangeV2
+    ? formatPrice(
+        priceRangeV2.minVariantPrice.currencyCode,
+        priceRangeV2.minVariantPrice.amount
+      )
+    : ""
 
   const defaultImageHeight = 200
   const defaultImageWidth = 200
@@ -65,11 +67,11 @@ export function ProductCard({ product, eager }) {
         <div style={{ height: defaultImageHeight, width: defaultImageWidth }} />
       )}
       <div className={productDetailsStyle}>
-        {/* <div className={productVendorStyle}>{vendor}</div> */}
+        <div className={productVendorStyle}>{vendor}</div>
         <h2 as="h2" className={productHeadingStyle}>
           {title}
         </h2>
-        {/* <div className={productPrice}>{price}</div> */}
+        <div className={productPrice}>{price}</div>
       </div>
     </Link>
   )

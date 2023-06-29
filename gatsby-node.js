@@ -34,6 +34,10 @@ exports.createPages = async ({ graphql, actions }) => {
         nodes {
           ...ProductCard
           storefrontId
+          metafields {
+            key
+            value
+          }
         }
         pageInfo {
           hasNextPage
@@ -85,10 +89,21 @@ exports.createPages = async ({ graphql, actions }) => {
   if (result.errors) {
     throw new Error(result.errors)
   }
+  const products = result.data.products
+
+  //format products to match transtatedProducts
+
+  products.nodes.forEach((node) => {
+    const formattedMetafields = node.metafields.map((metafield) => {
+      return { node: { ...metafield } }
+    })
+    node.metafields = { edges: formattedMetafields }
+  })
+
   function getProductTypeMetafieldFromNode(node) {
-    return node.metafields.edges.filter(
-      (edge) => (edge.node.key = "frenchtype")
-    )[0].node.value
+    return node.metafields.edges.filter((edge) => {
+      return edge.node.key === "product_type"
+    })[0].node.value
   }
   function createTranslatedSlug(node) {
     const translatedProductType = getProductTypeMetafieldFromNode(node)
@@ -96,35 +111,61 @@ exports.createPages = async ({ graphql, actions }) => {
     const slugifiedProductType = slugify(translatedProductType, { lower: true })
     return `./${slugifiedProductType}/${handle}`
   }
-  //define translated products
-  const products = result.data.products
-  const productNodes = result.data.products.nodes
-  const translatedProductNodes = result.data.translatedProducts.nodes
-  const translatedProductNodesMerged = productNodes.map((product) => {
-    const translatedProduct = translatedProductNodes.filter(
-      (tProduct) => tProduct.storefrontId === product.storefrontId
-    )[0]
-    const productMerged = {
-      ...product,
-      metafields: translatedProduct.metafields,
-      title: translatedProduct.title,
-      id: translatedProduct.id,
-      slug: createTranslatedSlug(translatedProduct),
-      handle: translatedProduct.handle,
+  function getTranslatedProducts() {
+    //define translated products
+    const productNodes = products.nodes
+    const translatedProductNodes = result.data.translatedProducts.nodes
+    const translatedProductNodesMerged = productNodes.map((product) => {
+      const translatedProduct = translatedProductNodes.filter(
+        (tProduct) => tProduct.storefrontId === product.storefrontId
+      )[0]
+      const productMerged = {
+        ...product,
+        metafields: translatedProduct.metafields,
+        title: translatedProduct.title,
+        id: translatedProduct.id,
+        slug: createTranslatedSlug(translatedProduct),
+        handle: translatedProduct.handle,
+      }
+      return productMerged
+    })
+    return {
+      ...products,
+      nodes: translatedProductNodesMerged,
     }
-    return productMerged
-  })
-  const translatedProducts = {
-    ...products,
-    nodes: translatedProductNodesMerged,
   }
+  function getUniqueProductTypes(nodes) {
+    const productTypes = nodes.map(getProductTypeMetafieldFromNode)
+    const uniqueProductTypes = [...new Set(productTypes)]
+    return uniqueProductTypes
+  }
+  function buildProductTypePreviews(products) {
+    const nodes = products.nodes
+    const productTypes = getUniqueProductTypes(nodes)
+    const firstProductOfEachType = productTypes.map((type) => {
+      const firstProductOfType = nodes.filter(
+        (node) => getProductTypeMetafieldFromNode(node) === type
+      )[0]
+
+      return {
+        ...firstProductOfType,
+        title: type,
+        slug: `./${slugify(type)}`,
+        vendor: "",
+        priceRangeV2: false,
+      }
+    })
+    return { ...products, nodes: firstProductOfEachType }
+  }
+
+  const translatedProducts = getTranslatedProducts()
 
   //create french products page
   createPage({
     path: `/magasin`,
     component: path.resolve(`src/components/ProductsPageTranslated.jsx`), // Update path to the translated products component
     context: {
-      products: translatedProducts,
+      products: buildProductTypePreviews(translatedProducts),
       language: "fr",
     },
   })
