@@ -5,9 +5,11 @@ import { Seo } from "./seo"
 import { MoreButton } from "./more-button"
 import { title } from "./translated-products.module.css"
 
-export default function ProductsPageTranslated({ pageContext: { products } }) {
+export default function ProductsPageTranslated({
+  pageContext: { products, language, otherLanguagePage },
+}) {
   return (
-    <Layout>
+    <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <h1 className={title}>Products</h1>
       <ProductListing products={products.nodes} />
       {products.pageInfo.hasNextPage && (

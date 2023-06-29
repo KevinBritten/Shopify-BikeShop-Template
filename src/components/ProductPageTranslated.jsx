@@ -29,7 +29,10 @@ import {
   productDescription,
 } from "./product-page.module.css"
 
-export default function Product({ data: { product, translatedProduct } }) {
+export default function Product({
+  data: { product, translatedProduct },
+  pageContext: { language, otherLanguagePage },
+}) {
   const {
     // options,
     variants,
@@ -37,14 +40,18 @@ export default function Product({ data: { product, translatedProduct } }) {
     priceRangeV2,
     images,
   } = product
-  const { title, description, options: translatedOptions } = translatedProduct
+  const {
+    title,
+    description,
+    options: translatedOptions,
+  } = language === "en" ? product : translatedProduct
 
   //add translated data to options object
   const options = product.options.map((option, i) => {
     return {
       ...option,
-      translatedValues: translatedProduct.options[i].values,
-      translatedName: translatedProduct.options[i].name,
+      translatedValues: translatedOptions[i].values,
+      translatedName: translatedOptions[i].name,
     }
   })
 
@@ -111,7 +118,7 @@ export default function Product({ data: { product, translatedProduct } }) {
   const hasMultipleImages = true || images.length > 1
 
   return (
-    <Layout>
+    <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <div className={container}>
         <div className={productBox}>
           {hasImages && (

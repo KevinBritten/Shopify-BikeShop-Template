@@ -24,7 +24,7 @@ import {
   socials,
 } from "./header.module.css"
 
-export function Header({ language }) {
+export function Header({ language, otherLanguagePage = "" }) {
   const { t, i18n } = useTranslation()
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -43,37 +43,41 @@ export function Header({ language }) {
   const langPrefix = language === "en" ? "/en" : ""
 
   function changeLanguage(lang) {
-    const currentPath = window.location.pathname
-    const pageFragment = window.location.hash
+    if (otherLanguagePage) {
+      window.location.href = otherLanguagePage
+    } else {
+      const currentPath = window.location.pathname
+      const pageFragment = window.location.hash
 
-    // Redirect to home page if the current page is root
-    if (!pageFragment) {
-      if (lang === "fr") {
-        window.location.href = "/"
-      } else if (lang === "en") {
-        window.location.href = "/en"
+      // Redirect to home page if the current page is root
+      if (!pageFragment) {
+        if (lang === "fr") {
+          window.location.href = "/"
+        } else if (lang === "en") {
+          window.location.href = "/en"
+        }
+        return
       }
-      return
-    }
 
-    // If not root, proceed with the usual process
-    const pageFragmentWithoutHash = pageFragment.replace("#", "")
-    const currentLang = currentPath.includes("/en/") ? "en" : "fr"
-    const matchedKeys = Object.keys(
-      i18n.getResourceBundle(currentLang, "translation").links
-    ).filter(
-      (key) =>
-        i18n.getResourceBundle(currentLang, "translation").links[key] ===
-        pageFragmentWithoutHash
-    )
-    const correctKey = matchedKeys[0]
-    const translatedFragment = i18n.t(`links.${correctKey}`, { lng: lang })
+      // If not root, proceed with the usual process
+      const pageFragmentWithoutHash = pageFragment.replace("#", "")
+      const currentLang = currentPath.includes("/en/") ? "en" : "fr"
+      const matchedKeys = Object.keys(
+        i18n.getResourceBundle(currentLang, "translation").links
+      ).filter(
+        (key) =>
+          i18n.getResourceBundle(currentLang, "translation").links[key] ===
+          pageFragmentWithoutHash
+      )
+      const correctKey = matchedKeys[0]
+      const translatedFragment = i18n.t(`links.${correctKey}`, { lng: lang })
 
-    if (lang === "fr") {
-      window.location.href =
-        currentPath.replace("/en/", "/") + "#" + translatedFragment
-    } else if (lang === "en") {
-      window.location.href = "/en" + currentPath + "#" + translatedFragment
+      if (lang === "fr") {
+        window.location.href =
+          currentPath.replace("/en/", "/") + "#" + translatedFragment
+      } else if (lang === "en") {
+        window.location.href = "/en" + currentPath + "#" + translatedFragment
+      }
     }
   }
   const preventBodyScroll = (state) => {
