@@ -158,6 +158,13 @@ exports.createPages = async ({ graphql, actions }) => {
     return { ...products, nodes: firstProductOfEachType }
   }
 
+  function filterProductsByType(products, type) {
+    const nodes = products.nodes
+    const filteredProducts = nodes.filter(
+      (node) => getProductTypeMetafieldFromNode(node) === type
+    )
+    return { ...products, nodes: filteredProducts }
+  }
   const translatedProducts = getTranslatedProducts()
 
   //create french products page
@@ -175,9 +182,21 @@ exports.createPages = async ({ graphql, actions }) => {
     path: `/en/store`,
     component: path.resolve(`src/components/ProductsPageTranslated.jsx`), // Update path to the translated products component
     context: {
-      products,
+      products: buildProductTypePreviews(products),
       language: "en",
     },
+  })
+
+  //create french page for each product type
+  getUniqueProductTypes(translatedProducts.nodes).forEach((type) => {
+    createPage({
+      path: `magasin/${type}`,
+      component: path.resolve(`src/components/ProductsPageTranslated.jsx`), // Update path to the translated products component
+      context: {
+        products: filterProductsByType(translatedProducts, type),
+        language: "fr",
+      },
+    })
   })
 
   // create individual french pages
