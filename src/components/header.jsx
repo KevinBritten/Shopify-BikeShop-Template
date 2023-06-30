@@ -155,12 +155,12 @@ export function Header({ language, otherLanguagePage = "" }) {
           >
             {t("links.contact")}
           </Link>
-          {/* <Link
+          <Link
             to={`${langPrefix}/${t("links.store")}`}
             activeClassName={activeLink}
           >
             {t("links.store")}
-          </Link> */}
+          </Link>
         </nav>
         {/* )} */}
         <nav className="hidden">

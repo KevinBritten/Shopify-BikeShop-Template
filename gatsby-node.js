@@ -196,6 +196,7 @@ exports.createPages = async ({ graphql, actions }) => {
       products: buildProductTypePreviews(translatedProducts),
       language: "fr",
       otherLanguagePage: "/en/store/",
+      pageTitle: "Magasin",
     },
   })
 
@@ -207,6 +208,7 @@ exports.createPages = async ({ graphql, actions }) => {
       products: buildProductTypePreviews(products),
       language: "en",
       otherLanguagePage: "/magasin/",
+      pageTitle: "Store",
     },
   })
   function createProductTypePages() {
@@ -223,6 +225,7 @@ exports.createPages = async ({ graphql, actions }) => {
           products: filterProductsByType(translatedProducts, type),
           language: "fr",
           otherLanguagePage: `/en/store/${slugify(englishProductTypes[i])}`,
+          pageTitle: type,
         },
       })
     })
@@ -236,6 +239,7 @@ exports.createPages = async ({ graphql, actions }) => {
           products: filterProductsByType(products, type),
           language: "en",
           otherLanguagePage: `/magasin/${slugify(frenchProductTypes[i])}`,
+          pageTitle: type,
         },
       })
     })
