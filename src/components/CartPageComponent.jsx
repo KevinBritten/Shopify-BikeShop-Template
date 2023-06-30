@@ -80,14 +80,16 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
               )}
               <tbody>
                 {checkout.lineItems.map((item) => (
-                  <LineItem item={item} key={item.id} />
+                  <LineItem item={item} key={item.id} language={language} />
                 ))}
 
                 <tr className={summary}>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
-                  <td className={labelColumn}>Subtotal</td>
+                  <td className={labelColumn}>
+                    {language === "en" ? "Subtotal" : "Sous-total"}
+                  </td>
                   <td className={totals}>
                     {formatPrice(
                       checkout.subtotalPriceV2.currencyCode,
@@ -99,7 +101,9 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
-                  <td className={labelColumn}>Taxes</td>
+                  <td className={labelColumn}>
+                    {language === "en" ? "Taxes" : "Taxes"}
+                  </td>
                   <td className={totals}>
                     {formatPrice(
                       checkout.totalTaxV2.currencyCode,
@@ -111,14 +115,22 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
-                  <td className={labelColumn}>Shipping</td>
-                  <td className={totals}>Calculated at checkout</td>
+                  <td className={labelColumn}>
+                    {language === "en" ? "Shipping" : "Livraison"}
+                  </td>
+                  <td className={totals}>
+                    {language === "en"
+                      ? "Calculated at checkout"
+                      : "Calculé lors du paiement"}
+                  </td>
                 </tr>
                 <tr className={grandTotal}>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
                   <td className={collapseColumn}></td>
-                  <td className={labelColumn}>Total Price</td>
+                  <td className={labelColumn}>
+                    {language === "en" ? "Total Price" : "Prix total"}
+                  </td>
                   <td className={totals}>
                     {formatPrice(
                       checkout.totalPriceV2.currencyCode,
@@ -133,7 +145,7 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
               disabled={loading}
               className={checkoutButton}
             >
-              Checkout
+              {language === "en" ? "Checkout" : "Payer"}
             </button>
           </>
         )}
