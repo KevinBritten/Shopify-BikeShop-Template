@@ -1,8 +1,8 @@
 import * as React from "react"
 import { Link } from "gatsby"
-import { Layout } from "../components/layout"
+import { Layout } from "./layout"
 import { StoreContext } from "../context/store-context"
-import { LineItem } from "../components/line-item"
+import { LineItem } from "./line-item"
 import { formatPrice } from "../utils/format-price"
 import {
   table,
@@ -20,9 +20,8 @@ import {
   emptyStateLink,
   title,
 } from "./cart.module.css"
-import { Seo } from "../components/seo"
 
-export default function CartPage() {
+export default function CartPageComponent({ language, otherLanguagePage }) {
   const { checkout, loading } = React.useContext(StoreContext)
   const emptyCart = checkout.lineItems.length === 0
 
@@ -31,31 +30,54 @@ export default function CartPage() {
   }
 
   return (
-    <Layout>
+    <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <div className={wrap}>
         {emptyCart ? (
           <div className={emptyStateContainer}>
-            <h1 className={emptyStateHeading}>Your cart is empty</h1>
-            {/* <p>
-              Looks like you haven’t found anything yet. We understand that
-              sometimes it’s hard to choose — maybe this helps:
-            </p> */}
-            <Link to="/" className={emptyStateLink}>
-              Go shop
-            </Link>
+            <h1 className={emptyStateHeading}>
+              {language === "en"
+                ? "Your cart is empty"
+                : "Votre panier est vide"}
+            </h1>
+            {language === "en" ? (
+              <Link to="/en/store/" className={emptyStateLink}>
+                Go shop
+              </Link>
+            ) : (
+              <Link to="/magasin" className={emptyStateLink}>
+                Aller faire des achats
+              </Link>
+            )}
           </div>
         ) : (
           <>
             <table className={table}>
-              <thead>
-                <tr>
-                  <th className={imageHeader}>Image</th>
-                  <th className={productHeader}>Product</th>
-                  <th className={collapseColumn}>Price</th>
-                  <th>Qty.</th>
-                  <th className={[totals, collapseColumn].join(" ")}>Total</th>
-                </tr>
-              </thead>
+              {language === "en" ? (
+                <thead>
+                  <tr>
+                    <th className={imageHeader}>Image</th>
+                    <th className={productHeader}>Product</th>
+                    <th className={collapseColumn}>Price</th>
+                    <th>Qty.</th>
+                    <th className={[totals, collapseColumn].join(" ")}>
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+              ) : (
+                // French version of the <thead> component
+                <thead>
+                  <tr>
+                    <th className={imageHeader}>Image</th>
+                    <th className={productHeader}>Produit</th>
+                    <th className={collapseColumn}>Prix</th>
+                    <th>Qté.</th>
+                    <th className={[totals, collapseColumn].join(" ")}>
+                      Total
+                    </th>
+                  </tr>
+                </thead>
+              )}
               <tbody>
                 {checkout.lineItems.map((item) => (
                   <LineItem item={item} key={item.id} />
@@ -119,5 +141,3 @@ export default function CartPage() {
     </Layout>
   )
 }
-
-export const Head = () => <Seo />
