@@ -144,7 +144,7 @@ i18n.use(initReactI18next).init({
                 "Nettoyage du cadre.",
                 "Inspection et évaluation du vélo.",
                 "Ajustement des freins.",
-                "Ajustement de la vitesse.",
+                "Ajustement des derailleurs.",
                 "Lubrification de la chaîne.",
                 "Gonflage des pneus.",
                 "Vérification du serrage des boulons.",
@@ -154,21 +154,21 @@ i18n.use(initReactI18next).init({
             {
               title: "Complet",
               services: [
-                "Incluant tout ce qui est offert au niveau Basique, plus",
+                "Incluant l’ensemble des services du forfait basique, plus",
                 "Nettoyage de la transmission et des composants.",
               ],
             },
             {
               title: "De luxe",
               services: [
-                "Incluant tout ce qui est offert au niveau Complet, plus",
+                "Incluant l’ensemble des services du forfait complet, plus",
                 "Lubrification et ajustement du jeu de direction, du boîtier de pédalier et des moyeux de roues.",
               ],
             },
           ],
 
           estimate: {
-            title: "Visitez-nous pour un devis gratuit",
+            title: "Venez-nous rendre visite pour un devis gratuit",
             body: "Obtenez un devis gratuit à Courrier Caverne aujourd'hui! Nos mécaniciens qualifiés ont les connaissances et l'expertise pour résoudre n'importe quel problème de vélo. Confiez-nous l'entretien et les réparations de votre vélo, des réglages mineurs aux réparations complexes.",
           },
         },
@@ -176,7 +176,7 @@ i18n.use(initReactI18next).init({
           title: "Montages",
           custom: {
             title: "Montages Sur Mesure",
-            body: "Personnalisez votre vélo à Courrier Caverne! Nos Montages Sur Mesure sont conçus pour réaliser le vélo de vos rêves. Avec une large gamme de options de cadre, de composants et d'accessoires au choix, vous avez la liberté de créer un chef-d'œuvre unique qui reflète votre style et vos préférences uniques. Notre personnel compétent vous assistera à chaque étape, fournissant des conseils et des orientations experts pour garantir que votre montage sur mesure dépasse vos attentes. Que vous soyez un cycliste expérimenté ou un novice, Courrier Caverne est là pour vous aider à créer le vélo parfait qui correspond à votre vision.",
+            body: "Personnalisez votre vélo à Courrier Caverne! Nos Montages Sur Mesure sont conçus pour réaliser le vélo de vos rêves. Avec une large gamme d'options de cadre, de composants et d'accessoires au choix, vous avez la liberté de créer un chef-d'œuvre unique qui reflète votre style et vos préférences uniques. Notre personnel compétent vous assistera à chaque étape, fournissant des conseils et des orientations experts pour garantir que votre montage sur mesure dépasse vos attentes. Que vous soyez un cycliste expérimenté ou un novice, Courrier Caverne est là pour vous aider à créer le vélo parfait qui correspond à votre vision.",
           },
           complete: {
             title: "Montages Complets",
