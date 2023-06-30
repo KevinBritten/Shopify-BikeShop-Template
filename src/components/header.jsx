@@ -193,7 +193,7 @@ export function Header({ language, otherLanguagePage = "" }) {
         {/* <Link to="/search" className={searchButton}>
           <SearchIcon />
         </Link> */}
-        {/* <CartButton quantity={quantity} /> */}
+        <CartButton quantity={quantity} language={language} />
         <div className={socials}>
           <Socials />
         </div>

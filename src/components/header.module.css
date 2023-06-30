@@ -31,22 +31,6 @@
   text-decoration: underline;
 }
 
-/* TODO: remove if no purpose for this pseudo element */
-/* .header::after {
-  grid-area: navHeader;
-  content: "";
-  display: block;
-  width: var(--space-2xl);
-  z-index: 1;
-  align-self: stretch;
-  background-image: linear-gradient(
-    90deg,
-    rgba(255, 255, 255, 0),
-    rgba(255, 255, 255, 1)
-  );
-  justify-self: flex-end;
-} */
-
 .logo {
   display: flex;
   grid-area: logo;
@@ -153,8 +137,8 @@ nav > a {
   }
   .languageButton {
     /* TODO: change when shop icons added */
-    padding-left: 96px;
-    padding-right:20px;
+    padding-left: 48px;
+    padding-right: 20px;
   }
   nav > a {
     margin: 0 32px;
