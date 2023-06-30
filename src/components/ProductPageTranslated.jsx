@@ -157,7 +157,9 @@ export default function Product({
             </div>
           )}
           {!hasImages && (
-            <span className={noImagePreview}>No Preview image</span>
+            <span className={noImagePreview}>
+              {language === "en" ? "No Preview image" : "Aucune image d'aperçu"}
+            </span>
           )}
           <div>
             {/* <div className={breadcrumb}>
@@ -181,7 +183,7 @@ export default function Product({
                         aria-label="Variants"
                         onChange={(event) => handleOptionChange(index, event)}
                       >
-                        <option value="">{`Select ${translatedName}`}</option>
+                        <option value="">{`${translatedName}`}</option>
                         {values.map((value, i) => (
                           <option value={value} key={`${name}-${value}`}>
                             {translatedValues[i]}
@@ -206,6 +208,7 @@ export default function Product({
                 variantId={productVariant.storefrontId}
                 quantity={quantity}
                 available={available}
+                language={language}
               />
             </div>
             {/* <div className={metaSection}>
