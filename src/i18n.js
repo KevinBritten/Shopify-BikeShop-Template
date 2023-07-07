@@ -195,7 +195,7 @@ i18n.use(initReactI18next).init({
             title: "Heures d'ouverture",
             subtitle: {
               bike: "Vélo Boutique",
-              cafe: "Cafe",
+              cafe: "Café",
             },
             days: {
               monday: "Lundi",
