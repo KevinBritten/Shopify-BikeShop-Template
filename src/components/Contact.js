@@ -35,15 +35,24 @@ function Contact({ language }) {
         <div className="col-span-2 md:col-span-1 text-center md:text-left">
           <h2 className="text-compliment">{t("contact.hours.title")}</h2>
           <ul>
+            <h3>{t("contact.hours.subtitle.bike")}</h3>
             <li>
-              {t("contact.hours.days.0")}: {t("contact.hours.closed")}
+              {t("contact.hours.days.monday")}: {t("contact.hours.closed")}
             </li>
-            <li>{t("contact.hours.days.1")}: 10am - 6pm</li>
-            <li>{t("contact.hours.days.2")}: 10am - 6pm</li>
-            <li>{t("contact.hours.days.3")}: 10am - 6pm</li>
-            <li>{t("contact.hours.days.4")}: 10am - 6pm</li>
-            <li>{t("contact.hours.days.5")}: 10am - 6pm</li>
-            <li>{t("contact.hours.days.6")}: 10am - 6pm</li>
+            <li>
+              {t("contact.hours.days.tuesday")} -{" "}
+              {t("contact.hours.days.sunday")}: {t("contact.hours.bike")}
+            </li>
+            <h3>{t("contact.hours.subtitle.cafe")}</h3>
+            <li>
+              {t("contact.hours.days.monday")} -{" "}
+              {t("contact.hours.days.friday")}: {t("contact.hours.cafe.week")}
+            </li>
+            <li>
+              {t("contact.hours.days.saturday")} -{" "}
+              {t("contact.hours.days.sunday")}:{" "}
+              {t("contact.hours.cafe.weekend")}
+            </li>
           </ul>
         </div>
         <div className="col-span-2 md:col-span-1 text-center md:text-left">
@@ -60,6 +69,11 @@ function Contact({ language }) {
             <li>
               <a href="mailto:info@courriercaverne.ca" className="underline">
                 info@courriercaverne.ca
+              </a>
+            </li>
+            <li>
+              <a href="cafe@courriercaverne.ca" className="underline">
+                cafe@courriercaverne.ca{" "}
               </a>
             </li>
             <li>

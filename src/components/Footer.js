@@ -10,12 +10,17 @@ function Footer() {
         <li>H2R 2N4</li>
       </ul>
       <Socials />
-      <a
-        href="mailto:info@courriercaverne.ca"
-        className="underline hidden md:block"
-      >
-        info@courriercaverne.ca
-      </a>
+      <div>
+        <a
+          href="mailto:info@courriercaverne.ca"
+          className="underline hidden md:block"
+        >
+          info@courriercaverne.ca
+        </a>
+        <a href="cafe@courriercaverne.ca" className="underline">
+          cafe@courriercaverne.ca{" "}
+        </a>
+      </div>
     </footer>
   )
 }
