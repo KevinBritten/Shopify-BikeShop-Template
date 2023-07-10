@@ -4,17 +4,112 @@ import { ProductListing } from "./product-listing"
 import { Seo } from "./seo"
 import { MoreButton } from "./more-button"
 import { title } from "./translated-products.module.css"
-import { Filters } from "./filters"
+import { Filters } from "./filters-metafields"
+import { graphql } from "gatsby"
 
 export default function ProductsPageTranslated({
-  pageContext: { products, language, otherLanguagePage, pageTitle },
+  pageContext: { products, language, otherLanguagePage, productType },
+  data: {
+    meta: { distinct },
+  },
 }) {
-  console.log(products)
+  //get an array of each metafield's possible values.
+  const filterMetafields = (
+    productNodes,
+    filters = [],
+    previousFiltersFromMetafields = []
+  ) => {
+    return distinct
+      .filter((metafield) => !(metafield === "product_type"))
+      .map((metafield) => {
+        // If the metafield has a filter applied already, use the previous filter
+        const previousFilter = previousFiltersFromMetafields.find(
+          (filter) => filter.key === metafield
+        )
+        if (
+          previousFilter &&
+          filters[metafield] &&
+          filters[metafield].length > 0
+        ) {
+          return previousFilter
+        }
+        const values = new Set()
+        //add all values to set if one is selected already to allow customer to select multiple options of same type
+        productNodes.forEach((product) => {
+          // Check if product.metafields contains an object with key:metafield
+          const metafieldObj = product.metafields.find(
+            (m) => m.key === metafield
+          )
+          if (metafieldObj) {
+            // Add the value to the set
+            values.add(metafieldObj.value)
+          }
+        })
+        return {
+          key: metafield,
+          values: [...values],
+        }
+      })
+  }
+
+  const [filtersFromMetafields, setFiltersFromMetafields] = React.useState(
+    filterMetafields(products.nodes)
+  )
+  const [filters, setFilters] = React.useState([])
+  const [filteredProducts, setFilteredProducts] = React.useState([
+    ...products.nodes,
+  ])
+
+  React.useEffect(() => {
+    if (Object.keys(filters).length === 0) {
+      setFilteredProducts(products.nodes)
+    } else {
+      setFilteredProducts(
+        products.nodes.filter((product) => {
+          return Object.entries(filters).every(([key, values]) => {
+            // If no values specified for the key, then all products with this key are acceptable
+            if (values.length === 0) {
+              return true
+            }
+
+            // Find corresponding metafield in the product's metafields
+            const metafield = product.metafields.find(
+              (metafield) => metafield.key === key
+            )
+
+            // If metafield is not found or its value is not in the filter's values, return false
+            if (!metafield || !values.includes(metafield.value)) {
+              return false
+            }
+
+            // Otherwise, this filter is satisfied
+            return true
+          })
+        })
+      )
+    }
+  }, [filters])
+
+  React.useEffect(() => {
+    setFiltersFromMetafields(
+      filterMetafields(filteredProducts, filters, filtersFromMetafields)
+    )
+  }, [filteredProducts])
+
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <div className="my-10">
-        <h1 className={title}>{pageTitle}</h1>
-        <ProductListing products={products.nodes} />
+        <h1 className={title}>{productType}</h1>
+        <Filters
+          setFilters={setFilters}
+          filters={filters}
+          filtersFromMetafields={filtersFromMetafields}
+          // tags={tags}
+          // vendors={vendors}
+          // productTypes={productTypes}
+          // currencyCode={currencyCode}
+        />
+        <ProductListing products={filteredProducts} />
         {products.pageInfo.hasNextPage && (
           <MoreButton to={`/search#more`}>More products</MoreButton>
         )}{" "}
@@ -23,6 +118,16 @@ export default function ProductsPageTranslated({
   )
 }
 
-export const Head = ({ pageContext: { pageTitle } }) => (
-  <Seo title={`${pageTitle} - Courrier Caverne`} />
+export const Head = ({ pageContext: { productType } }) => (
+  <Seo title={`${productType} - Courrier Caverne`} />
 )
+
+export const query = graphql`
+  query ($productType: String) {
+    meta: allShopifyTranslatedProduct(
+      filter: { metafields: { elemMatch: { value: { eq: $productType } } } }
+    ) {
+      distinct(field: metafields___key)
+    }
+  }
+`

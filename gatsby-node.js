@@ -121,9 +121,21 @@ exports.createPages = async ({ graphql, actions }) => {
         translatedProduct
       )
 
+      //add metafields from original language if no translated version exists
+      const metafields = product.metafields.map((metafield) => {
+        const translatedMetafield = translatedProduct.metafields.find(
+          (tMetafield) => tMetafield.key === metafield.key
+        )
+        if (translatedMetafield) {
+          return translatedMetafield
+        } else {
+          return metafield
+        }
+      })
+
       const productMerged = {
         ...product,
-        metafields: translatedProduct.metafields,
+        metafields,
         title: translatedProduct.title,
         id: translatedProduct.id,
         slug: createTranslatedSlug(translatedProduct, "magasin"),
@@ -203,29 +215,29 @@ exports.createPages = async ({ graphql, actions }) => {
     const englishProductTypes = getUniqueProductTypes(products.nodes)
 
     //create french page for each product type
-    frenchProductTypes.forEach((type, i) => {
+    frenchProductTypes.forEach((productType, i) => {
       createPage({
-        path: `magasin/${slugify(type)}`,
+        path: `magasin/${slugify(productType)}`,
         component: path.resolve(`src/components/ProductTypePageTranslated.jsx`), // Update path to the translated products component
         context: {
-          products: filterProductsByType(translatedProducts, type),
+          products: filterProductsByType(translatedProducts, productType),
           language: "fr",
           otherLanguagePage: `/en/store/${slugify(englishProductTypes[i])}`,
-          pageTitle: type,
+          productType,
         },
       })
     })
 
     //create english page for each product type
-    englishProductTypes.forEach((type, i) => {
+    englishProductTypes.forEach((productType, i) => {
       createPage({
-        path: `en/store/${slugify(type)}`,
+        path: `en/store/${slugify(productType)}`,
         component: path.resolve(`src/components/ProductsPageTranslated.jsx`), // Update path to the translated products component
         context: {
-          products: filterProductsByType(products, type),
+          products: filterProductsByType(products, productType),
           language: "en",
           otherLanguagePage: `/magasin/${slugify(frenchProductTypes[i])}`,
-          pageTitle: type,
+          productType,
         },
       })
     })

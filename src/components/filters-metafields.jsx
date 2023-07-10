@@ -9,12 +9,13 @@ import {
 } from "./filters.module.css"
 
 export function Filters({
-  currencyCode,
-  productTypes,
-  tags,
-  vendors,
+  // currencyCode,
+  // productTypes,
+  // tags,
+  // vendors,
   filters,
   setFilters,
+  filtersFromMetafields,
 }) {
   const updateFilter = (key, value) => {
     setFilters((filters) => ({ ...filters, [key]: value }))
@@ -29,70 +30,89 @@ export function Filters({
     }
   }
 
+  // return (
+  //   <>
+  //     <CheckFilter
+  //       name="Type"
+  //       items={productTypes}
+  //       selectedItems={filters.productTypes}
+  //       setSelectedItems={(value) => updateFilter("productTypes", value)}
+  //     />
+  //     <hr />
+  //     <details className={priceFilterStyle} open={true}>
+  //       <summary>
+  //         <div className={summary}>
+  //           Price
+  //           {(filters.maxPrice || filters.minPrice) && (
+  //             <button
+  //               className={clearButton}
+  //               onClick={() =>
+  //                 setFilters((filters) => ({
+  //                   ...filters,
+  //                   maxPrice: "",
+  //                   minPrice: "",
+  //                 }))
+  //               }
+  //             >
+  //               Reset
+  //             </button>
+  //           )}
+  //         </div>
+  //       </summary>
+  //       <div className={priceFields}>
+  //         <CurrencyField
+  //           {...currencyCode}
+  //           aria-label="Minimum price"
+  //           value={filters.minPrice}
+  //           onChange={(event) =>
+  //             updateNumeric("minPrice", event.currentTarget.value)
+  //           }
+  //         />{" "}
+  //         –{" "}
+  //         <CurrencyField
+  //           {...currencyCode}
+  //           aria-label="Maximum price"
+  //           value={filters.maxPrice}
+  //           onChange={(event) =>
+  //             updateNumeric("maxPrice", event.currentTarget.value)
+  //           }
+  //         />
+  //       </div>
+  //     </details>
+  //     <hr />
+  //     <CheckFilter
+  //       name="Brands"
+  //       items={vendors}
+  //       selectedItems={filters.vendors}
+  //       setSelectedItems={(value) => updateFilter("vendors", value)}
+  //     />
+  //     <hr />
+  //     <CheckFilter
+  //       open={true}
+  //       name="Tags"
+  //       items={tags}
+  //       selectedItems={filters.tags}
+  //       setSelectedItems={(value) => updateFilter("tags", value)}
+  //     />
+  //   </>
+  // )
   return (
-    <>
-      <CheckFilter
-        name="Type"
-        items={productTypes}
-        selectedItems={filters.productTypes}
-        setSelectedItems={(value) => updateFilter("productTypes", value)}
-      />
-      <hr />
-      <details className={priceFilterStyle} open={true}>
-        <summary>
-          <div className={summary}>
-            Price
-            {(filters.maxPrice || filters.minPrice) && (
-              <button
-                className={clearButton}
-                onClick={() =>
-                  setFilters((filters) => ({
-                    ...filters,
-                    maxPrice: "",
-                    minPrice: "",
-                  }))
-                }
-              >
-                Reset
-              </button>
-            )}
-          </div>
-        </summary>
-        <div className={priceFields}>
-          <CurrencyField
-            {...currencyCode}
-            aria-label="Minimum price"
-            value={filters.minPrice}
-            onChange={(event) =>
-              updateNumeric("minPrice", event.currentTarget.value)
-            }
-          />{" "}
-          –{" "}
-          <CurrencyField
-            {...currencyCode}
-            aria-label="Maximum price"
-            value={filters.maxPrice}
-            onChange={(event) =>
-              updateNumeric("maxPrice", event.currentTarget.value)
-            }
+    <div>
+      {filtersFromMetafields.map((metafield) => {
+        const { key, values } = metafield
+        return values.length ? (
+          <CheckFilter
+            open={true}
+            name={key.replace(/_/g, " ")}
+            items={values}
+            selectedItems={filters[key]}
+            setSelectedItems={(value) => updateFilter(key, value)}
+            key={key}
           />
-        </div>
-      </details>
-      <hr />
-      <CheckFilter
-        name="Brands"
-        items={vendors}
-        selectedItems={filters.vendors}
-        setSelectedItems={(value) => updateFilter("vendors", value)}
-      />
-      <hr />
-      <CheckFilter
-        open={true}
-        name="Tags"
-        items={tags}
-        selectedItems={filters.tags}
-        setSelectedItems={(value) => updateFilter("tags", value)}
-      />
-    </>
+        ) : (
+          false
+        )
+      })}
+    </div>
   )
 }
