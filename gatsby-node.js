@@ -88,15 +88,6 @@ exports.createPages = async ({ graphql, actions }) => {
   }
   const products = result.data.products
 
-  //format products to match transtatedProducts
-
-  // products.nodes.forEach((node) => {
-  //   const formattedMetafields = node.metafields.map((metafield) => {
-  //     return { node: { ...metafield } }
-  //   })
-  //   node.metafields = { edges: formattedMetafields }
-  // })
-
   function getProductTypeMetafieldFromNode(node) {
     return node.metafields.filter((metafield) => {
       return metafield.key === "product_type"
@@ -215,7 +206,7 @@ exports.createPages = async ({ graphql, actions }) => {
     frenchProductTypes.forEach((type, i) => {
       createPage({
         path: `magasin/${slugify(type)}`,
-        component: path.resolve(`src/components/ProductsPageTranslated.jsx`), // Update path to the translated products component
+        component: path.resolve(`src/components/ProductTypePageTranslated.jsx`), // Update path to the translated products component
         context: {
           products: filterProductsByType(translatedProducts, type),
           language: "fr",
