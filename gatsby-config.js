@@ -32,6 +32,7 @@ module.exports = {
         prefixDefault: false,
         configPath: require.resolve("./locales/config.json"),
         locales: ["fr"],
+        identifiers: [{ namespace: "custom", key: "product_type" }],
         waitingGatsbySourceShopify: 5000,
         sourceOnlyMode: true,
       },
