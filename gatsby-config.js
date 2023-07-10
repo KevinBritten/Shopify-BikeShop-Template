@@ -31,7 +31,7 @@ module.exports = {
         defaultLang: "en",
         prefixDefault: false,
         configPath: require.resolve("./locales/config.json"),
-        locales: ["fr"],
+        locales: ["fr", "en"],
         identifiers: [
           { namespace: "custom", key: "product_type" },
           { namespace: "custom", key: "valve_type" },

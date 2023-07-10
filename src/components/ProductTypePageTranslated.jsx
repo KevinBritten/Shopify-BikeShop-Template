@@ -123,9 +123,12 @@ export const Head = ({ pageContext: { productType } }) => (
 )
 
 export const query = graphql`
-  query ($productType: String) {
+  query ($productType: String, $language: String) {
     meta: allShopifyTranslatedProduct(
-      filter: { metafields: { elemMatch: { value: { eq: $productType } } } }
+      filter: {
+        locale: { eq: $language }
+        metafields: { elemMatch: { value: { eq: $productType } } }
+      }
     ) {
       distinct(field: metafields___key)
     }

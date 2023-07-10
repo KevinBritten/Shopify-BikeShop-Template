@@ -6,30 +6,6 @@ exports.createPages = async ({ graphql, actions }) => {
 
   const result = await graphql(`
     {
-      collections: allShopifyCollection {
-        edges {
-          node {
-            id
-            title
-            description
-            descriptionHtml
-            storefrontId
-            handle
-          }
-        }
-      }
-      translatedCollections: allShopifyTranslatedCollection {
-        edges {
-          node {
-            title
-            description
-            descriptionHtml
-            locale
-            storefrontId
-            handle
-          }
-        }
-      }
       products: allShopifyProduct(sort: { fields: publishedAt, order: ASC }) {
         nodes {
           ...ProductCard
@@ -44,7 +20,9 @@ exports.createPages = async ({ graphql, actions }) => {
           hasNextPage
         }
       }
-      translatedProducts: allShopifyTranslatedProduct {
+      translatedProducts: allShopifyTranslatedProduct(
+        filter: { locale: { eq: "fr" } }
+      ) {
         nodes {
           ...TranslatedProductCard
           handle
@@ -218,7 +196,7 @@ exports.createPages = async ({ graphql, actions }) => {
     frenchProductTypes.forEach((productType, i) => {
       createPage({
         path: `magasin/${slugify(productType)}`,
-        component: path.resolve(`src/components/ProductTypePageTranslated.jsx`), // Update path to the translated products component
+        component: path.resolve(`src/components/ProductTypePageTranslated.jsx`),
         context: {
           products: filterProductsByType(translatedProducts, productType),
           language: "fr",
@@ -232,7 +210,7 @@ exports.createPages = async ({ graphql, actions }) => {
     englishProductTypes.forEach((productType, i) => {
       createPage({
         path: `en/store/${slugify(productType)}`,
-        component: path.resolve(`src/components/ProductsPageTranslated.jsx`), // Update path to the translated products component
+        component: path.resolve(`src/components/ProductTypePageTranslated.jsx`),
         context: {
           products: filterProductsByType(products, productType),
           language: "en",
