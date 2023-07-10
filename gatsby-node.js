@@ -50,12 +50,8 @@ exports.createPages = async ({ graphql, actions }) => {
           handle
           storefrontId
           metafields {
-            edges {
-              node {
-                key
-                value
-              }
-            }
+            key
+            value
           }
         }
       }
@@ -94,20 +90,19 @@ exports.createPages = async ({ graphql, actions }) => {
 
   //format products to match transtatedProducts
 
-  products.nodes.forEach((node) => {
-    const formattedMetafields = node.metafields.map((metafield) => {
-      return { node: { ...metafield } }
-    })
-    node.metafields = { edges: formattedMetafields }
-  })
+  // products.nodes.forEach((node) => {
+  //   const formattedMetafields = node.metafields.map((metafield) => {
+  //     return { node: { ...metafield } }
+  //   })
+  //   node.metafields = { edges: formattedMetafields }
+  // })
 
   function getProductTypeMetafieldFromNode(node) {
-    return node.metafields.edges.filter((edge) => {
-      return edge.node.key === "product_type"
-    })[0].node.value
+    return node.metafields.filter((metafield) => {
+      return metafield.key === "product_type"
+    })[0].value
   }
   function createTranslatedSlug(node, base) {
-    console.log(node)
     const translatedProductType = getProductTypeMetafieldFromNode(node)
     const { handle } = node
     const slugifiedProductType = slugify(translatedProductType, { lower: true })

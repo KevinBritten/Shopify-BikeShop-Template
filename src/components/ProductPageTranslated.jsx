@@ -297,14 +297,6 @@ export const query = graphql`
       title
       description
       id
-      metafields {
-        edges {
-          node {
-            key
-            value
-          }
-        }
-      }
       handle
       variants {
         edges {
