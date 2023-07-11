@@ -8,6 +8,34 @@ import { Filters } from "./filters-metafields"
 import { graphql } from "gatsby"
 import { getCurrencySymbol } from "../utils/format-price"
 
+import FilterIcon from "../icons/filter"
+import CrossIcon from "../icons/cross"
+
+import {
+  visuallyHidden,
+  main,
+  search,
+  searchIcon,
+  sortSelector,
+  results,
+  productList as productListStyle,
+  productListItem,
+  pagination,
+  paginationButton,
+  progressStyle,
+  resultsStyle,
+  filterStyle,
+  clearSearch,
+  searchForm,
+  sortIcon,
+  filterButton,
+  filterTitle,
+  modalOpen,
+  activeFilters,
+  filterWrap,
+  emptyState,
+} from "./search-page.module.css"
+
 export default function ProductsPageTranslated({
   pageContext: { products, language, otherLanguagePage, productType },
   data: {
@@ -64,6 +92,29 @@ export default function ProductsPageTranslated({
   const [filteredProducts, setFilteredProducts] = React.useState([
     ...products.nodes,
   ])
+  // This modal is only used on mobile
+  const [showModal, setShowModal] = React.useState(false)
+
+  // Scroll up when navigating
+  React.useEffect(() => {
+    if (!showModal) {
+      window.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "smooth",
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+      })
+    }
+  }, [products, showModal])
+
+  // Stop page from scrolling when modal is visible
+  React.useEffect(() => {
+    if (showModal) {
+      document.documentElement.style.overflow = "hidden"
+    } else {
+      document.documentElement.style.overflow = ""
+    }
+  }, [showModal])
 
   React.useEffect(() => {
     if (Object.keys(filters).length === 0) {
@@ -114,22 +165,51 @@ export default function ProductsPageTranslated({
     )
   }, [filteredProducts])
 
+  const filterCount = React.useMemo(() => {
+    return !!Object.entries(filters).find(([key, values]) => values.length > 0)
+  }, [filters])
+
+  React.useEffect(() => {
+    console.log(filterCount)
+  }, [filterCount])
+
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
+      <button
+        className={[
+          filterButton,
+          filterCount ? activeFilters : undefined,
+          "fixed",
+        ].join(" ")}
+        onClick={() => setShowModal((show) => !show)}
+        // This is hidden because the filters are already visible to
+        // screenreaders, so the modal isnt needed.
+        aria-hidden
+      >
+        <FilterIcon />
+      </button>
       <div className="my-10">
         <h1 className={title}>{productType}</h1>
         <div className="flex">
-          <div className="m-10">
-            <Filters
-              setFilters={setFilters}
-              filters={filters}
-              filtersFromMetafields={filtersFromMetafields}
-              // tags={tags}
-              // vendors={vendors}
-              // productTypes={productTypes}
-              currencyCode={currencyCode}
-            />
-          </div>
+          <section className={[filterStyle, showModal && modalOpen].join(" ")}>
+            <div className={filterTitle}>
+              <h2>Filter</h2>
+              <button aria-hidden onClick={() => setShowModal(false)}>
+                <CrossIcon />
+              </button>
+            </div>
+            <div className={filterWrap}>
+              <Filters
+                setFilters={setFilters}
+                filters={filters}
+                filtersFromMetafields={filtersFromMetafields}
+                // tags={tags}
+                // vendors={vendors}
+                // productTypes={productTypes}
+                currencyCode={currencyCode}
+              />
+            </div>
+          </section>
           <ProductListing products={filteredProducts} />
         </div>
         {products.pageInfo.hasNextPage && (
