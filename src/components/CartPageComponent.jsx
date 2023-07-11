@@ -58,7 +58,7 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
                     <th className={imageHeader}>Image</th>
                     <th className={productHeader}>Product</th>
                     <th className={collapseColumn}>Price</th>
-                    <th>Qty.</th>
+                    <th className={collapseColumn}>Qty.</th>
                     <th className={[totals, collapseColumn].join(" ")}>
                       Total
                     </th>
@@ -71,7 +71,7 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
                     <th className={imageHeader}>Image</th>
                     <th className={productHeader}>Produit</th>
                     <th className={collapseColumn}>Prix</th>
-                    <th>Qté.</th>
+                    <th className={collapseColumn}>Qté.</th>
                     <th className={[totals, collapseColumn].join(" ")}>
                       Total
                     </th>

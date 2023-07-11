@@ -91,6 +91,20 @@ export function LineItem({ item, language }) {
         <div className={variant}>
           {item.variant.title === "Default Title" ? "" : item.variant.title}
         </div>
+        <div className="sm:hidden">
+          {price} {language === "en" ? "ea." : "chq."}
+          <br />
+          <div className="py-2">
+            <NumericInput
+              disabled={loading}
+              value={quantity}
+              aria-label="Quantity"
+              onIncrement={doIncrement}
+              onDecrement={doDecrement}
+              onChange={(e) => handleQuantityChange(e.currentTarget.value)}
+            />
+          </div>
+        </div>
         <div className={remove}>
           <button onClick={handleRemove}>
             <DeleteIcon /> {language === "en" ? "Remove" : "Supprimer"}
@@ -98,7 +112,7 @@ export function LineItem({ item, language }) {
         </div>
       </td>
       <td className={priceColumn}>{price}</td>
-      <td>
+      <td className={priceColumn}>
         <NumericInput
           disabled={loading}
           value={quantity}
