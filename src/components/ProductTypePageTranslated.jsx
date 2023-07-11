@@ -6,6 +6,7 @@ import { MoreButton } from "./more-button"
 import { title } from "./translated-products.module.css"
 import { Filters } from "./filters-metafields"
 import { graphql } from "gatsby"
+import { getCurrencySymbol } from "../utils/format-price"
 
 export default function ProductsPageTranslated({
   pageContext: { products, language, otherLanguagePage, productType },
@@ -52,6 +53,10 @@ export default function ProductsPageTranslated({
       })
   }
 
+  const currencyCode = getCurrencySymbol(
+    products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
+  )
+
   const [filtersFromMetafields, setFiltersFromMetafields] = React.useState(
     filterMetafields(products.nodes)
   )
@@ -67,6 +72,19 @@ export default function ProductsPageTranslated({
       setFilteredProducts(
         products.nodes.filter((product) => {
           return Object.entries(filters).every(([key, values]) => {
+            // Handle min/max price
+            if (key === "minPrice") {
+              return values
+                ? parseFloat(product.priceRangeV2.minVariantPrice.amount) >=
+                    values
+                : true
+            }
+            if (key === "maxPrice") {
+              return values
+                ? parseFloat(product.priceRangeV2.minVariantPrice.amount) <=
+                    values
+                : true
+            }
             // If no values specified for the key, then all products with this key are acceptable
             if (values.length === 0) {
               return true
@@ -100,16 +118,20 @@ export default function ProductsPageTranslated({
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <div className="my-10">
         <h1 className={title}>{productType}</h1>
-        <Filters
-          setFilters={setFilters}
-          filters={filters}
-          filtersFromMetafields={filtersFromMetafields}
-          // tags={tags}
-          // vendors={vendors}
-          // productTypes={productTypes}
-          // currencyCode={currencyCode}
-        />
-        <ProductListing products={filteredProducts} />
+        <div className="flex">
+          <div className="m-10">
+            <Filters
+              setFilters={setFilters}
+              filters={filters}
+              filtersFromMetafields={filtersFromMetafields}
+              // tags={tags}
+              // vendors={vendors}
+              // productTypes={productTypes}
+              currencyCode={currencyCode}
+            />
+          </div>
+          <ProductListing products={filteredProducts} />
+        </div>
         {products.pageInfo.hasNextPage && (
           <MoreButton to={`/search#more`}>More products</MoreButton>
         )}{" "}

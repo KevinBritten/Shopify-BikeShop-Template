@@ -9,7 +9,7 @@ import {
 } from "./filters.module.css"
 
 export function Filters({
-  // currencyCode,
+  currencyCode,
   // productTypes,
   // tags,
   // vendors,
@@ -98,17 +98,62 @@ export function Filters({
   // )
   return (
     <div>
+      <details className={priceFilterStyle} open={true}>
+        <summary>
+          <div className={summary}>
+            Price
+            {(filters.maxPrice || filters.minPrice) && (
+              <button
+                className={clearButton}
+                onClick={() =>
+                  setFilters((filters) => ({
+                    ...filters,
+                    maxPrice: "",
+                    minPrice: "",
+                  }))
+                }
+              >
+                Reset
+              </button>
+            )}
+          </div>
+        </summary>
+        <div className={priceFields}>
+          <CurrencyField
+            {...currencyCode}
+            aria-label="Minimum price"
+            value={filters.minPrice}
+            onChange={(event) =>
+              updateNumeric("minPrice", event.currentTarget.value)
+            }
+          />{" "}
+          –{" "}
+          <CurrencyField
+            {...currencyCode}
+            aria-label="Maximum price"
+            value={filters.maxPrice}
+            onChange={(event) =>
+              updateNumeric("maxPrice", event.currentTarget.value)
+            }
+          />
+        </div>
+      </details>
+      <hr className="my-5" />
+
       {filtersFromMetafields.map((metafield) => {
         const { key, values } = metafield
         return values.length ? (
-          <CheckFilter
-            open={true}
-            name={key.replace(/_/g, " ")}
-            items={values}
-            selectedItems={filters[key]}
-            setSelectedItems={(value) => updateFilter(key, value)}
-            key={key}
-          />
+          <>
+            <CheckFilter
+              open={true}
+              name={key.replace(/_/g, " ")}
+              items={values}
+              selectedItems={filters[key]}
+              setSelectedItems={(value) => updateFilter(key, value)}
+              key={key}
+            />
+            <hr className="my-5" />
+          </>
         ) : (
           false
         )
