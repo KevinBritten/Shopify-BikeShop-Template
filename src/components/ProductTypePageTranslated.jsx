@@ -179,7 +179,7 @@ export default function ProductsPageTranslated({
         className={[
           filterButton,
           filterCount ? activeFilters : undefined,
-          "fixed",
+          "fixed top-0 z-10",
         ].join(" ")}
         onClick={() => setShowModal((show) => !show)}
         // This is hidden because the filters are already visible to
