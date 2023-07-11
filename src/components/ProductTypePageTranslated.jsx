@@ -190,7 +190,7 @@ export default function ProductsPageTranslated({
       </button>
       <div className="my-10">
         <h1 className={title}>{productType}</h1>
-        <div className="flex">
+        <div className="flex justify-center">
           <section className={[filterStyle, showModal && modalOpen].join(" ")}>
             <div className={filterTitle}>
               <h2>Filter</h2>
