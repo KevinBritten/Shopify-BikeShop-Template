@@ -2,10 +2,11 @@ import * as React from "react"
 import fetch from "isomorphic-fetch"
 import Client from "shopify-buy"
 
-const client = Client.buildClient(
+let client = Client.buildClient(
   {
     domain: process.env.GATSBY_SHOPIFY_STORE_URL,
     storefrontAccessToken: process.env.GATSBY_STOREFRONT_ACCESS_TOKEN,
+    language: "fr",
   },
   fetch
 )
@@ -34,6 +35,20 @@ export const StoreProvider = ({ children }) => {
   const [checkout, setCheckout] = React.useState(defaultValues.checkout)
   const [loading, setLoading] = React.useState(false)
   const [didJustAddToCart, setDidJustAddToCart] = React.useState(false)
+
+  React.useEffect(() => {
+    if (window.location.pathname.includes("/en/")) {
+      client = Client.buildClient(
+        {
+          domain: process.env.GATSBY_SHOPIFY_STORE_URL,
+          storefrontAccessToken: process.env.GATSBY_STOREFRONT_ACCESS_TOKEN,
+          language: "en",
+        },
+        fetch
+      )
+    }
+  }, [])
+  console.log(client)
 
   const setCheckoutItem = (checkout) => {
     if (isBrowser) {
