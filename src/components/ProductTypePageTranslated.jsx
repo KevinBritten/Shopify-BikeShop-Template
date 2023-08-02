@@ -3,11 +3,16 @@ import { Layout } from "./layout"
 import { ProductListing } from "./product-listing"
 import { Seo } from "./seo"
 import { MoreButton } from "./more-button"
-import { title } from "./translated-products.module.css"
+import {
+  title,
+  gridContainer,
+  productsContainer,
+} from "./translated-products.module.css"
 import { Filters } from "./filters-metafields"
 import { graphql } from "gatsby"
 import { getCurrencySymbol } from "../utils/format-price"
 
+import SortIcon from "../icons/sort"
 import FilterIcon from "../icons/filter"
 import CrossIcon from "../icons/cross"
 
@@ -94,6 +99,8 @@ export default function ProductsPageTranslated({
   ])
   // This modal is only used on mobile
   const [showModal, setShowModal] = React.useState(false)
+
+  const [sortKey, setSortKey] = React.useState("CREATED_AT")
 
   // Scroll up when navigating
   React.useEffect(() => {
@@ -189,8 +196,9 @@ export default function ProductsPageTranslated({
         <FilterIcon />
       </button>
       <div className="my-10">
-        <h1 className={title}>{productType}</h1>
-        <div className="flex justify-center">
+        <div class={gridContainer}>
+          <h1 className={title}>{productType}</h1>
+
           <section className={[filterStyle, showModal && modalOpen].join(" ")}>
             <div className={filterTitle}>
               <h2>Filter</h2>
@@ -210,7 +218,24 @@ export default function ProductsPageTranslated({
               />
             </div>
           </section>
-          <ProductListing products={filteredProducts} />
+          <div className={productsContainer}>
+            <ProductListing products={filteredProducts} />
+          </div>
+          <div className={sortSelector}>
+            <label>
+              <span>Sort by:</span>
+              <select
+                value={sortKey}
+                // eslint-disable-next-line
+                onChange={(e) => setSortKey(e.target.value)}
+              >
+                <option value="PRICE">Price</option>
+                <option value="TITLE">Title</option>
+                <option value="CREATED_AT">New items</option>
+              </select>
+            </label>
+            <SortIcon className={sortIcon} />
+          </div>
         </div>
         {products.pageInfo.hasNextPage && (
           <MoreButton to={`/search#more`}>More products</MoreButton>
