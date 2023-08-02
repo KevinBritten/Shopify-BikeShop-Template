@@ -103,7 +103,6 @@ export default function ProductsPageTranslated({
   const [sortKey, setSortKey] = React.useState("createdAt")
 
   const sortProducts = (products, sortKey) => {
-    console.log(sortKey)
     // Clone the original array to avoid modifying the original data
     const sortedProducts = [...products]
 
@@ -211,7 +210,6 @@ export default function ProductsPageTranslated({
   }, [filters, sortKey])
 
   React.useEffect(() => {
-    console.log(filteredProducts)
     setFiltersFromMetafields(
       filterMetafields(filteredProducts, filters, filtersFromMetafields)
     )
