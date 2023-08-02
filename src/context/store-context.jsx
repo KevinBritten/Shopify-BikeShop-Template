@@ -48,7 +48,6 @@ export const StoreProvider = ({ children }) => {
       )
     }
   }, [])
-  console.log(client)
 
   const setCheckoutItem = (checkout) => {
     if (isBrowser) {

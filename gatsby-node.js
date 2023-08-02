@@ -9,6 +9,7 @@ exports.createPages = async ({ graphql, actions }) => {
       products: allShopifyProduct(sort: { fields: publishedAt, order: ASC }) {
         nodes {
           ...ProductCard
+          createdAt
           handle
           storefrontId
           metafields {

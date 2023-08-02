@@ -100,7 +100,48 @@ export default function ProductsPageTranslated({
   // This modal is only used on mobile
   const [showModal, setShowModal] = React.useState(false)
 
-  const [sortKey, setSortKey] = React.useState("CREATED_AT")
+  const [sortKey, setSortKey] = React.useState("createdAt")
+
+  const sortProducts = (products, sortKey) => {
+    console.log(sortKey)
+    // Clone the original array to avoid modifying the original data
+    const sortedProducts = [...products]
+
+    // Define the sorting function based on the selected sort key
+    switch (sortKey) {
+      case "createdAt":
+        sortedProducts.sort(
+          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+        )
+        break
+      case "ascending_price":
+        sortedProducts.sort(
+          (a, b) =>
+            parseFloat(a.priceRangeV2.minVariantPrice.amount) -
+            parseFloat(b.priceRangeV2.minVariantPrice.amount)
+        )
+        break
+      case "descending_price":
+        sortedProducts.sort(
+          (a, b) =>
+            parseFloat(b.priceRangeV2.minVariantPrice.amount) -
+            parseFloat(a.priceRangeV2.minVariantPrice.amount)
+        )
+        break
+      case "ascending_title":
+        sortedProducts.sort((a, b) => a.title.localeCompare(b.title))
+        break
+      case "descending_title":
+        sortedProducts.sort((a, b) => b.title.localeCompare(a.title))
+        break
+      default:
+        // If an invalid sort key is provided, return the original array
+        console.warn(`Invalid sort key: ${sortKey}`)
+        return sortedProducts
+    }
+
+    return sortedProducts
+  }
 
   // Scroll up when navigating
   React.useEffect(() => {
@@ -125,48 +166,52 @@ export default function ProductsPageTranslated({
 
   React.useEffect(() => {
     if (Object.keys(filters).length === 0) {
-      setFilteredProducts(products.nodes)
+      setFilteredProducts(sortProducts(products.nodes, sortKey))
     } else {
       setFilteredProducts(
-        products.nodes.filter((product) => {
-          return Object.entries(filters).every(([key, values]) => {
-            // Handle min/max price
-            if (key === "minPrice") {
-              return values
-                ? parseFloat(product.priceRangeV2.minVariantPrice.amount) >=
-                    values
-                : true
-            }
-            if (key === "maxPrice") {
-              return values
-                ? parseFloat(product.priceRangeV2.minVariantPrice.amount) <=
-                    values
-                : true
-            }
-            // If no values specified for the key, then all products with this key are acceptable
-            if (values.length === 0) {
+        sortProducts(
+          products.nodes.filter((product) => {
+            return Object.entries(filters).every(([key, values]) => {
+              // Handle min/max price
+              if (key === "minPrice") {
+                return values
+                  ? parseFloat(product.priceRangeV2.minVariantPrice.amount) >=
+                      values
+                  : true
+              }
+              if (key === "maxPrice") {
+                return values
+                  ? parseFloat(product.priceRangeV2.minVariantPrice.amount) <=
+                      values
+                  : true
+              }
+              // If no values specified for the key, then all products with this key are acceptable
+              if (values.length === 0) {
+                return true
+              }
+
+              // Find corresponding metafield in the product's metafields
+              const metafield = product.metafields.find(
+                (metafield) => metafield.key === key
+              )
+
+              // If metafield is not found or its value is not in the filter's values, return false
+              if (!metafield || !values.includes(metafield.value)) {
+                return false
+              }
+
+              // Otherwise, this filter is satisfied
               return true
-            }
-
-            // Find corresponding metafield in the product's metafields
-            const metafield = product.metafields.find(
-              (metafield) => metafield.key === key
-            )
-
-            // If metafield is not found or its value is not in the filter's values, return false
-            if (!metafield || !values.includes(metafield.value)) {
-              return false
-            }
-
-            // Otherwise, this filter is satisfied
-            return true
-          })
-        })
+            })
+          }),
+          sortKey
+        )
       )
     }
-  }, [filters])
+  }, [filters, sortKey])
 
   React.useEffect(() => {
+    console.log(filteredProducts)
     setFiltersFromMetafields(
       filterMetafields(filteredProducts, filters, filtersFromMetafields)
     )
@@ -176,9 +221,7 @@ export default function ProductsPageTranslated({
     return !!Object.entries(filters).find(([key, values]) => values.length > 0)
   }, [filters])
 
-  React.useEffect(() => {
-    console.log(filterCount)
-  }, [filterCount])
+  React.useEffect(() => {}, [filterCount])
 
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
@@ -226,12 +269,23 @@ export default function ProductsPageTranslated({
               <span>Sort by:</span>
               <select
                 value={sortKey}
-                // eslint-disable-next-line
                 onChange={(e) => setSortKey(e.target.value)}
               >
-                <option value="PRICE">Price</option>
-                <option value="TITLE">Title</option>
-                <option value="CREATED_AT">New items</option>
+                <option value="createdAt">
+                  {language === "en" ? "New items" : "Nouveaux articles"}
+                </option>
+                <option value="ascending_price">
+                  {language === "en" ? "Price ↑" : "Prix ↑"}
+                </option>
+                <option value="descending_price">
+                  {language === "en" ? "Price ↓" : "Prix ↓"}
+                </option>
+                <option value="ascending_title">
+                  {language === "en" ? "Title ↑" : "Titre ↑"}
+                </option>
+                <option value="descending_title">
+                  {language === "en" ? "Title ↓" : "Titre ↓"}
+                </option>
               </select>
             </label>
             <SortIcon className={sortIcon} />
