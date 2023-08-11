@@ -26,14 +26,10 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
   const emptyCart = checkout.lineItems.length === 0
 
   const handleCheckout = () => {
-    if (language === "en") {
-      window.open(checkout.webUrl)
-    } else {
-      window.open(frenchWebUrl)
-    }
+    window.open(checkout.webUrl)
   }
 
-  console.log(frenchWebUrl)
+  console.log(checkout)
 
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
