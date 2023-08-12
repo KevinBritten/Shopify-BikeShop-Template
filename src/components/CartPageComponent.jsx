@@ -22,12 +22,14 @@ import {
 } from "./cart.module.css"
 
 export default function CartPageComponent({ language, otherLanguagePage }) {
-  const { checkout, loading } = React.useContext(StoreContext)
+  const { checkout, loading, frenchWebUrl } = React.useContext(StoreContext)
   const emptyCart = checkout.lineItems.length === 0
 
   const handleCheckout = () => {
     window.open(checkout.webUrl)
   }
+
+  console.log(checkout)
 
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>

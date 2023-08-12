@@ -37,6 +37,7 @@
     "gatsby-source-shopify": "^6.0.0",
     "gatsby-source-shopify-translations": "github:KevinBritten/gatsby-source-shopify-translations#build",
     "gatsby-transformer-sharp": "^4.0.0",
+    "graphql-request": "^6.1.0",
     "hamburger-react": "^2.5.0",
     "i18next": "^22.5.0",
     "isomorphic-fetch": "^3.0.0",
