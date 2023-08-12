@@ -28,9 +28,6 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
   const handleCheckout = () => {
     window.open(checkout.webUrl)
   }
-  React.useEffect(() => {
-    console.log(checkout)
-  }, [checkout.customAttributes])
 
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>

@@ -103,10 +103,6 @@ export const StoreProvider = ({ children }) => {
             existingCheckoutID
           )
           if (!existingCheckout.completedAt) {
-            console.log(
-              existingCheckout.customAttributes[0].value,
-              client.config.language
-            )
             if (
               !(
                 existingCheckout.customAttributes[0].value ===
@@ -147,7 +143,7 @@ export const StoreProvider = ({ children }) => {
               setCheckoutItem(updatedCheckout)
               return
             }
-            console.log("no")
+
             setCheckoutItem(existingCheckout)
 
             return
@@ -174,8 +170,6 @@ export const StoreProvider = ({ children }) => {
     const checkoutID = checkout.id
 
     const frenchTitle = await fetchFrenchTitle(variantId)
-
-    console.log(frenchTitle)
 
     const lineItemsToUpdate = [
       {

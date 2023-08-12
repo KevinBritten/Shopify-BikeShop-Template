@@ -18,8 +18,6 @@ export function LineItem({ item, language }) {
   const { removeLineItem, checkout, updateLineItem, loading } =
     React.useContext(StoreContext)
   const [quantity, setQuantity] = React.useState(item.quantity)
-
-  console.log(item)
   const variantImage = {
     ...item.variant.image,
     originalSrc: item.variant.image.src,
