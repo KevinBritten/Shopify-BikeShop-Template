@@ -22,8 +22,8 @@ import {
 } from "./cart.module.css"
 
 export default function CartPageComponent({ language, otherLanguagePage }) {
-  const { checkout, loading, frenchWebUrl } = React.useContext(StoreContext)
-  const emptyCart = checkout.lineItems.length === 0
+  const { checkout, loading, loadingCheckout } = React.useContext(StoreContext)
+  const emptyCart = !loadingCheckout && checkout.lineItems.length === 0
 
   const handleCheckout = () => {
     window.open(checkout.webUrl)
@@ -42,7 +42,16 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
         >
           checkout
         </button>
-        {emptyCart ? (
+
+        {loadingCheckout ? (
+          <div className={emptyStateContainer}>
+            <h1 className={emptyStateHeading}>
+              {language === "en"
+                ? "Loading Cart..."
+                : "Chargement du panier..."}
+            </h1>
+          </div>
+        ) : emptyCart ? (
           <div className={emptyStateContainer}>
             <h1 className={emptyStateHeading}>
               {language === "en"

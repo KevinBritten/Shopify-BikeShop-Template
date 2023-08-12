@@ -16,6 +16,7 @@ const defaultValues = {
   cart: [],
   isOpen: false,
   loading: false,
+  loadingCheckout: true,
   onOpen: () => {},
   onClose: () => {},
   addVariantToCart: () => {},
@@ -35,6 +36,7 @@ const localStorageKey = `shopify_checkout_id`
 export const StoreProvider = ({ children }) => {
   const [checkout, setCheckout] = React.useState(defaultValues.checkout)
   const [loading, setLoading] = React.useState(false)
+  const [loadingCheckout, setLoadingCheckout] = React.useState(true)
   const [didJustAddToCart, setDidJustAddToCart] = React.useState(false)
   const [frenchWebUrl, setFrenchWebUrl] = React.useState(null)
 
@@ -83,6 +85,7 @@ export const StoreProvider = ({ children }) => {
     }
 
     setCheckout(checkout)
+    setLoadingCheckout(false)
   }
 
   React.useEffect(() => {
@@ -209,6 +212,7 @@ export const StoreProvider = ({ children }) => {
     <StoreContext.Provider
       value={{
         ...defaultValues,
+        loadingCheckout,
         addVariantToCart,
         removeLineItem,
         updateLineItem,
