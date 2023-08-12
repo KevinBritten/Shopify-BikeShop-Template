@@ -35,14 +35,6 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <div className={wrap}>
-        <button
-          onClick={() => {
-            console.log(checkout)
-          }}
-        >
-          checkout
-        </button>
-
         {loadingCheckout ? (
           <div className={emptyStateContainer}>
             <h1 className={emptyStateHeading}>
