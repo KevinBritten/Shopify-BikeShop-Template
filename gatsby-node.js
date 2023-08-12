@@ -245,11 +245,29 @@ exports.createPages = async ({ graphql, actions }) => {
       path: `/en/store/${slugify(getProductTypeMetafieldFromNode(node))}/${
         node.handle
       }`,
-      component: path.resolve(`src/components/ProductPageTranslated.jsx`), // Update path to the translated products component
+      component: path.resolve(`src/components/ProductPageTranslated.jsx`),
       context: {
         storefrontId: node.storefrontId,
         language: "en",
         otherLanguagePage: node.otherLanguagePage,
+      },
+    })
+  })
+
+  // create search pages
+  const searchPageConfig = [
+    { products, path: "/en/search", language: "en" },
+    { products: translatedProducts, path: "/recherche", language: "fr" },
+  ]
+
+  searchPageConfig.forEach((language, i, a) => {
+    createPage({
+      path: language.path,
+      component: path.resolve(`src/components/SearchPageComponent.jsx`),
+      context: {
+        otherLanguagePage: i === 0 ? a[1].path : a[0].path,
+        language: language.language,
+        products: language.products,
       },
     })
   })
