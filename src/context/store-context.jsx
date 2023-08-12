@@ -108,8 +108,9 @@ export const StoreProvider = ({ children }) => {
               )
             ) {
               const newCheckout = await client.checkout.create()
+
               // await client.checkout.addLineItems(
-              //   newCheckout.id,
+              //   fetchedCheckout.id,
               //   existingCheckout.lineItems.map((item) => {
               //     return { variantId: item.variant.id, quantity: item.quantity }
               //   })
@@ -119,9 +120,19 @@ export const StoreProvider = ({ children }) => {
                   { key: "language", value: client.config.language },
                 ],
               }
-              await client.checkout.updateAttributes(newCheckout.id, input)
-              console.log(newCheckout)
-              setCheckoutItem(newCheckout)
+
+              let updatedCheckout = await client.checkout.updateAttributes(
+                newCheckout.id,
+                input
+              )
+              updatedCheckout = await client.checkout.addLineItems(
+                newCheckout.id,
+                existingCheckout.lineItems.map((item) => {
+                  return { variantId: item.variant.id, quantity: item.quantity }
+                })
+              )
+
+              setCheckoutItem(updatedCheckout)
               return
             }
             console.log("no")

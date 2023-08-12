@@ -28,12 +28,20 @@ export default function CartPageComponent({ language, otherLanguagePage }) {
   const handleCheckout = () => {
     window.open(checkout.webUrl)
   }
-
-  console.log(checkout)
+  React.useEffect(() => {
+    console.log(checkout)
+  }, [checkout.customAttributes])
 
   return (
     <Layout language={language} otherLanguagePage={otherLanguagePage}>
       <div className={wrap}>
+        <button
+          onClick={() => {
+            console.log(checkout)
+          }}
+        >
+          checkout
+        </button>
         {emptyCart ? (
           <div className={emptyStateContainer}>
             <h1 className={emptyStateHeading}>
