@@ -110,7 +110,7 @@ export default function ProductsPageTranslated({
     switch (sortKey) {
       case "createdAt":
         sortedProducts.sort(
-          (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+          (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
         )
         break
       case "ascending_price":
@@ -138,7 +138,6 @@ export default function ProductsPageTranslated({
         console.warn(`Invalid sort key: ${sortKey}`)
         return sortedProducts
     }
-
     return sortedProducts
   }
 
