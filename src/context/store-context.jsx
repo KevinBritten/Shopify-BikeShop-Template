@@ -1,6 +1,6 @@
 import * as React from "react"
 import fetch from "isomorphic-fetch"
-import Client from "shopify-buy"
+import Client, { CustomerErrorCode } from "shopify-buy"
 import { request } from "graphql-request"
 
 let client = Client.buildClient(
@@ -40,30 +40,33 @@ export const StoreProvider = ({ children }) => {
   const [didJustAddToCart, setDidJustAddToCart] = React.useState(false)
   const [frenchWebUrl, setFrenchWebUrl] = React.useState(null)
 
-  const fetchFrenchWebUrl = async (checkoutID) => {
-    //   const query = `
-    // query MyQuery @inContext(language: FR) {
-    //   node(id: "${checkoutID}") {
-    //     ... on Checkout {
-    //       webUrl
-    //     }
-    //   }
-    // }`
+  const fetchFrenchTitle = async (id) => {
+    const query = `
+    query MyQuery($id:ID!) @inContext(language: FR) {
+      node(id: $id) {
+        ... on ProductVariant {
+          product {
+            title
+          }
+        }
+      }
+    }
+    `
 
-    //   const url = "https://bestteststore2.myshopify.com/api/2023-07/graphql.json"
-    //   const headers = {
-    //     "X-Shopify-Storefront-Access-Token":
-    //       process.env.GATSBY_STOREFRONT_ACCESS_TOKEN,
-    //   }
+    const variables = { id }
 
-    //   try {
-    //     const data = await request(url, query, undefined, headers)
-    //     const frenchUrl = data.node.webUrl
-    //     setFrenchWebUrl(frenchUrl)
-    //   } catch (error) {
-    //     console.error(error)
-    //   }
-    return
+    const url = "https://bestteststore2.myshopify.com/api/2023-07/graphql.json"
+    const headers = {
+      "X-Shopify-Storefront-Access-Token":
+        process.env.GATSBY_STOREFRONT_ACCESS_TOKEN,
+    }
+
+    try {
+      const data = await request(url, query, variables, headers)
+      return data.node.product.title // Adjust this based on the actual response structure
+    } catch (error) {
+      console.error(error)
+    }
   }
 
   React.useEffect(() => {
@@ -112,12 +115,6 @@ export const StoreProvider = ({ children }) => {
             ) {
               const newCheckout = await client.checkout.create()
 
-              // await client.checkout.addLineItems(
-              //   fetchedCheckout.id,
-              //   existingCheckout.lineItems.map((item) => {
-              //     return { variantId: item.variant.id, quantity: item.quantity }
-              //   })
-              // )
               const input = {
                 customAttributes: [
                   { key: "language", value: client.config.language },
@@ -128,11 +125,23 @@ export const StoreProvider = ({ children }) => {
                 newCheckout.id,
                 input
               )
+              const lineItemsToAdd = existingCheckout.lineItems.map((item) => {
+                const customAttributes = [
+                  {
+                    key: item.customAttributes[0].key,
+                    value: item.customAttributes[0].value,
+                  },
+                ]
+                return {
+                  variantId: item.variant.id,
+                  quantity: item.quantity,
+                  customAttributes,
+                }
+              })
+
               updatedCheckout = await client.checkout.addLineItems(
                 newCheckout.id,
-                existingCheckout.lineItems.map((item) => {
-                  return { variantId: item.variant.id, quantity: item.quantity }
-                })
+                lineItemsToAdd
               )
 
               setCheckoutItem(updatedCheckout)
@@ -140,7 +149,7 @@ export const StoreProvider = ({ children }) => {
             }
             console.log("no")
             setCheckoutItem(existingCheckout)
-            fetchFrenchWebUrl(existingCheckout.id)
+
             return
           }
         } catch (e) {
@@ -154,21 +163,25 @@ export const StoreProvider = ({ children }) => {
       }
       await client.checkout.updateAttributes(newCheckout.id, input)
       setCheckoutItem(newCheckout)
-      fetchFrenchWebUrl(newCheckout.id)
     }
 
     initializeCheckout()
   }, [])
 
-  const addVariantToCart = (variantId, quantity) => {
+  const addVariantToCart = async (variantId, quantity) => {
     setLoading(true)
 
     const checkoutID = checkout.id
+
+    const frenchTitle = await fetchFrenchTitle(variantId)
+
+    console.log(frenchTitle)
 
     const lineItemsToUpdate = [
       {
         variantId,
         quantity: parseInt(quantity, 10),
+        customAttributes: [{ key: "frenchTitle", value: frenchTitle }],
       },
     ]
 

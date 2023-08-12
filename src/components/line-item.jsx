@@ -19,6 +19,7 @@ export function LineItem({ item, language }) {
     React.useContext(StoreContext)
   const [quantity, setQuantity] = React.useState(item.quantity)
 
+  console.log(item)
   const variantImage = {
     ...item.variant.image,
     originalSrc: item.variant.image.src,
@@ -87,7 +88,9 @@ export function LineItem({ item, language }) {
         )}
       </td>
       <td>
-        <h2 className={title}>{item.title}</h2>
+        <h2 className={title}>
+          {language === "fr" ? item.customAttributes[0].value : item.title}
+        </h2>
         <div className={variant}>
           {item.variant.title === "Default Title" ? "" : item.variant.title}
         </div>
