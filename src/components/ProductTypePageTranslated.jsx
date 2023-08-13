@@ -86,20 +86,6 @@ export default function ProductsPageTranslated({
       })
   }
 
-  const currencyCode = getCurrencySymbol(
-    products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
-  )
-
-  const [filtersFromMetafields, setFiltersFromMetafields] = React.useState(
-    filterMetafields(products.nodes)
-  )
-  const [filters, setFilters] = React.useState([])
-  const [filteredProducts, setFilteredProducts] = React.useState([
-    ...products.nodes,
-  ])
-  // This modal is only used on mobile
-  const [showModal, setShowModal] = React.useState(false)
-
   const [sortKey, setSortKey] = React.useState("createdAt")
 
   const sortProducts = (products, sortKey) => {
@@ -141,6 +127,20 @@ export default function ProductsPageTranslated({
 
     return sortedProducts
   }
+
+  const currencyCode = getCurrencySymbol(
+    products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
+  )
+
+  const [filtersFromMetafields, setFiltersFromMetafields] = React.useState(
+    filterMetafields(products.nodes)
+  )
+  const [filters, setFilters] = React.useState([])
+  const [filteredProducts, setFilteredProducts] = React.useState(
+    sortProducts([...products.nodes])
+  )
+  // This modal is only used on mobile
+  const [showModal, setShowModal] = React.useState(false)
 
   // Scroll up when navigating
   React.useEffect(() => {
