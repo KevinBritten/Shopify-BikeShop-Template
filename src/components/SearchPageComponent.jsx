@@ -237,7 +237,7 @@ export default function ProductsPageTranslated({
       </button>
       <div className="my-10">
         <div class={gridContainer}>
-          <h1 className={title}>{productType}</h1>
+          <h1 className={title}></h1>
 
           <section className={[filterStyle, showModal && modalOpen].join(" ")}>
             <div className={filterTitle}>
@@ -296,8 +296,8 @@ export default function ProductsPageTranslated({
   )
 }
 
-export const Head = ({ pageContext: { productType } }) => (
-  <Seo title={`${productType} - Courrier Caverne`} />
+export const Head = ({ pageContext: { language } }) => (
+  <Seo title={language === "fr" ? "Recherche" : "Search"} />
 )
 
 export const query = graphql`
