@@ -1,3 +1,21 @@
+.grid-container {
+  display: grid;
+  grid-template-columns: min-content 1fr auto;
+  grid-template-rows: min-content auto;
+  grid-template-areas:
+    "nothing search sort"
+    "filters products products";
+}
+
+.products-container {
+  grid-area: products;
+}
+
+.searchForm {
+  grid-area: search;
+  margin: 20px 10px;
+}
+
 .visually-hidden {
   border: 0;
   clip: rect(0, 0, 0, 0);
@@ -164,6 +182,7 @@
 }
 
 .sortSelector {
+  grid-area: sort;
   display: grid;
   place-items: center;
   font-weight: var(--semibold);

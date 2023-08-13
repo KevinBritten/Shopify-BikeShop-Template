@@ -3,20 +3,19 @@ import { Layout } from "./layout"
 import { ProductListing } from "./product-listing"
 import { Seo } from "./seo"
 import { MoreButton } from "./more-button"
-import {
-  title,
-  gridContainer,
-  productsContainer,
-} from "./translated-products.module.css"
+
 import { Filters } from "./filters-metafields"
 import { graphql } from "gatsby"
 import { getCurrencySymbol } from "../utils/format-price"
-
+import debounce from "debounce"
+import SearchIcon from "../icons/search"
 import SortIcon from "../icons/sort"
 import FilterIcon from "../icons/filter"
 import CrossIcon from "../icons/cross"
 
 import {
+  gridContainer,
+  productsContainer,
   visuallyHidden,
   main,
   search,
@@ -86,20 +85,6 @@ export default function ProductsPageTranslated({
       })
   }
 
-  const currencyCode = getCurrencySymbol(
-    products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
-  )
-
-  const [filtersFromMetafields, setFiltersFromMetafields] = React.useState(
-    filterMetafields(products.nodes)
-  )
-  const [filters, setFilters] = React.useState([])
-  const [filteredProducts, setFilteredProducts] = React.useState([
-    ...products.nodes,
-  ])
-  // This modal is only used on mobile
-  const [showModal, setShowModal] = React.useState(false)
-
   const [sortKey, setSortKey] = React.useState("createdAt")
 
   const sortProducts = (products, sortKey) => {
@@ -140,6 +125,22 @@ export default function ProductsPageTranslated({
     }
     return sortedProducts
   }
+
+  const currencyCode = getCurrencySymbol(
+    products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
+  )
+
+  const [filtersFromMetafields, setFiltersFromMetafields] = React.useState(
+    filterMetafields(products.nodes)
+  )
+  const [filters, setFilters] = React.useState([])
+
+  const [filteredProducts, setFilteredProducts] = React.useState(
+    sortProducts([...products.nodes])
+  )
+
+  // This modal is only used on mobile
+  const [showModal, setShowModal] = React.useState(false)
 
   // Scroll up when navigating
   React.useEffect(() => {
@@ -237,7 +238,7 @@ export default function ProductsPageTranslated({
       </button>
       <div className="my-10">
         <div class={gridContainer}>
-          <h1 className={title}></h1>
+          <SearchBar defaultTerm={"filters.term"} setFilters={setFilters} />
 
           <section className={[filterStyle, showModal && modalOpen].join(" ")}>
             <div className={filterTitle}>
@@ -293,6 +294,46 @@ export default function ProductsPageTranslated({
         )}{" "}
       </div>
     </Layout>
+  )
+}
+
+function SearchBar({ defaultTerm, setFilters }) {
+  const [term, setTerm] = React.useState(defaultTerm)
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const debouncedSetFilters = React.useCallback(
+    debounce((value) => {
+      setFilters((filters) => ({ ...filters, term: value }))
+    }, 200),
+    [setFilters]
+  )
+
+  return (
+    <form onSubmit={(e) => e.preventDefault()} className={searchForm}>
+      <SearchIcon aria-hidden className={searchIcon} />
+      <input
+        type="text"
+        value={term}
+        onChange={(e) => {
+          setTerm(e.target.value)
+          debouncedSetFilters(e.target.value)
+        }}
+        placeholder="Search..."
+      />
+      {term ? (
+        <button
+          className={clearSearch}
+          type="reset"
+          onClick={() => {
+            setTerm("")
+            setFilters((filters) => ({ ...filters, term: "" }))
+          }}
+          aria-label="Clear search query"
+        >
+          <CrossIcon />
+        </button>
+      ) : undefined}
+    </form>
   )
 }
 
