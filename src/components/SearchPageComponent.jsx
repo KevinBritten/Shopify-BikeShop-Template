@@ -131,9 +131,9 @@ export default function SearchPageComponent({
       default:
         // If an invalid sort key is provided, return the original array
         console.warn(`Invalid sort key: ${sortKey}`)
-        return sortedProducts
     }
-    return sortedProducts
+    //only return first 50 results
+    return sortedProducts.slice(0, 40)
   }
 
   const [filteredProducts, setFilteredProducts] = React.useState(
