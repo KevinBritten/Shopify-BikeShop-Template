@@ -1,4 +1,6 @@
 import * as React from "react"
+import Fuse from "fuse.js"
+
 import { Layout } from "./layout"
 import { ProductListing } from "./product-listing"
 import { Seo } from "./seo"
@@ -98,6 +100,9 @@ export default function SearchPageComponent({
 
     // Define the sorting function based on the selected sort key
     switch (sortKey) {
+      case "relevance":
+        //if sort is by relevance, sorting is handled by fuse
+        break
       case "createdAt":
         sortedProducts.sort(
           (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
@@ -172,52 +177,56 @@ export default function SearchPageComponent({
     if (Object.keys(filters).length === 0) {
       setFilteredProducts(sortProducts(products.nodes, sortKey))
     } else {
-      setFilteredProducts(
-        sortProducts(
-          products.nodes.filter((product) => {
-            console.log(filters)
-            return Object.entries(filters).every(([key, values]) => {
-              // Handle min/max price
-              if (key === "minPrice") {
-                return values
-                  ? parseFloat(product.priceRangeV2.minVariantPrice.amount) >=
-                      values
-                  : true
-              }
-              if (key === "maxPrice") {
-                return values
-                  ? parseFloat(product.priceRangeV2.minVariantPrice.amount) <=
-                      values
-                  : true
-              }
+      const productsToSearch = products.nodes.filter((product) => {
+        return Object.entries(filters).every(([key, values]) => {
+          // Handle min/max price
+          if (key === "minPrice") {
+            return values
+              ? parseFloat(product.priceRangeV2.minVariantPrice.amount) >=
+                  values
+              : true
+          }
+          if (key === "maxPrice") {
+            return values
+              ? parseFloat(product.priceRangeV2.minVariantPrice.amount) <=
+                  values
+              : true
+          }
 
-              if (key === "term") {
-                return product.title
-                  .toLowerCase()
-                  .includes(values.toLowerCase())
-              }
-              // If no values specified for the key, then all products with this key are acceptable
-              if (values.length === 0) {
-                return true
-              }
+          // If no values specified for the key, then all products with this key are acceptable
+          if (values.length === 0 || key === "term") {
+            return true
+          }
 
-              // Find corresponding metafield in the product's metafields
-              const metafield = product.metafields.find(
-                (metafield) => metafield.key === key
-              )
+          // Find corresponding metafield in the product's metafields
+          const metafield = product.metafields.find(
+            (metafield) => metafield.key === key
+          )
 
-              // If metafield is not found or its value is not in the filter's values, return false
-              if (!metafield || !values.includes(metafield.value)) {
-                return false
-              }
+          // If metafield is not found or its value is not in the filter's values, return false
+          if (!metafield || !values.includes(metafield.value)) {
+            return false
+          }
 
-              // Otherwise, this filter is satisfied
-              return true
-            })
-          }),
-          sortKey
-        )
-      )
+          // Otherwise, this filter is satisfied
+          return true
+        })
+      })
+
+      let searchedProducts
+      if (filters.term) {
+        const fuse = new Fuse([...productsToSearch], {
+          keys: ["title"],
+          includeScore: true,
+          shouldSort: sortKey === "relevance",
+        })
+        searchedProducts = fuse.search(filters.term).map((result) => {
+          return result.item
+        })
+      } else {
+        searchedProducts = productsToSearch
+      }
+      setFilteredProducts(sortProducts(searchedProducts, sortKey))
     }
   }, [filters, sortKey])
 
@@ -283,6 +292,9 @@ export default function SearchPageComponent({
                 value={sortKey}
                 onChange={(e) => setSortKey(e.target.value)}
               >
+                <option value="relevance">
+                  {language === "en" ? "Relevance" : "Pertinence"}
+                </option>
                 <option value="createdAt">
                   {language === "en" ? "New items" : "Nouveaux articles"}
                 </option>
