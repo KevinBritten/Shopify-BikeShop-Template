@@ -135,11 +135,7 @@ nav > a {
   .header {
     grid-template-columns: 150px 1fr min-content min-content;
   }
-  .languageButton {
-    /* TODO: change when shop icons added */
-    padding-left: 82px;
-    padding-right: 20px;
-  }
+
   nav > a {
     margin: 0 32px;
   }

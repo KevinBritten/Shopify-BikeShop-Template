@@ -190,9 +190,12 @@ export function Header({ language, otherLanguagePage = "" }) {
             </button>
           )}
         </div>
-        {/* <Link to="/search" className={searchButton}>
+        <Link
+          to={`${langPrefix}/${t("links.search")}`}
+          className={searchButton}
+        >
           <SearchIcon />
-        </Link> */}
+        </Link>
         <CartButton quantity={quantity} language={language} />
         <div className={socials}>
           <Socials />

@@ -10,6 +10,7 @@ i18n.use(initReactI18next).init({
           builds: "builds",
           contact: "contact",
           store: "store",
+          search: "search",
         },
         hero: {
           slides: [
@@ -108,6 +109,7 @@ i18n.use(initReactI18next).init({
           builds: "constructions",
           contact: "contact",
           store: "magasin",
+          search: "recherche",
         },
 
         hero: {
