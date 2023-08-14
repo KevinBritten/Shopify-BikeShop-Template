@@ -81,7 +81,7 @@ export default function ProductsPageTranslated({
         })
         return {
           key: metafield,
-          values: [...values],
+          values: [...values].sort(),
         }
       })
   }
@@ -128,6 +128,10 @@ export default function ProductsPageTranslated({
     return sortedProducts
   }
 
+  const [filteredProducts, setFilteredProducts] = React.useState(
+    sortProducts([...products.nodes], sortKey)
+  )
+
   const currencyCode = getCurrencySymbol(
     products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
   )
@@ -136,9 +140,7 @@ export default function ProductsPageTranslated({
     filterMetafields(products.nodes)
   )
   const [filters, setFilters] = React.useState([])
-  const [filteredProducts, setFilteredProducts] = React.useState(
-    sortProducts([...products.nodes])
-  )
+
   // This modal is only used on mobile
   const [showModal, setShowModal] = React.useState(false)
 
