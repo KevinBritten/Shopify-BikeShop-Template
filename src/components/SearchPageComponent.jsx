@@ -53,7 +53,6 @@ export default function SearchPageComponent({
     previousFiltersFromMetafields = []
   ) => {
     return distinct
-      .filter((metafield) => !(metafield === "product_type"))
       .map((metafield) => {
         // If the metafield has a filter applied already, use the previous filter
         const previousFilter = previousFiltersFromMetafields.find(
@@ -82,6 +81,12 @@ export default function SearchPageComponent({
           key: metafield,
           values: [...values].sort(),
         }
+      })
+      .sort((a, b) => {
+        //ensure product type is first
+        if (a.key === "product_type") return -1
+        if (b.key === "product_type") return 1
+        return a.key.localeCompare(b.key)
       })
   }
 
@@ -187,7 +192,6 @@ export default function SearchPageComponent({
               }
 
               if (key === "term") {
-                console.log(product)
                 return product.title
                   .toLowerCase()
                   .includes(values.toLowerCase())
