@@ -118,7 +118,7 @@
   position: relative;
   grid-area: search;
   height: min-content;
-  display: grid;
+  display: block;
   grid-template-columns: auto max-content max-content;
   align-items: center;
   padding: var(--space-md) var(--space-md) var(--space-md)
