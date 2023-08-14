@@ -40,8 +40,8 @@ import {
   emptyState,
 } from "./search-page.module.css"
 
-export default function ProductsPageTranslated({
-  pageContext: { products, language, otherLanguagePage, productType },
+export default function SearchPageComponent({
+  pageContext: { products, language, otherLanguagePage },
   data: {
     meta: { distinct },
   },
@@ -80,7 +80,7 @@ export default function ProductsPageTranslated({
         })
         return {
           key: metafield,
-          values: [...values],
+          values: [...values].sort(),
         }
       })
   }
@@ -126,6 +126,10 @@ export default function ProductsPageTranslated({
     return sortedProducts
   }
 
+  const [filteredProducts, setFilteredProducts] = React.useState(
+    sortProducts([...products.nodes], sortKey)
+  )
+
   const currencyCode = getCurrencySymbol(
     products.nodes[0]?.priceRangeV2?.minVariantPrice?.currencyCode
   )
@@ -134,10 +138,6 @@ export default function ProductsPageTranslated({
     filterMetafields(products.nodes)
   )
   const [filters, setFilters] = React.useState([])
-
-  const [filteredProducts, setFilteredProducts] = React.useState(
-    sortProducts([...products.nodes])
-  )
 
   // This modal is only used on mobile
   const [showModal, setShowModal] = React.useState(false)
@@ -170,6 +170,7 @@ export default function ProductsPageTranslated({
       setFilteredProducts(
         sortProducts(
           products.nodes.filter((product) => {
+            console.log(filters)
             return Object.entries(filters).every(([key, values]) => {
               // Handle min/max price
               if (key === "minPrice") {
@@ -183,6 +184,13 @@ export default function ProductsPageTranslated({
                   ? parseFloat(product.priceRangeV2.minVariantPrice.amount) <=
                       values
                   : true
+              }
+
+              if (key === "term") {
+                console.log(product)
+                return product.title
+                  .toLowerCase()
+                  .includes(values.toLowerCase())
               }
               // If no values specified for the key, then all products with this key are acceptable
               if (values.length === 0) {
@@ -238,7 +246,9 @@ export default function ProductsPageTranslated({
       </button>
       <div className="my-10">
         <div class={gridContainer}>
-          <SearchBar defaultTerm={"filters.term"} setFilters={setFilters} />
+          <div className={search} aria-hidden={modalOpen}>
+            <SearchBar defaultTerm={""} setFilters={setFilters} />
+          </div>
 
           <section className={[filterStyle, showModal && modalOpen].join(" ")}>
             <div className={filterTitle}>
@@ -342,13 +352,8 @@ export const Head = ({ pageContext: { language } }) => (
 )
 
 export const query = graphql`
-  query ($productType: String, $language: String) {
-    meta: allShopifyTranslatedProduct(
-      filter: {
-        locale: { eq: $language }
-        metafields: { elemMatch: { value: { eq: $productType } } }
-      }
-    ) {
+  query ($language: String) {
+    meta: allShopifyTranslatedProduct(filter: { locale: { eq: $language } }) {
       distinct(field: metafields___key)
     }
   }
