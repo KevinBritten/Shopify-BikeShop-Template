@@ -24,6 +24,7 @@
     "@splidejs/react-splide": "^0.7.12",
     "debounce": "^1.2.1",
     "dotenv": "^10.0.0",
+    "fuse.js": "^6.6.2",
     "gatsby": "^4.19.0",
     "gatsby-plugin-gatsby-cloud": "^4.0.0",
     "gatsby-plugin-google-analytics": "^4.0.0",
