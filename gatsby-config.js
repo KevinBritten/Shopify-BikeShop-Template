@@ -32,11 +32,6 @@ module.exports = {
         prefixDefault: false,
         configPath: require.resolve("./locales/config.json"),
         locales: ["fr", "en"],
-        identifiers: [
-          { namespace: "custom", key: "product_type" },
-          { namespace: "custom", key: "valve_type" },
-          { namespace: "custom", key: "stem_length" },
-        ],
         waitingGatsbySourceShopify: 5000,
         sourceOnlyMode: true,
       },
