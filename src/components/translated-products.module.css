@@ -1,0 +1,21 @@
+.title {
+  grid-column-start: 2;
+
+  font-weight: var(--bold);
+  margin: 0;
+  padding: var(--space-2xl) var(--size-gutter-raw) var(--space-2xl);
+  text-align: center;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: min-content 1fr auto;
+  grid-template-rows: min-content auto;
+  grid-template-areas:
+    "title title sort"
+    "filters products products";
+}
+
+.products-container {
+  grid-area: products;
+}

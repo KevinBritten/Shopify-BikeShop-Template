@@ -24,7 +24,7 @@ import {
   socials,
 } from "./header.module.css"
 
-export function Header({ language }) {
+export function Header({ language, otherLanguagePage = "" }) {
   const { t, i18n } = useTranslation()
   useEffect(() => {
     i18n.changeLanguage(language)
@@ -43,37 +43,41 @@ export function Header({ language }) {
   const langPrefix = language === "en" ? "/en" : ""
 
   function changeLanguage(lang) {
-    const currentPath = window.location.pathname
-    const pageFragment = window.location.hash
+    if (otherLanguagePage) {
+      window.location.href = otherLanguagePage
+    } else {
+      const currentPath = window.location.pathname
+      const pageFragment = window.location.hash
 
-    // Redirect to home page if the current page is root
-    if (!pageFragment) {
-      if (lang === "fr") {
-        window.location.href = "/"
-      } else if (lang === "en") {
-        window.location.href = "/en"
+      // Redirect to home page if the current page is root
+      if (!pageFragment) {
+        if (lang === "fr") {
+          window.location.href = "/"
+        } else if (lang === "en") {
+          window.location.href = "/en"
+        }
+        return
       }
-      return
-    }
 
-    // If not root, proceed with the usual process
-    const pageFragmentWithoutHash = pageFragment.replace("#", "")
-    const currentLang = currentPath.includes("/en/") ? "en" : "fr"
-    const matchedKeys = Object.keys(
-      i18n.getResourceBundle(currentLang, "translation").links
-    ).filter(
-      (key) =>
-        i18n.getResourceBundle(currentLang, "translation").links[key] ===
-        pageFragmentWithoutHash
-    )
-    const correctKey = matchedKeys[0]
-    const translatedFragment = i18n.t(`links.${correctKey}`, { lng: lang })
+      // If not root, proceed with the usual process
+      const pageFragmentWithoutHash = pageFragment.replace("#", "")
+      const currentLang = currentPath.includes("/en/") ? "en" : "fr"
+      const matchedKeys = Object.keys(
+        i18n.getResourceBundle(currentLang, "translation").links
+      ).filter(
+        (key) =>
+          i18n.getResourceBundle(currentLang, "translation").links[key] ===
+          pageFragmentWithoutHash
+      )
+      const correctKey = matchedKeys[0]
+      const translatedFragment = i18n.t(`links.${correctKey}`, { lng: lang })
 
-    if (lang === "fr") {
-      window.location.href =
-        currentPath.replace("/en/", "/") + "#" + translatedFragment
-    } else if (lang === "en") {
-      window.location.href = "/en" + currentPath + "#" + translatedFragment
+      if (lang === "fr") {
+        window.location.href =
+          currentPath.replace("/en/", "/") + "#" + translatedFragment
+      } else if (lang === "en") {
+        window.location.href = "/en" + currentPath + "#" + translatedFragment
+      }
     }
   }
   const preventBodyScroll = (state) => {
@@ -151,12 +155,12 @@ export function Header({ language }) {
           >
             {t("links.contact")}
           </Link>
-          {/* <Link
+          <Link
             to={`${langPrefix}/${t("links.store")}`}
             activeClassName={activeLink}
           >
             {t("links.store")}
-          </Link> */}
+          </Link>
         </nav>
         {/* )} */}
         <nav className="hidden">
@@ -186,10 +190,13 @@ export function Header({ language }) {
             </button>
           )}
         </div>
-        {/* <Link to="/search" className={searchButton}>
+        <Link
+          to={`${langPrefix}/${t("links.search")}`}
+          className={searchButton}
+        >
           <SearchIcon />
-        </Link> */}
-        {/* <CartButton quantity={quantity} /> */}
+        </Link>
+        <CartButton quantity={quantity} language={language} />
         <div className={socials}>
           <Socials />
         </div>
@@ -197,10 +204,14 @@ export function Header({ language }) {
 
       <Toast show={loading || didJustAddToCart}>
         {!didJustAddToCart ? (
-          "Updating…"
+          language === "en" ? (
+            "Updating…"
+          ) : (
+            "Mise à jour…"
+          )
         ) : (
           <>
-            Added to cart{" "}
+            {language === "en" ? "Added to cart" : "Ajouté au panier"}{" "}
             <svg
               width="14"
               height="14"

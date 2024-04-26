@@ -23,6 +23,20 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-shopify-translations`,
+      options: {
+        shopName: process.env.GATSBY_SHOPIFY_STORE_URL,
+        shopifyPassword: process.env.SHOPIFY_SHOP_PASSWORD,
+        accessToken: process.env.GATSBY_STOREFRONT_ACCESS_TOKEN,
+        defaultLang: "en",
+        prefixDefault: false,
+        configPath: require.resolve("./locales/config.json"),
+        locales: ["fr", "en"],
+        waitingGatsbySourceShopify: 5000,
+        sourceOnlyMode: true,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,

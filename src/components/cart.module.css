@@ -10,7 +10,7 @@
   margin: auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 48px 1fr min-content;
+  grid-template-columns: 48px 1fr;
   gap: var(--space-md) var(--space-2xl);
 }
 
@@ -31,7 +31,7 @@
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: 0 var(--size-gutter-raw);
+  padding: 30px var(--size-gutter-raw);
 }
 
 .totals,
@@ -78,17 +78,15 @@
 
 .summary .labelColumn {
   grid-column-start: 1;
-  grid-column-end: 2;
 }
 
 .summary .totals {
   grid-column-start: 2;
-  grid-column-end: 4;
+  padding-left: 20px;
 }
 
 .grandTotal .labelColumn {
   grid-column-start: 1;
-  grid-column-end: 3;
 }
 
 .collapseColumn {
@@ -137,6 +135,10 @@
   .grandTotal .labelColumn {
     grid-column-start: auto;
     grid-column-end: auto;
+  }
+
+  .summary .totals {
+    padding-left: 0;
   }
 
   .collapseColumn {

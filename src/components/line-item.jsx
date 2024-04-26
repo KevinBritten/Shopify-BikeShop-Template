@@ -14,15 +14,10 @@ import {
   priceColumn,
 } from "./line-item.module.css"
 
-export function LineItem({ item }) {
-  const {
-    removeLineItem,
-    checkout,
-    updateLineItem,
-    loading,
-  } = React.useContext(StoreContext)
+export function LineItem({ item, language }) {
+  const { removeLineItem, checkout, updateLineItem, loading } =
+    React.useContext(StoreContext)
   const [quantity, setQuantity] = React.useState(item.quantity)
-
   const variantImage = {
     ...item.variant.image,
     originalSrc: item.variant.image.src,
@@ -91,18 +86,34 @@ export function LineItem({ item }) {
         )}
       </td>
       <td>
-        <h2 className={title}>{item.title}</h2>
+        <h2 className={title}>
+          {language === "fr" ? item.customAttributes[0].value : item.title}
+        </h2>
         <div className={variant}>
           {item.variant.title === "Default Title" ? "" : item.variant.title}
         </div>
+        <div className="sm:hidden">
+          {price} {language === "en" ? "ea." : "chq."}
+          <br />
+          <div className="py-2">
+            <NumericInput
+              disabled={loading}
+              value={quantity}
+              aria-label="Quantity"
+              onIncrement={doIncrement}
+              onDecrement={doDecrement}
+              onChange={(e) => handleQuantityChange(e.currentTarget.value)}
+            />
+          </div>
+        </div>
         <div className={remove}>
           <button onClick={handleRemove}>
-            <DeleteIcon /> Remove
+            <DeleteIcon /> {language === "en" ? "Remove" : "Supprimer"}
           </button>
         </div>
       </td>
       <td className={priceColumn}>{price}</td>
-      <td>
+      <td className={priceColumn}>
         <NumericInput
           disabled={loading}
           value={quantity}
