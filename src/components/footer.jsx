@@ -42,7 +42,7 @@ export function Footer() {
           </svg>
         </a>
         <a
-          href="https://www.facebook.com/Courrier-caverne-112116368140522/"
+          href="https://www.facebook.com/Cycle-sanctuary"
           target="_blank"
           rel="noopener noreferrer"
         >
