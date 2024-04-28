@@ -44,7 +44,7 @@ const Socials = () => {
         </svg>
       </a>
       <a
-        href="https://goo.gl/maps/xLLDG5gpzZ5vyirs6"
+        href="https://maps.app.goo.gl/aqgC54JnwUEQpNnZA"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Google Maps"
