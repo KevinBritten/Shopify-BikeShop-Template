@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next"
 import i18n from "i18next"
 import { Link } from "gatsby"
 import { StoreContext } from "../context/store-context"
-import Logo from "../icons/logo"
+import Logo from "../icons/cycle-sanctuary-logo.png"
 import Socials from "./Socials"
 import { Navigation } from "./navigation"
 import { CartButton } from "./cart-button"
@@ -131,7 +131,7 @@ export function Header({ language, otherLanguagePage = "" }) {
           to={`${langPrefix}/`}
           className={logoCss}
         >
-          <Logo />
+          <img src={Logo}  />
         </Link>
         <nav className="nav items-center flex-col md:flex-row justify-center md:justify-end lg:justify-center flex uppercase">
           <Link
