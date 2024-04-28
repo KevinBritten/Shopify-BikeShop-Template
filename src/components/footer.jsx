@@ -22,7 +22,7 @@ export function Footer() {
       </div>
       <div className="flex items-center gap-8 justify-center">
         <a
-          href="https://www.instagram.com/courriercaverne/"
+          href="https://www.instagram.com/cyclesanctuary/"
           target="_blank"
           rel="noopener noreferrer"
         >
@@ -89,12 +89,12 @@ export function Footer() {
         </div>
         <a
           className="underline hover:no-underline my-8 block"
-          href="mailto:courriercaverne@gmail.com"
+          href="mailto:cyclesanctuary@gmail.com"
           target="_blank"
           rel="noopener noreferrer"
           style={{ textDecoration: "underline" }}
         >
-          courriercaverne@gmail.com
+          cyclesanctuary@gmail.com
         </a>
       </div>
     </footer>

@@ -22,5 +22,5 @@ export default function ProductsPageTranslated({
 }
 
 export const Head = ({ pageContext: { pageTitle } }) => (
-  <Seo title={`${pageTitle} - Courrier Caverne`} />
+  <Seo title={`${pageTitle} - Cycle Sanctuary`} />
 )

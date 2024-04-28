@@ -6,4 +6,4 @@ export default function CartPage() {
   return <CartPageComponent language="en" otherLanguagePage="/panier" />
 }
 
-export const Head = () => <Seo title="Cart - Courrier Caverne" />
+export const Head = () => <Seo title="Cart - Cycle Sanctuary" />

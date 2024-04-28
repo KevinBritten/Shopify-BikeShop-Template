@@ -4,7 +4,7 @@ const Socials = () => {
   return (
     <div className="flex items-center gap-8 justify-center">
       <a
-        href="https://www.instagram.com/courriercaverne/"
+        href="https://www.instagram.com/cyclesanctuary/"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Instagram"

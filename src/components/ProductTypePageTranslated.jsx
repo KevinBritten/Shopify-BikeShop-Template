@@ -300,7 +300,7 @@ export default function ProductsPageTranslated({
 }
 
 export const Head = ({ pageContext: { productType } }) => (
-  <Seo title={`${productType} - Courrier Caverne`} />
+  <Seo title={`${productType} - Cycle Sanctuary`} />
 )
 
 export const query = graphql`

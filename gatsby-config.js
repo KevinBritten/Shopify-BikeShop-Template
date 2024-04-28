@@ -1,9 +1,9 @@
 require("dotenv").config()
 module.exports = {
   siteMetadata: {
-    siteTitle: "Courrier Caverne",
-    siteTitleDefault: "Courrier Caverne",
-    siteUrl: "https://www.courriercaverne.ca",
+    siteTitle: "Cycle Sanctuary",
+    siteTitleDefault: "Cycle Sanctuary",
+    siteUrl: "https://www.cyclesanctuary.ca",
     siteDescription: "7400 rue Saint-André, Montréal",
     siteImage: "/cc-ogimage.png",
     twitter: "@joperron",

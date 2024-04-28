@@ -16,8 +16,8 @@ export const query = graphql`
 export const Head = () => (
   <>
     <Seo
-      title="Courrier Caverne - Magasin de vélos & Café à Montréal"
-      description="Courrier Caverne est votre guichet unique pour des vélos de qualité et du café délicieux. Explorez notre gamme de vélos et rejoignez-nous au café."
+      title="Cycle Sanctuary - Magasin de vélos & Café à Montréal"
+      description="Cycle Sanctuary est votre guichet unique pour des vélos de qualité et du café délicieux. Explorez notre gamme de vélos et rejoignez-nous au café."
       pathname="/"
     />
   </>

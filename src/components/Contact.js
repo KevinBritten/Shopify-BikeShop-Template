@@ -67,13 +67,13 @@ function Contact({ language }) {
           <h2 className="text-compliment">{t("contact.contact.title")}</h2>
           <ul>
             <li>
-              <a href="mailto:info@courriercaverne.ca" className="underline">
-                info@courriercaverne.ca
+              <a href="mailto:info@cyclesanctuary.ca" className="underline">
+                info@cyclesanctuary.ca
               </a>
             </li>
             <li>
-              <a href="cafe@courriercaverne.ca" className="underline">
-                cafe@courriercaverne.ca{" "}
+              <a href="cafe@cyclesanctuary.ca" className="underline">
+                cafe@cyclesanctuary.ca{" "}
               </a>
             </li>
             <li>

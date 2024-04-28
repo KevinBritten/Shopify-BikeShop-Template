@@ -12,13 +12,13 @@ function Footer() {
       <Socials />
       <div>
         <a
-          href="mailto:info@courriercaverne.ca"
+          href="mailto:info@cyclesanctuary.ca"
           className="underline hidden md:block"
         >
-          info@courriercaverne.ca
+          info@cyclesanctuary.ca
         </a>
-        <a href="cafe@courriercaverne.ca" className="underline">
-          cafe@courriercaverne.ca{" "}
+        <a href="cafe@cyclesanctuary.ca" className="underline">
+          cafe@cyclesanctuary.ca{" "}
         </a>
       </div>
     </footer>

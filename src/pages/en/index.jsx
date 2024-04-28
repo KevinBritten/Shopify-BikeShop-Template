@@ -4,8 +4,8 @@ import Home from "../../components/Home"
 
 export const Head = () => (
   <Seo
-    title="Courrier Caverne - Montreal Bike Store & Café"
-    description="Courrier Caverne is your one-stop-shop for quality bikes and delicious coffee. Explore our range of bikes and join us in the café."
+    title="Cycle Sanctuary - Montreal Bike Store & Café"
+    description="Cycle Sanctuary is your one-stop-shop for quality bikes and delicious coffee. Explore our range of bikes and join us in the café."
     pathname="/en"
   />
 )
