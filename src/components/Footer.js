@@ -17,7 +17,7 @@ function Footer() {
         >
           info@cyclesanctuary.ca
         </a>
-        <a href="cafe@cyclesanctuary.ca" className="underline">
+        <a href="cafe@cyclesanctuary.ca" className="underline hidden md:block">
           cafe@cyclesanctuary.ca{" "}
         </a>
       </div>
